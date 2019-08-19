@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Utils {
-    //获取一个数组的最大值
+    //获取一个数组的最大值666
     public double getMax(List<Double> list){
         if(list!=null && list.size()>0) {
             double max = list.get(0);
