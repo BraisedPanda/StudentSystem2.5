@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.braisedpanda.shirotest.mapper.ClassMapper">
+
+
+    <!--添加班级-->
+    <insert id="addClass" parameterType="com.braisedpanda.shirotest.bean.SClass"
+
+    >
+        insert into class
+        (classId,
+        className,
+        classTeacher,
+        classCount,
+        chineseTeacher,
+        mathematicsTeacher,
+        englishTeacher,
+        politicsTeacher,
+        historyTeacher,
+        geographyTeacher,
+        biologyTeacher,
+        chemistryTeacher,
+        physicsTeacher,
+        musicTeacher,
+        artsTeacher,
+        sportsTeacher)
+        values (
+        #{classId},
+        #{className},
+        #{classTeacher},
+        #{classCount},
+        #{chineseTeacher},
+        #{mathematicsTeacher},
+        #{englishTeacher},
+        #{politicsTeacher},
+        #{historyTeacher},
+        #{geographyTeacher},
+        #{biologyTeacher},
+        #{chemistryTeacher},
+        #{physicsTeacher},
+        #{musicTeacher},
+        #{artsTeacher},
+        #{sportsTeacher})
+
+    </insert>
+
+
+    <!--查询所有的班级-->
+    <select id="getAllClass" resultType="com.braisedpanda.shirotest.bean.SClass">
+        select * from class
+    </select>
+
+    <!--根据班级id删除班级-->
+    <delete id="deleteClassById">
+        delete from class where classId = #{classId}
+    </delete>
+
+    <!--根据classid查找出class-->
+    <select id="getClassById" resultType="com.braisedpanda.shirotest.bean.SClass">
+        select * from class where classId = #{classId}
+    </select>
+
+    <!--更新班级信息-->
+    <update id="updateClass" parameterType="com.braisedpanda.shirotest.bean.SClass">
+
+        update class set
+        className=#{className},
+        classTeacher=#{classTeacher},
+        classCount=#{classCount},
+        chineseTeacher=#{chineseTeacher},
+        mathematicsTeacher=#{mathematicsTeacher},
+        englishTeacher=#{englishTeacher},
+        politicsTeacher=#{politicsTeacher},
+        historyTeacher=#{historyTeacher},
+        geographyTeacher=#{geographyTeacher},
+        biologyTeacher=#{biologyTeacher},
+        chemistryTeacher=#{chemistryTeacher},
+        physicsTeacher=#{physicsTeacher},
+        musicTeacher=#{musicTeacher},
+        physicsTeacher=#{physicsTeacher},
+        artsTeacher=#{artsTeacher},
+        sportsTeacher=#{sportsTeacher}
+
+        where
+        classId = #{classId}
+
+
+    </update>
+
+
+    <!--获取所有的班级id-->
+    <select id="getAllClassId" resultType="String">
+        select classId from class
+    </select>
+
+
+
+
+</mapper>

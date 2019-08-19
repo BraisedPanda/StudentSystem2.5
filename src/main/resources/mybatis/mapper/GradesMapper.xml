@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.braisedpanda.shirotest.mapper.GradesMapper">
+
+
+    <!--添加学生成绩卡-->
+    <insert id="add" parameterType="com.braisedpanda.shirotest.bean.StudentGradesCard"
+
+    >
+        insert into student_grades_card
+        (stugradesCardId,stuId,testTime,testDescribe)
+        values (#{stugradesCardId},#{stuId},#{testTime},#{testDescribe})
+
+    </insert>
+
+
+    <!--根据学生的id查找所有的学生成绩卡-->
+    <select id="getGradesCard" resultType="com.braisedpanda.shirotest.bean.StudentGradesCard">
+        select * from student_grades_card where stuId=#{stuId}
+
+    </select>
+
+    <!--添加学生成绩详细-->
+    <insert id="addGrades" parameterType="com.braisedpanda.shirotest.bean.StudentGrades"
+
+    >
+        insert into student_grades
+        (stugradesId,stugradesCardId,
+        total,average,
+         maxScore,minScore,
+          chinese,mathematics,
+           english,politics,
+            history,geography,
+             biology,chemistry,
+              physics,music,
+               arts,sports)
+        values (
+        #{stugradesId},#{stugradesCardId},#{total},#{average},
+         #{maxScore},#{minScore},#{chinese},
+          #{mathematics},#{english},#{politics},#{history},
+           #{geography},#{biology},#{chemistry},#{physics},
+            #{music},#{arts},#{sports}
+        )
+
+    </insert>
+
+    <!--根据graedscard的id查找所有的学生成绩-->
+    <select id="getGrades" resultType="com.braisedpanda.shirotest.bean.StudentGrades">
+        select * from student_grades where stugradesCardId=#{stugradesCardId}
+
+    </select>
+
+    <!--根据学生的id查询所有的成绩-->
+    <select id="getStuGradesBystuId" resultType="com.braisedpanda.shirotest.bean.StudentGradesCustom">
+
+        select * from student_grades where stuId = #{stuId}
+    </select>
+
+
+    <!--获取部分的学生成绩卡信息(只获取考试时间和考试描述)-->
+    <select id="getSGCard" resultType="com.braisedpanda.shirotest.bean.StudentGradesCard">
+        select distinct testTime,testDescribe from student_grades_card
+    </select>
+
+
+    <!--插入班级成绩卡-->
+    <insert id="addClassGradesCard">
+        insert into ClassGradesCard
+        (
+        classGradesCardId,
+        classId,
+        testTime,
+        testDescribe
+        )
+        values
+        (
+        #{classGradesCardId},
+        #{classId},
+        #{testTime},
+        #{testDescribe}
+
+        )
+
+    </insert>
+
+
+    <!--获取所有的班级成绩卡-->
+    <select id="getAllClassGradesCard" resultType="com.braisedpanda.shirotest.bean.ClassGradesCard">
+
+        select * from ClassGradesCard
+
+    </select>
+
+
+
+    <select id="getGradesCardById_and_DesCribe" resultType="com.braisedpanda.shirotest.bean.StudentGradesCard">
+        select * from student_grades_card where stuId=#{stuId} and testDescribe=#{testDescribe}
+    </select>
+
+
+    <insert id="addClassGrades" parameterType="com.braisedpanda.shirotest.bean.ClassGrades">
+
+           insert into ClassGrades
+        (
+        classGradesId,
+        classGradesCardId,
+        totalAve,
+        totalMax,
+        totalMin,
+        chineseMax,
+        chineseMin,
+        chineseAve,
+        mathematicsMin,
+        mathematicsMax,
+        mathematicsAve,
+        englishMax,
+        englishMin,
+        englishAve,
+        politicsMin,
+        politicsMax,
+        politicsAve,
+        historyMax,
+        historyMin,
+        historyAve,
+        geographyMin,
+        geographyAve,
+        geographyMax,
+        biologyMax,
+        biologyMin,
+        biologyAve,
+        chemistryMin,
+        chemistryAve,
+        chemistryMax,
+        physicsMin,
+        physicsAve,
+        physicsMax,
+        musicMin,
+        musicAve,
+        musicMax,
+        artsMin,
+        artsAve,
+        artsMax,
+        sportsMin,
+        sportsMax,
+        sportsAve
+
+        )
+        values
+        (
+        #{classGradesId},
+        #{classGradesCardId},
+        #{totalAve},
+        #{totalMax},
+        #{totalMin},
+        #{chineseMax},
+        #{chineseMin},
+        #{chineseAve},
+        #{mathematicsMin},
+        #{mathematicsMax},
+        #{mathematicsAve},
+        #{englishMax},
+        #{englishMin},
+        #{englishAve},
+        #{politicsMin},
+        #{politicsMax},
+        #{politicsAve},
+        #{historyMax},
+        #{historyMin},
+        #{historyAve},
+        #{geographyMin},
+        #{geographyAve},
+        #{geographyMax},
+        #{biologyMax},
+        #{biologyMin},
+        #{biologyAve},
+        #{chemistryMin},
+        #{chemistryAve},
+        #{chemistryMax},
+        #{physicsMin},
+        #{physicsAve},
+        #{physicsMax},
+        #{musicMin},
+        #{musicAve},
+        #{musicMax},
+        #{artsMin},
+        #{artsAve},
+        #{artsMax},
+        #{sportsMin},
+        #{sportsMax},
+         #{sportsAve}
+
+        )
+
+
+
+    </insert>
+
+
+
+    <!--查找所有的班级成绩-->
+    <select id="getAllClassGrades" resultType="com.braisedpanda.shirotest.bean.ClassGrades">
+
+      select * from ClassGrades
+
+    </select>
+
+    <!--根据id查找班级成绩卡-->
+    <select id="getClassGradesCardByID" resultType="com.braisedpanda.shirotest.bean.ClassGradesCard">
+        select * from ClassGradesCard where classGradesCardId =#{classGradesCardId}
+    </select>
+
+
+
+</mapper>

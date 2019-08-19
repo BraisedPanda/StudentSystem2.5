@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{lib/css/main.css}">
+    <link rel="stylesheet" th:href="@{/lib/css/public.css}">
+    <script th:src="@{/lib/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+    <style>
+
+        .layui-form input{
+            width:215px;
+        }
+        .body{
+            margin-left: 200px;
+            height:800px;
+        }
+        #image2{
+            wdith:100px;
+            height: 100px;
+        }
+        .layui-upload-list{
+            margin-left: 120px;
+
+        }
+        .layui-upload-img{
+            wdith:100px;
+            height: 100px;
+        }
+        body{
+            background-image: url("images/background/page_bg.JPG");
+            background-size: 100%;
+
+        }
+    </style>
+
+    <script>
+        layui.use('element', function(){
+            var element = layui.element;
+
+            //…
+        });
+        //上传照片
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: '/upload/'
+                ,accept:'images'
+                ,size:50000
+                ,before: function(obj){
+
+                    obj.preview(function(index, file, result){
+
+                        $('#demo1').attr('src', result);
+                    });
+                }
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code > 0){
+                        return layer.msg('上传失败');
+                    }
+                    //上传成功
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #4cae4c;">上传成功</span>');
+
+                    var fileupload = $(".stuImage");
+                    fileupload.attr("value",res.data.src);
+                    console.log(fileupload.attr("value"));
+                }
+                ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                }
+            });
+
+
+        });
+
+    </script>
+</head>
+<body>
+<!--<div th:replace="menu/left :: leftbar" ></div>-->
+<!--<div th:replace="menu/top :: topbar"></div>-->
+<div class="body">
+
+    <div class="form">
+        <br>
+        <form class="layui-form" action="/editstudent" method="post">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">学号:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="stuId" th:value="${student.stuId}" autocomplete="off" class="layui-input stuId" disabled>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">照片:</label>
+                    <div class="layui-input-inline">
+                        <img  id="image2" th:src="${student.stuImage}">
+
+                    </div>
+
+                </div>
+            </div>
+            <!--************这里是上传图片的代码***************-->
+            <!--************这里添加的隐藏的输入框，用来传递images的参数***************-->
+            <input type="hidden" name="stuImage" class="stuImage" th:value="${student.stuImage}">
+            <div class="layui-form-item">
+                <label class="layui-form-label ">更换照片:</label>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-sm" id="test1">上传图片</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+            </div>
+            <!--************上面里是上传图片的代码***************-->
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">登录密码:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuPassword" lay-verify="password" th:value="${student.stuPassword}"  placeholder="请填写6到12位密码" autocomplete="off" class="layui-input stuPassword">
+
+                    </div>
+
+                 </div>
+
+
+                <label class="layui-form-label">姓名:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="stuName" lay-verify="username" th:value="${student.stuName}"  placeholder="请填写姓名" autocomplete="off" class="layui-input stuName">
+                </div>
+
+            </div>
+            <input type="hidden" name="stuSex" class="stuSex" th:value="${student.stuSex}">
+            <input type="hidden" name="stuId" class="stuId" th:value="${student.stuId}">
+
+
+            <input type="hidden" name="nationName" class="nationName" th:value="${student.nationName}">
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">年龄:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuAge"  th:value="${student.stuAge}" required class="layui-input stuAge">
+                    </div>
+                </div>
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">身份证号码:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuIdCard" th:value="${student.stuIdCard}" required class="layui-input stuIdCard">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuEmail" th:value="${student.stuEmail}" lay-verify="email" autocomplete="off" placeholder="example@exp.com" class="layui-input stuEmail">
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">生日:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuBirthday" id="date2" th:value="${student.stuBirthday}" lay-verify="date" placeholder="选择出生日期" autocomplete="off" class="layui-input stuBirthday">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">民族:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="nationName" th:value="${student.nationName}" required class="layui-input nationName" disabled>
+                </div>
+            </div>
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">学业状态:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuStatus" th:value="${student.stuStatus}" required class="layui-input stuStatus">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">班级:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="classId" th:value="${student.classId}" required class="layui-input classId">
+                    </div>
+                </div>
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">入学时间:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuenRollmentTime" th:value="${student.stuenRollmentTime}" id="date1" lay-verify="date" placeholder="选择出生日期" autocomplete="off" class="layui-input stuenRollmentTime">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">政治面貌:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuPolitical" th:value="${student.stuPolitical}" required class="layui-input stuPolitical">
+                    </div>
+                </div>
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">家庭住址:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="stuAddress" th:value="${student.stuAddress}" required class="layui-input stuAddress">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                    <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit="" lay-filter="demo1">修改</button>
+                    &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                    <button type="reset" class="layui-btn layui-btn-radius  layui-btn-danger">重置</button>
+                </div>
+            </div>
+            <br>
+        </form>
+
+
+
+    </div>
+
+</div>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date1'
+        });
+        laydate.render({
+            elem: '#date2'
+        });
+
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,password: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,username:[
+                /^[\S]{2,}$/
+                ,'用户名长度必须大于2，且不能出现空格'
+            ]
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>
