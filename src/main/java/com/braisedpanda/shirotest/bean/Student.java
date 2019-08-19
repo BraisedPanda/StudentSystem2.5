@@ -24,13 +24,124 @@ public class Student implements Serializable {
 
     private Nation nation;
 
+    public String getStuId() {
+        return stuId;
+    }
 
-    public String getnationName() {
+    public void setStuId(String stuId) {
+        this.stuId = stuId;
+    }
+
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
+    }
+
+    public String getStuPassword() {
+        return stuPassword;
+    }
+
+    public void setStuPassword(String stuPassword) {
+        this.stuPassword = stuPassword;
+    }
+
+    public String getStuEmail() {
+        return stuEmail;
+    }
+
+    public void setStuEmail(String stuEmail) {
+        this.stuEmail = stuEmail;
+    }
+
+    public String getStuIdCard() {
+        return stuIdCard;
+    }
+
+    public void setStuIdCard(String stuIdCard) {
+        this.stuIdCard = stuIdCard;
+    }
+
+    public String getStuSex() {
+        return stuSex;
+    }
+
+    public void setStuSex(String stuSex) {
+        this.stuSex = stuSex;
+    }
+
+    public String getStuBirthday() {
+        return stuBirthday;
+    }
+
+    public void setStuBirthday(String stuBirthday) {
+        this.stuBirthday = stuBirthday;
+    }
+
+    public String getNationName() {
         return nationName;
     }
 
-    public void setnationName(String nationName) {
+    public void setNationName(String nationName) {
         this.nationName = nationName;
+    }
+
+    public String getStuStatus() {
+        return stuStatus;
+    }
+
+    public void setStuStatus(String stuStatus) {
+        this.stuStatus = stuStatus;
+    }
+
+    public String getStuAge() {
+        return stuAge;
+    }
+
+    public void setStuAge(String stuAge) {
+        this.stuAge = stuAge;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getStuenRollmentTime() {
+        return stuenRollmentTime;
+    }
+
+    public void setStuenRollmentTime(String stuenRollmentTime) {
+        this.stuenRollmentTime = stuenRollmentTime;
+    }
+
+    public String getStuPolitical() {
+        return stuPolitical;
+    }
+
+    public void setStuPolitical(String stuPolitical) {
+        this.stuPolitical = stuPolitical;
+    }
+
+    public String getStuAddress() {
+        return stuAddress;
+    }
+
+    public void setStuAddress(String stuAddress) {
+        this.stuAddress = stuAddress;
+    }
+
+    public String getStuImage() {
+        return stuImage;
+    }
+
+    public void setStuImage(String stuImage) {
+        this.stuImage = stuImage;
     }
 
     public Nation getNation() {
@@ -39,143 +150,5 @@ public class Student implements Serializable {
 
     public void setNation(Nation nation) {
         this.nation = nation;
-    }
-
-    public String getstuId() {
-        return stuId;
-    }
-
-    public void setstuId(String stuId) {
-        this.stuId = stuId;
-    }
-
-    public String getstuName() {
-        return stuName;
-    }
-
-    public void setstuName(String stuName) {
-        this.stuName = stuName;
-    }
-
-    public String getstuPassword() {
-        return stuPassword;
-    }
-
-    public void setstuPassword(String stuPassword) {
-        this.stuPassword = stuPassword;
-    }
-
-    public String getstuEmail() {
-        return stuEmail;
-    }
-
-    public void setstuEmail(String stuEmail) {
-        this.stuEmail = stuEmail;
-    }
-
-    public String getstuIdCard() {
-        return stuIdCard;
-    }
-
-    public void setstuIdCard(String stuIdCard) {
-        this.stuIdCard = stuIdCard;
-    }
-
-    public String getstuSex() {
-        return stuSex;
-    }
-
-    public void setstuSex(String stuSex) {
-        this.stuSex = stuSex;
-    }
-
-    public String getstuBirthday() {
-        return stuBirthday;
-    }
-
-    public void setstuBirthday(String stuBirthday) {
-        this.stuBirthday = stuBirthday;
-    }
-
-
-
-
-
-    public String getstuStatus() {
-        return stuStatus;
-    }
-
-    public void setstuStatus(String stuStatus) {
-        this.stuStatus = stuStatus;
-    }
-
-    public String getstuAge() {
-        return stuAge;
-    }
-
-    public void setstuAge(String stuAge) {
-        this.stuAge = stuAge;
-    }
-
-    public String getclassId() {
-        return classId;
-    }
-
-    public void setclassId(String classId) {
-        this.classId = classId;
-    }
-
-    public String getstuenRollmentTime() {
-        return stuenRollmentTime;
-    }
-
-    public void setstuenRollmentTime(String stuenRollmentTime) {
-        this.stuenRollmentTime = stuenRollmentTime;
-    }
-
-    public String getstuPolitical() {
-        return stuPolitical;
-    }
-
-    public void setstuPolitical(String stuPolitical) {
-        this.stuPolitical = stuPolitical;
-    }
-
-    public String getstuAddress() {
-        return stuAddress;
-    }
-
-    public void setstuAddress(String stuAddress) {
-        this.stuAddress = stuAddress;
-    }
-
-    public String getstuImage() {
-        return stuImage;
-    }
-
-    public void setstuImage(String stuImage) {
-        this.stuImage = stuImage;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "stuId='" + stuId + '\'' +
-                ", stuName='" + stuName + '\'' +
-                ", stuPassword='" + stuPassword + '\'' +
-                ", stuEmail='" + stuEmail + '\'' +
-                ", stuIdCard='" + stuIdCard + '\'' +
-                ", stuSex='" + stuSex + '\'' +
-                ", stuBirthday='" + stuBirthday + '\'' +
-                ", nationName='" + nationName + '\'' +
-                ", stuStatus='" + stuStatus + '\'' +
-                ", stuAge='" + stuAge + '\'' +
-                ", classId='" + classId + '\'' +
-                ", stuenRollmentTime='" + stuenRollmentTime + '\'' +
-                ", stuPolitical='" + stuPolitical + '\'' +
-                ", stuAddress='" + stuAddress + '\'' +
-                ", stuImage='" + stuImage + '\'' +
-                ", nation=" + nation +
-                '}';
     }
 }

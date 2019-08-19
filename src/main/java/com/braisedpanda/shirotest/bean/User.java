@@ -14,22 +14,6 @@ public class User implements Serializable{
     private String images;
     private String roleList;
 
-    public String getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(String roleList) {
-        this.roleList = roleList;
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
-
     public int getUid() {
         return uid;
     }
@@ -78,26 +62,27 @@ public class User implements Serializable{
         this.gender = gender;
     }
 
-    public String getactiveCode() {
+    public String getActiveCode() {
         return activeCode;
     }
 
-    public void setactiveCode(String activeCode) {
+    public void setActiveCode(String activeCode) {
         this.activeCode = activeCode;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "uid=" + uid +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", gender='" + gender + '\'' +
-                ", activeCode='" + activeCode + '\'' +
-                ", images='" + images + '\'' +
-                ", roleList='" + roleList + '\'' +
-                '}';
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public String getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(String roleList) {
+        this.roleList = roleList;
     }
 }

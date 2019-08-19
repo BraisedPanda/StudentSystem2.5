@@ -9,7 +9,7 @@
     <insert id="add" parameterType="com.braisedpanda.shirotest.bean.StudentGradesCard"
 
     >
-        insert into student_grades_card
+        insert into studentGradesCard
         (stugradesCardId,stuId,testTime,testDescribe)
         values (#{stugradesCardId},#{stuId},#{testTime},#{testDescribe})
 
@@ -18,15 +18,15 @@
 
     <!--根据学生的id查找所有的学生成绩卡-->
     <select id="getGradesCard" resultType="com.braisedpanda.shirotest.bean.StudentGradesCard">
-        select * from student_grades_card where stuId=#{stuId}
+        select * from studentGradesCard where stuId=#{stuId}
 
     </select>
 
     <!--添加学生成绩详细-->
-    <insert id="addGrades" parameterType="com.braisedpanda.shirotest.bean.StudentGrades"
+    <insert id="insertGrades" parameterType="com.braisedpanda.shirotest.bean.StudentGrades"
 
     >
-        insert into student_grades
+        insert into studentGrades
         (stugradesId,stugradesCardId,
         total,average,
          maxScore,minScore,
@@ -48,25 +48,25 @@
 
     <!--根据graedscard的id查找所有的学生成绩-->
     <select id="getGrades" resultType="com.braisedpanda.shirotest.bean.StudentGrades">
-        select * from student_grades where stugradesCardId=#{stugradesCardId}
+        select * from studentGrades where stugradesCardId=#{stugradesCardId}
 
     </select>
 
     <!--根据学生的id查询所有的成绩-->
     <select id="getStuGradesBystuId" resultType="com.braisedpanda.shirotest.bean.StudentGradesCustom">
 
-        select * from student_grades where stuId = #{stuId}
+        select * from studentGrades where stuId = #{stuId}
     </select>
 
 
     <!--获取部分的学生成绩卡信息(只获取考试时间和考试描述)-->
     <select id="getSGCard" resultType="com.braisedpanda.shirotest.bean.StudentGradesCard">
-        select distinct testTime,testDescribe from student_grades_card
+        select distinct testTime,testDescribe from studentGradesCard
     </select>
 
 
     <!--插入班级成绩卡-->
-    <insert id="addClassGradesCard">
+    <insert id="insertClassGradesCard">
         insert into ClassGradesCard
         (
         classGradesCardId,
@@ -87,7 +87,7 @@
 
 
     <!--获取所有的班级成绩卡-->
-    <select id="getAllClassGradesCard" resultType="com.braisedpanda.shirotest.bean.ClassGradesCard">
+    <select id="listClassGradesCard" resultType="com.braisedpanda.shirotest.bean.ClassGradesCard">
 
         select * from ClassGradesCard
 
@@ -96,11 +96,11 @@
 
 
     <select id="getGradesCardById_and_DesCribe" resultType="com.braisedpanda.shirotest.bean.StudentGradesCard">
-        select * from student_grades_card where stuId=#{stuId} and testDescribe=#{testDescribe}
+        select * from studentGradesCard where stuId=#{stuId} and testDescribe=#{testDescribe}
     </select>
 
 
-    <insert id="addClassGrades" parameterType="com.braisedpanda.shirotest.bean.ClassGrades">
+    <insert id="insertClassGrades" parameterType="com.braisedpanda.shirotest.bean.ClassGrades">
 
            insert into ClassGrades
         (
@@ -200,7 +200,7 @@
 
 
     <!--查找所有的班级成绩-->
-    <select id="getAllClassGrades" resultType="com.braisedpanda.shirotest.bean.ClassGrades">
+    <select id="listClassGrades" resultType="com.braisedpanda.shirotest.bean.ClassGrades">
 
       select * from ClassGrades
 

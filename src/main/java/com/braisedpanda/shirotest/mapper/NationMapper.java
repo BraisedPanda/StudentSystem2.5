@@ -12,5 +12,5 @@ public interface NationMapper {
     Nation getNationById(String nationId);
 
     //查询所有的nation
-    List<Nation> getAllNation();
+    List<Nation> listNations();
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class RolePermission implements Serializable{
     private String rPId;
-    private String nationName;
+    private String permissionId;
     private String permission;
     private String permissionDescribe;
     private String roleId;
@@ -19,12 +19,12 @@ public class RolePermission implements Serializable{
         this.rPId = rPId;
     }
 
-    public String getnationName() {
-        return nationName;
+    public String getPermissionId() {
+        return permissionId;
     }
 
-    public void setnationName(String nationName) {
-        this.nationName = nationName;
+    public void setPermissionId(String permissionId) {
+        this.permissionId = permissionId;
     }
 
     public String getPermission() {
@@ -35,19 +35,19 @@ public class RolePermission implements Serializable{
         this.permission = permission;
     }
 
-    public String getpermissionDescribe() {
+    public String getPermissionDescribe() {
         return permissionDescribe;
     }
 
-    public void setpermissionDescribe(String permissionDescribe) {
+    public void setPermissionDescribe(String permissionDescribe) {
         this.permissionDescribe = permissionDescribe;
     }
 
-    public String getroleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setroleId(String roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
@@ -59,24 +59,11 @@ public class RolePermission implements Serializable{
         this.role = role;
     }
 
-    public String getroleDescribe() {
+    public String getRoleDescribe() {
         return roleDescribe;
     }
 
-    public void setroleDescribe(String roleDescribe) {
+    public void setRoleDescribe(String roleDescribe) {
         this.roleDescribe = roleDescribe;
-    }
-
-    @Override
-    public String toString() {
-        return "RolePermission{" +
-                "rPId='" + rPId + '\'' +
-                ", nationName='" + nationName + '\'' +
-                ", permission='" + permission + '\'' +
-                ", permissionDescribe='" + permissionDescribe + '\'' +
-                ", roleId='" + roleId + '\'' +
-                ", role='" + role + '\'' +
-                ", roleDescribe='" + roleDescribe + '\'' +
-                '}';
     }
 }

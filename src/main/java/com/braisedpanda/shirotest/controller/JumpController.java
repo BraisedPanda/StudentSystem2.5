@@ -37,16 +37,19 @@ public class JumpController {
         return "menu/nopermission";
     }
 
+    @RequestMapping("login")
+    public String toologin(){
+        return "redirect:/";
+    }
+
     @RequestMapping("tostudentlist")
     public String tostudentlist(){
         return "student/allstudent";
     }
 
-
-
     @RequestMapping("toallpermission")
     public String toallpermission(){
-        return "permission/allrole_permission";
+        return "permission/allrolePermission";
     }
 
 

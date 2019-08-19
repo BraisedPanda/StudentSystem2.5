@@ -33,27 +33,27 @@ public class GradesController {
 
 
     //批量生成学生成绩卡数据
-    @RequestMapping("addGradesCard")
-    public String addGradesCard(){
+    @RequestMapping("insertGradesCard")
+    public String insertGradesCard(){
         StudentGradesCard card = new StudentGradesCard();
         List<Student> studentList = studentService.getAllStudent();
         for (Student s:
              studentList) {
-            String stuId = s.getstuId();
+            String stuId = s.getStuId();
             for(int i=1;i<=3;i++){
                 String time = i+"";
                 String stugradesCardId = "SGC"+time+stuId;
-                card.setstugradesCardId(stugradesCardId);
-                card.setstuId(stuId);
-                card.settestTime(time);
+                card.setStugradesCardId(stugradesCardId);
+                card.setStuId(stuId);
+                card.setTestTime(time);
                 if(i==1){
-                    card.settestDescribe("开学考试");
+                    card.setTestDescribe("开学考试");
 
                 }else if(i==2){
-                    card.settestDescribe("期中考试");
+                    card.setTestDescribe("期中考试");
 
                 }else {
-                    card.settestDescribe("期末考试");
+                    card.setTestDescribe("期末考试");
                 }
                 gradesService.add(card);
 
@@ -66,20 +66,20 @@ public class GradesController {
     }
 
     //批量生成学生成绩
-    @RequestMapping("addGrades")
-    public String addGrades(){
+    @RequestMapping("insertGrades")
+    public String insertGrades(){
         List<Student> studentList = studentService.getAllStudent();
         for (Student s:
              studentList) {
-            String stuId = s.getstuId();
-            List<StudentGradesCard> student_grades_cardList = gradesService.getGradesCard(stuId);
-            StudentGrades student_grades = new StudentGrades();
-            for (StudentGradesCard student_grades_card:
-                    student_grades_cardList ) {
-                String stugradesCardId = student_grades_card.getstugradesCardId();
+            String stuId = s.getStuId();
+            List<StudentGradesCard> studentGradesCardList = gradesService.getGradesCard(stuId);
+            StudentGrades studentGrades = new StudentGrades();
+            for (StudentGradesCard studentGradesCard:
+                    studentGradesCardList ) {
+                String stugradesCardId = studentGradesCard.getStugradesCardId();
 
-                student_grades.setstugradesId("SGI"+stugradesCardId);
-                student_grades.setstugradesCardId(stugradesCardId);
+                studentGrades.setStugradesId("SGI"+stugradesCardId);
+                studentGrades.setStugradesCardId(stugradesCardId);
                 Random random = new Random();
                 double a = 60+random.nextInt(90);
                 double b = 60+random.nextInt(90);
@@ -93,18 +93,18 @@ public class GradesController {
                 double j = 60+random.nextInt(90);
                 double k = 60+ random.nextInt(90);
                 double l = 60+random.nextInt(90);
-                student_grades.setChinese(a);
-                student_grades.setMathematics(b);
-                student_grades.setEnglish(c);
-                student_grades.setPolitics(d);
-                student_grades.setHistory(e);
-                student_grades.setGeography(f);
-                student_grades.setBiology(g);
-                student_grades.setChemistry(h);
-                student_grades.setPhysics(i);
-                student_grades.setMusic(j);
-                student_grades.setArts(k);
-                student_grades.setSports(l);
+                studentGrades.setChinese(a);
+                studentGrades.setMathematics(b);
+                studentGrades.setEnglish(c);
+                studentGrades.setPolitics(d);
+                studentGrades.setHistory(e);
+                studentGrades.setGeography(f);
+                studentGrades.setBiology(g);
+                studentGrades.setChemistry(h);
+                studentGrades.setPhysics(i);
+                studentGrades.setMusic(j);
+                studentGrades.setArts(k);
+                studentGrades.setSports(l);
 
                 double[] array = new double[]{a,b,c,d,e,f,g,h,i,j,k,l};
                 double max=array[0];
@@ -122,13 +122,13 @@ public class GradesController {
                 }
                 double ave = total/array.length;
 
-                student_grades.setmaxScore(max);
-                student_grades.setminScore(min);
-                student_grades.setTotal(total);
-                student_grades.setAverage(ave);
+                studentGrades.setMaxScore(max);
+                studentGrades.setMinScore(min);
+                studentGrades.setTotal(total);
+                studentGrades.setAverage(ave);
 
-                System.out.println(student_grades);
-                gradesService.addGrades(student_grades);
+                System.out.println(studentGrades);
+                gradesService.insertGrades(studentGrades);
 
             }
 
@@ -156,26 +156,26 @@ public class GradesController {
             //创建前端展示的成绩单
             StudentGradesCustom sgc = new StudentGradesCustom();
 
-            String cardid = card.getstugradesCardId();
+            String cardid = card.getStugradesCardId();
             //多次成绩单号已经查到
            StudentGrades grades = gradesService.getGrades(cardid);
 
             //设置学生id
-            sgc.setstuId(stuId);
+            sgc.setStuId(stuId);
             //设置学生姓名
-            sgc.setstuName(student.getstuName());
+            sgc.setStuName(student.getStuName());
             //设置学生班级
-            sgc.setclassId(student.getclassId());
+            sgc.setClassId(student.getClassId());
             //设置测试的描述信息
-            sgc.settestDescribe(card.gettestDescribe());
+            sgc.setTestDescribe(card.getTestDescribe());
             //设置总分
             sgc.setTotal(grades.getTotal());
             //设置平均分
             sgc.setAverage(grades.getAverage());
             //设置最高分
-            sgc.setmaxScore(grades.getmaxScore());
+            sgc.setMaxScore(grades.getMaxScore());
             //设置最低分
-            sgc.setminScore(grades.getminScore());
+            sgc.setMinScore(grades.getMinScore());
             //设置语文分数
             sgc.setChinese(grades.getChinese());
             //设置数学分数
@@ -201,7 +201,7 @@ public class GradesController {
             //设置体育分数
             sgc.setSports(grades.getSports());
             //设置考试的时间
-            sgc.settestTime(card.gettestTime());
+            sgc.setTestTime(card.getTestTime());
 
             sgcList.add(sgc);
         }
@@ -233,7 +233,7 @@ public class GradesController {
     @RequestMapping("tostudentgrades")
     public String tostudentgrades(Model model,HttpSession session){
         User user = (User)session.getAttribute("user");
-        String stuId = user.getactiveCode();
+        String stuId = user.getActiveCode();
         System.out.println(user);
         model.addAttribute("stuId",stuId);
 
@@ -243,12 +243,12 @@ public class GradesController {
 
     //批量生成班级成绩卡
     @ResponseBody
-    @RequestMapping("autoaddclass_gardes_card")
-    public void autoaddclass_gardes_card(){
+    @RequestMapping("autoinsertClass_gardes_card")
+    public void autoinsertClass_gardes_card(){
         //获取部分的学生成绩卡信息(只获取考试时间和考试描述)
        List<StudentGradesCard> sg_cardlist = gradesService.getSGCard();
        //获取所有的班级id
-       List<String> classidlist = classService.getAllClassId();
+       List<String> classidlist = classService.listClassId();
         for (String s:
              classidlist) {
            //批量生成student_gardes_card信息
@@ -256,15 +256,15 @@ public class GradesController {
                  sg_cardlist) {
                 ClassGradesCard cgcrad = new ClassGradesCard();
                 //设置唯一id值，CGC+班级id+考试时间
-                String classGradesCardId = "CGC"+s+sgc.gettestTime().replace("-","");
-                cgcrad.setclassGradesCardId(classGradesCardId);
+                String classGradesCardId = "CGC"+s+sgc.getTestTime().replace("-","");
+                cgcrad.setClassGradesCardId(classGradesCardId);
                 //设置classId
-                cgcrad.setclassId(s);
-                cgcrad.settestTime(sgc.gettestTime());
-                cgcrad.settestDescribe(sgc.gettestDescribe());
+                cgcrad.setClassId(s);
+                cgcrad.setTestTime(sgc.getTestTime());
+                cgcrad.setTestDescribe(sgc.getTestDescribe());
 
 
-               gradesService.addClassGradesCard(cgcrad);
+               gradesService.insertClassGradesCard(cgcrad);
             }
 
         }
@@ -273,24 +273,24 @@ public class GradesController {
 
     //批量生成班级成绩统计
     @ResponseBody
-    @RequestMapping("addClassGrades")
-    public HashMap<String,Object> addClassGrades(){
+    @RequestMapping("insertClassGrades")
+    public HashMap<String,Object> insertClassGrades(){
         HashMap<String,Object> resultMap = new HashMap<>();
 
         //获取各个班的所有学生
         ClassGrades ClassGrades = new ClassGrades();
         //获取所有的班级成绩卡片
-        List<ClassGradesCard> ClassGradesCardList = gradesService.getAllClassGradesCard();
+        List<ClassGradesCard> ClassGradesCardList = gradesService.listClassGradesCard();
 
         for (ClassGradesCard ClassGradesCard:
                 ClassGradesCardList  ) {
 
-            String classGradesId = "CGI"+ ClassGradesCard.getclassGradesCardId();
-            ClassGrades.setclassGradesId(classGradesId);
-            ClassGrades.setclassGradesCardId(ClassGradesCard.getclassGradesCardId());
+            String classGradesId = "CGI"+ ClassGradesCard.getClassGradesCardId();
+            ClassGrades.setClassGradesId(classGradesId);
+            ClassGrades.setClassGradesCardId(ClassGradesCard.getClassGradesCardId());
 
             //获取classId
-            String classId = ClassGradesCard.getclassId();
+            String classId = ClassGradesCard.getClassId();
             System.out.println("班级ID："+classId+"==============================");
 
                 //根据classId查找出该班级所有的学生
@@ -299,13 +299,13 @@ public class GradesController {
                             List<Double> totallist = new ArrayList<>();
                             List<Double> chineselist = new ArrayList<>();
                             List<Double> mathematicslist = new ArrayList<>();
-                            List<Double> englishlist = new ArrayList<>();
-                            List<Double> politicslist = new ArrayList<>();
-                            List<Double> historylist = new ArrayList<>();
-                            List<Double> geographylist = new ArrayList<>();
-                            List<Double> biologylist = new ArrayList<>();
-                            List<Double> chemistrylist = new ArrayList<>();
-                            List<Double> physicslist = new ArrayList<>();
+                            List<Double> Englishlist = new ArrayList<>();
+                            List<Double> Politicslist = new ArrayList<>();
+                            List<Double> Historylist = new ArrayList<>();
+                            List<Double> Geographylist = new ArrayList<>();
+                            List<Double> Biologylist = new ArrayList<>();
+                            List<Double> Chemistrylist = new ArrayList<>();
+                            List<Double> Physicslist = new ArrayList<>();
                             List<Double> musiclist = new ArrayList<>();
                             List<Double> artslist = new ArrayList<>();
                             List<Double> sportslist = new ArrayList<>();
@@ -314,42 +314,42 @@ public class GradesController {
 
                             for (Student stu:
                                     studentList) {
-                                System.out.println("学生姓名："+stu.getstuName());
+                                System.out.println("学生姓名："+stu.getStuName());
 
                                 //根据每个学生的学生stuId，查找出该学生的成绩卡
-                                String stuId = stu.getstuId();
-                                String time_describe = ClassGradesCard.gettestDescribe();
+                                String stuId = stu.getStuId();
+                                String time_describe = ClassGradesCard.getTestDescribe();
 
-                                StudentGradesCard student_Grades_Card = gradesService.getGradesCardById_and_DesCribe(stuId,time_describe);
+                                StudentGradesCard studentGradesCard = gradesService.getGradesCardById_and_DesCribe(stuId,time_describe);
 
-                                String stugradesCardId = student_Grades_Card.getstugradesCardId();
+                                String stugradesCardId = studentGradesCard.getStugradesCardId();
 
-                                StudentGrades student_grades =  gradesService.getGrades(stugradesCardId);
+                                StudentGrades studentGrades =  gradesService.getGrades(stugradesCardId);
 
-                                double total = student_grades.getTotal();
-                                double chinese = student_grades.getChinese();
-                                double mathematics = student_grades.getMathematics();
-                                double english = student_grades.getEnglish();
-                                double politics = student_grades.getPolitics();
-                                double history = student_grades.getHistory();
-                                double geography = student_grades.getGeography();
-                                double biology = student_grades.getBiology();
-                                double chemistry = student_grades.getChemistry();
-                                double physics = student_grades.getPhysics();
-                                double music = student_grades.getMusic();
-                                double arts = student_grades.getArts();
-                                double sports = student_grades.getSports();
+                                double total = studentGrades.getTotal();
+                                double chinese = studentGrades.getChinese();
+                                double mathematics = studentGrades.getMathematics();
+                                double English = studentGrades.getEnglish();
+                                double Politics = studentGrades.getPolitics();
+                                double History = studentGrades.getHistory();
+                                double Geography = studentGrades.getGeography();
+                                double Biology = studentGrades.getBiology();
+                                double Chemistry = studentGrades.getChemistry();
+                                double Physics = studentGrades.getPhysics();
+                                double music = studentGrades.getMusic();
+                                double arts = studentGrades.getArts();
+                                double sports = studentGrades.getSports();
 
                                 totallist.add(total);
                                 chineselist.add(chinese);
                                 mathematicslist.add(mathematics);
-                                englishlist.add(english);
-                                politicslist.add(politics);
-                                historylist.add(history);
-                                geographylist.add(geography);
-                                biologylist.add(biology);
-                                chemistrylist.add(chemistry);
-                                physicslist.add(physics);
+                                Englishlist.add(English);
+                                Politicslist.add(Politics);
+                                Historylist.add(History);
+                                Geographylist.add(Geography);
+                                Biologylist.add(Biology);
+                                Chemistrylist.add(Chemistry);
+                                Physicslist.add(Physics);
                                 musiclist.add(music);
                                 artslist.add(arts);
                                 sportslist.add(sports);
@@ -361,104 +361,104 @@ public class GradesController {
                             Double totalMin = utils.getMin(totallist);
                             Double totalAver = utils.getAver(totallist);
 
-                            ClassGrades.settotalAve(totalAver);
-                            ClassGrades.settotalMax(totalMax);
-                            ClassGrades.settotalMin(totalMin);
+                            ClassGrades.setTotalAve(totalAver);
+                            ClassGrades.setTotalMax(totalMax);
+                            ClassGrades.setTotalMin(totalMin);
 
                             //语文各分值统计
                             Double chineseMax = utils.getMax(chineselist);
                             Double chineseMin = utils.getMin(chineselist);
                             Double chineseAver = utils.getAver(chineselist);
 
-                            ClassGrades.setchineseAve(chineseAver);
-                            ClassGrades.setchineseMax(chineseMax);
-                            ClassGrades.setchineseMin(chineseMin);
+                            ClassGrades.setChineseAve(chineseAver);
+                            ClassGrades.setChineseMax(chineseMax);
+                            ClassGrades.setChineseMin(chineseMin);
 
                             //数学各分值统计
                             Double mathematicsMax = utils.getMax(mathematicslist);
                             Double mathematicsMin = utils.getMin(mathematicslist);
                             Double mathematicsAver = utils.getAver(mathematicslist);
 
-                            ClassGrades.setmathematicsAve(mathematicsAver);
-                            ClassGrades.setmathematicsMax(mathematicsMax);
-                            ClassGrades.setmathematicsMin(mathematicsMin);
+                            ClassGrades.setMathematicsAve(mathematicsAver);
+                            ClassGrades.setMathematicsMax(mathematicsMax);
+                            ClassGrades.setMathematicsMin(mathematicsMin);
 
                             //英语各分值统计
-                            Double englishMax = utils.getMax(englishlist);
-                            Double englishMin = utils.getMin(englishlist);
-                            Double englishAver = utils.getAver(englishlist);
+                            Double EnglishMax = utils.getMax(Englishlist);
+                            Double EnglishMin = utils.getMin(Englishlist);
+                            Double EnglishAver = utils.getAver(Englishlist);
 
-                            ClassGrades.setenglishAve(englishAver);
-                            ClassGrades.setenglishMax(englishMax);
-                            ClassGrades.setenglishMin(englishMin);
+                            ClassGrades.setEnglishAve(EnglishAver);
+                            ClassGrades.setEnglishMax(EnglishMax);
+                            ClassGrades.setEnglishMin(EnglishMin);
 
                             //政治各分值统计
-                            Double politicsMax = utils.getMax(politicslist);
-                            Double politicsMin = utils.getMin(politicslist);
-                            Double politicsAver = utils.getAver(politicslist);
+                            Double PoliticsMax = utils.getMax(Politicslist);
+                            Double PoliticsMin = utils.getMin(Politicslist);
+                            Double PoliticsAver = utils.getAver(Politicslist);
 
-                            ClassGrades.setpoliticsAve(politicsAver);
-                            ClassGrades.setpoliticsMax(politicsMax);
-                            ClassGrades.setpoliticsMin(politicsMin);
+                            ClassGrades.setPoliticsAve(PoliticsAver);
+                            ClassGrades.setPoliticsMax(PoliticsMax);
+                            ClassGrades.setPoliticsMin(PoliticsMin);
 
 
                             //历史各分值统计
-                            Double historyMax = utils.getMax(historylist);
-                            Double historyMin = utils.getMin(historylist);
-                            Double historyAver = utils.getAver(historylist);
+                            Double HistoryMax = utils.getMax(Historylist);
+                            Double HistoryMin = utils.getMin(Historylist);
+                            Double HistoryAver = utils.getAver(Historylist);
 
-                            ClassGrades.sethistoryMax(historyMax);
-                            ClassGrades.sethistoryMin(historyMin);
-                            ClassGrades.sethistoryAve(historyAver);
+                            ClassGrades.setHistoryMax(HistoryMax);
+                            ClassGrades.setHistoryMin(HistoryMin);
+                            ClassGrades.setHistoryAve(HistoryAver);
 
                             //地理各分值统计
-                            Double geographyMax = utils.getMax(geographylist);
-                            Double geographyMin = utils.getMin(geographylist);
-                            Double geographyAver = utils.getAver(geographylist);
+                            Double GeographyMax = utils.getMax(Geographylist);
+                            Double GeographyMin = utils.getMin(Geographylist);
+                            Double GeographyAver = utils.getAver(Geographylist);
 
-                            ClassGrades.setgeographyAve(geographyAver);
-                            ClassGrades.setgeographyMax(geographyMax);
-                            ClassGrades.setgeographyMin(geographyMin);
+                            ClassGrades.setGeographyAve(GeographyAver);
+                            ClassGrades.setGeographyMax(GeographyMax);
+                            ClassGrades.setGeographyMin(GeographyMin);
 
 
                             //生物各分值统计
-                            Double biologyMax = utils.getMax(biologylist);
-                            Double biologyMin = utils.getMin(biologylist);
-                            Double biologyAver = utils.getAver(biologylist);
+                            Double BiologyMax = utils.getMax(Biologylist);
+                            Double BiologyMin = utils.getMin(Biologylist);
+                            Double BiologyAver = utils.getAver(Biologylist);
 
-                            ClassGrades.setbiologyAve(biologyAver);
-                            ClassGrades.setbiologyMax(biologyMax);
-                            ClassGrades.setbiologyMin(biologyMin);
+                            ClassGrades.setBiologyAve(BiologyAver);
+                            ClassGrades.setBiologyMax(BiologyMax);
+                            ClassGrades.setBiologyMin(BiologyMin);
 
 
 
                             //化学各分值统计
-                            Double chemistryMax = utils.getMax(chemistrylist);
-                            Double chemistryMin = utils.getMin(chemistrylist);
-                            Double chemistryAver = utils.getAver(chemistrylist);
+                            Double ChemistryMax = utils.getMax(Chemistrylist);
+                            Double ChemistryMin = utils.getMin(Chemistrylist);
+                            Double ChemistryAver = utils.getAver(Chemistrylist);
 
-                            ClassGrades.setchemistryAve(chemistryAver);
-                            ClassGrades.setchineseMin(chemistryMin);
-                            ClassGrades.setchemistryMax(chemistryMax);
+                            ClassGrades.setChemistryAve(ChemistryAver);
+                            ClassGrades.setChineseMin(ChemistryMin);
+                            ClassGrades.setChemistryMax(ChemistryMax);
 
 
                             //物理各分值统计
-                            Double physicsMax = utils.getMax(physicslist);
-                            Double physicsMin = utils.getMin(physicslist);
-                            Double physicsAver = utils.getAver(physicslist);
+                            Double PhysicsMax = utils.getMax(Physicslist);
+                            Double PhysicsMin = utils.getMin(Physicslist);
+                            Double PhysicsAver = utils.getAver(Physicslist);
 
-                            ClassGrades.setphysicsAve(physicsAver);
-                            ClassGrades.setphysicsMax(physicsMax);
-                            ClassGrades.setphysicsMin(physicsMin);
+                            ClassGrades.setPhysicsAve(PhysicsAver);
+                            ClassGrades.setPhysicsMax(PhysicsMax);
+                            ClassGrades.setPhysicsMin(PhysicsMin);
 
                             //音乐各分值统计
                             Double musicMax = utils.getMax(musiclist);
                             Double musicMin = utils.getMin(musiclist);
                             Double musicAver = utils.getAver(musiclist);
 
-                            ClassGrades.setmusicAve(musicAver);
-                            ClassGrades.setmusicMax(musicMax);
-                            ClassGrades.setmusicMin(musicMin);
+                            ClassGrades.setMusicAve(musicAver);
+                            ClassGrades.setMusicMax(musicMax);
+                            ClassGrades.setMusicMin(musicMin);
 
 
                             //美术各分值统计
@@ -466,22 +466,22 @@ public class GradesController {
                             Double artsMin = utils.getMin(artslist);
                             Double artsAver = utils.getAver(artslist);
 
-                            ClassGrades.setartsMax(artsMax);
-                            ClassGrades.setartsAve(artsAver);
-                            ClassGrades.setartsMin(artsMin);
+                            ClassGrades.setArtsMax(artsMax);
+                            ClassGrades.setArtsAve(artsAver);
+                            ClassGrades.setArtsMin(artsMin);
 
                             //体育各分值统计
                             Double sportsMax = utils.getMax(sportslist);
                             Double sportsMin = utils.getMin(sportslist);
                             Double sportsAver = utils.getAver(sportslist);
 
-                            ClassGrades.setsportsMin(sportsMin);
-                            ClassGrades.setsportsAve(sportsAver);
-                            ClassGrades.setsportsMax(sportsMax);
+                            ClassGrades.setSportsMin(sportsMin);
+                            ClassGrades.setSportsAve(sportsAver);
+                            ClassGrades.setSportsMax(sportsMax);
 
                             System.out.println("该班级成绩分数："+ClassGrades);
 
-                            gradesService.addClassGrades(ClassGrades);
+                            gradesService.insertClassGrades(ClassGrades);
 
                  }
 
@@ -500,9 +500,9 @@ public class GradesController {
 
 
 
-        int count = gradesService.getAllClassGrades().size();
+        int count = gradesService.listClassGrades().size();
         PageHelper.startPage(page,limit);
-        List<ClassGrades> ClassGradeslist1 = gradesService.getAllClassGrades();
+        List<ClassGrades> ClassGradeslist1 = gradesService.listClassGrades();
 
         PageInfo<ClassGrades> ClassGradesPageInfo = new PageInfo<>(ClassGradeslist1);
 
@@ -512,51 +512,51 @@ public class GradesController {
 
         for (ClassGrades cgrades:
                 ClassGradeslist2 ) {
-            String classGradesCardId = cgrades.getclassGradesCardId();
+            String classGradesCardId = cgrades.getClassGradesCardId();
             ClassGradesCard card = gradesService.getClassGradesCardByID(classGradesCardId);
             CustomClassGrades custom = new CustomClassGrades();
-            custom.setclassId(card.getclassId());
-            custom.settestDescribe(card.gettestDescribe());
-            custom.settestTime(card.gettestTime());
-            custom.settotalAve(cgrades.gettotalAve());
-            custom.settotalMax(cgrades.gettotalMax());
-            custom.settotalMin(cgrades.gettotalMin());
-            custom.setchineseMax(cgrades.getchineseMax());
-            custom.setchineseMin(cgrades.getchineseMin());
-            custom.setchineseAve(cgrades.getchineseAve());
-            custom.setmathematicsMax(cgrades.getmathematicsMax());
-            custom.setmathematicsMin(cgrades.getmathematicsMin());
-            custom.setmathematicsAve(cgrades.getmathematicsAve());
-            custom.setenglishMax(cgrades.getenglishMax());
-            custom.setenglishMin(cgrades.getenglishMin());
-            custom.setenglishAve(cgrades.getenglishAve());
-            custom.setpoliticsMax(cgrades.getpoliticsMax());
-            custom.setpoliticsMin(cgrades.getpoliticsMin());
-            custom.setpoliticsAve(cgrades.getpoliticsAve());
-            custom.sethistoryMax(cgrades.gethistoryMax());
-            custom.sethistoryMin(cgrades.gethistoryMin());
-            custom.sethistoryAve(cgrades.gethistoryAve());
-            custom.setgeographyMax(cgrades.getgeographyMax());
-            custom.setgeographyMin(cgrades.getgeographyMin());
-            custom.setgeographyAve(cgrades.getgeographyAve());
-            custom.setbiologyAve(cgrades.getbiologyAve());
-            custom.setbiologyMax(cgrades.getbiologyMax());
-            custom.setbiologyMin(cgrades.getbiologyMin());
-            custom.setchemistryAve(cgrades.getchemistryAve());
-            custom.setchemistryMax(cgrades.getchemistryMax());
-            custom.setchemistryMin(cgrades.getchemistryMin());
-            custom.setphysicsMax(cgrades.getphysicsMax());
-            custom.setphysicsMin(cgrades.getphysicsMin());
-            custom.setphysicsAve(cgrades.getphysicsAve());
-            custom.setmusicAve(cgrades.getmusicAve());
-            custom.setmusicMin(cgrades.getmusicMin());
-            custom.setmusicMax(cgrades.getmusicMax());
-            custom.setartsMax(cgrades.getartsMax());
-            custom.setartsMin(cgrades.getartsMin());
-            custom.setartsAve(cgrades.getartsAve());
-            custom.setsportsMax(cgrades.getsportsMax());
-            custom.setsportsMin(cgrades.getsportsMin());
-            custom.setsportsAve(cgrades.getsportsAve());
+            custom.setClassId(card.getClassId());
+            custom.setTestDescribe(card.getTestDescribe());
+            custom.setTestTime(card.getTestTime());
+            custom.setTotalAve(cgrades.getTotalAve());
+            custom.setTotalMax(cgrades.getTotalMax());
+            custom.setTotalMin(cgrades.getTotalMin());
+            custom.setChineseMax(cgrades.getChineseMax());
+            custom.setChineseMin(cgrades.getChineseMin());
+            custom.setChineseAve(cgrades.getChineseAve());
+            custom.setMathematicsMax(cgrades.getMathematicsMax());
+            custom.setMathematicsMin(cgrades.getMathematicsMin());
+            custom.setMathematicsAve(cgrades.getMathematicsAve());
+            custom.setEnglishMax(cgrades.getEnglishMax());
+            custom.setEnglishMin(cgrades.getEnglishMin());
+            custom.setEnglishAve(cgrades.getEnglishAve());
+            custom.setPoliticsMax(cgrades.getPoliticsMax());
+            custom.setPoliticsMin(cgrades.getPoliticsMin());
+            custom.setPoliticsAve(cgrades.getPoliticsAve());
+            custom.setHistoryMax(cgrades.getHistoryMax());
+            custom.setHistoryMin(cgrades.getHistoryMin());
+            custom.setHistoryAve(cgrades.getHistoryAve());
+            custom.setGeographyMax(cgrades.getGeographyMax());
+            custom.setGeographyMin(cgrades.getGeographyMin());
+            custom.setGeographyAve(cgrades.getGeographyAve());
+            custom.setBiologyAve(cgrades.getBiologyAve());
+            custom.setBiologyMax(cgrades.getBiologyMax());
+            custom.setBiologyMin(cgrades.getBiologyMin());
+            custom.setChemistryAve(cgrades.getChemistryAve());
+            custom.setChemistryMax(cgrades.getChemistryMax());
+            custom.setChemistryMin(cgrades.getChemistryMin());
+            custom.setPhysicsMax(cgrades.getPhysicsMax());
+            custom.setPhysicsMin(cgrades.getPhysicsMin());
+            custom.setPhysicsAve(cgrades.getPhysicsAve());
+            custom.setMusicAve(cgrades.getMusicAve());
+            custom.setMusicMin(cgrades.getMusicMin());
+            custom.setMusicMax(cgrades.getMusicMax());
+            custom.setArtsMax(cgrades.getArtsMax());
+            custom.setArtsMin(cgrades.getArtsMin());
+            custom.setArtsAve(cgrades.getArtsAve());
+            custom.setSportsMax(cgrades.getSportsMax());
+            custom.setSportsMin(cgrades.getSportsMin());
+            custom.setSportsAve(cgrades.getSportsAve());
 
 
 

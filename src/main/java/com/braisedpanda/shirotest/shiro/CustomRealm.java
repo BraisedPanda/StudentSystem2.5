@@ -21,7 +21,7 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
+        System.out.println("========开始权限验证========");
 //        String username = (String) SecurityUtils.getSubject().getPrincipal();
         User user = (User)principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -34,7 +34,7 @@ public class CustomRealm extends AuthorizingRealm {
            info.addRole(role.getRole());
 
 
-           String roleId= role.getroleId();
+           String roleId= role.getRoleId();
             List<String> permissionList= userService.getPermission(roleId);
             //查询登录用户所拥有的权限，并添加权限
             for (String  permission:
@@ -50,7 +50,7 @@ public class CustomRealm extends AuthorizingRealm {
     //重写验证身份的方法
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-
+        System.out.println("========开始身份验证========");
         String username = (String) authenticationToken.getPrincipal();
 
         String password = new String((char[]) authenticationToken.getCredentials());

@@ -17,8 +17,8 @@ public class PermissionServiceImpl implements PermissionService{
 
     //添加角色信息
     @Override
-    public void addRole(Role role) {
-        permissionMapper.addRole(role);
+    public void insertRole(Role role) {
+        permissionMapper.insertRole(role);
     }
 
     //查询所有的权限信息
@@ -38,8 +38,8 @@ public class PermissionServiceImpl implements PermissionService{
     //添加对应的角色-权限表
 
     @Override
-    public void addRole_Permission(RolePermission rp) {
-        permissionMapper.addRole_Permission(rp);
+    public void insertRolePermission(RolePermission rp) {
+        permissionMapper.insertRolePermission(rp);
     }
     //查找所有的角色
 
@@ -52,8 +52,8 @@ public class PermissionServiceImpl implements PermissionService{
 
     @Override
     public List<UserRole> getRoleById(String uid) {
-        List<UserRole> user_roleList =permissionMapper.getRoleById(uid);
-       return user_roleList;
+        List<UserRole> userRoleList =permissionMapper.getRoleById(uid);
+       return userRoleList;
     }
 
     //根据roleId在role中查询相应的role
@@ -64,24 +64,24 @@ public class PermissionServiceImpl implements PermissionService{
         return role;
     }
 
-    //新增user_role
+    //新增userRole
 
     @Override
-    public void addUser_Role(UserRole user_role) {
-        permissionMapper.addUser_Role(user_role);
+    public void insertUserRole(UserRole userRole) {
+        permissionMapper.insertUserRole(userRole);
     }
-    //在表User_Role中删除所有uid的角色
+    //在表userRole中删除所有uid的角色
 
     @Override
     public void deleteRoleByUid(int uid) {
         permissionMapper.deleteRoleByUid(uid);
     }
 
-    //查找所有的role_permission内容
+    //查找所有的rolePermission内容
     @Override
-    public List<RolePermission> getAllRole_Permission() {
-        List<RolePermission> role_permissionList = permissionMapper.getAllRole_Permission();
-        return role_permissionList;
+    public List<RolePermission> listRolePermission() {
+        List<RolePermission> rolePermissionList = permissionMapper.listRolePermission();
+        return rolePermissionList;
     }
     //根据rPId删除角色所拥有的权限
 
@@ -90,14 +90,14 @@ public class PermissionServiceImpl implements PermissionService{
         permissionMapper.deleteRolePermissionById(rPId);
     }
 
-    //根据rPId查找role_permission对象
+    //根据rPId查找rolePermission对象
 
     @Override
-    public List<RolePermission>  getRole_PermissionById(String rPId) {
-        List<RolePermission> role_permissionlist  = permissionMapper.getRole_PermissionById(rPId);
-        return role_permissionlist;
+    public List<RolePermission>  getRolePermissionById(String rPId) {
+        List<RolePermission> rolePermissionlist  = permissionMapper.getRolePermissionById(rPId);
+        return rolePermissionlist;
     }
-    //根据roleId删除role_permission表中所有的权限
+    //根据roleId删除rolePermission表中所有的权限
     @Override
     public void deleteRolePermissionByroleId(String roleId) {
         permissionMapper.deleteRolePermissionByroleId(roleId);

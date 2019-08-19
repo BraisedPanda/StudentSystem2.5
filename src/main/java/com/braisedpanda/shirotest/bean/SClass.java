@@ -22,35 +22,35 @@ public class SClass implements Serializable{
     private String sportsTeacher;          //体育老师
     private List<Student> studentList;      //班级全部的学生
 
-    public String getclassId() {
+    public String getClassId() {
         return classId;
     }
 
-    public void setclassId(String classId) {
+    public void setClassId(String classId) {
         this.classId = classId;
     }
 
-    public String getclassName() {
+    public String getClassName() {
         return className;
     }
 
-    public void setclassName(String className) {
+    public void setClassName(String className) {
         this.className = className;
     }
 
-    public String getclassTeacher() {
+    public String getClassTeacher() {
         return classTeacher;
     }
 
-    public void setclassTeacher(String classTeacher) {
+    public void setClassTeacher(String classTeacher) {
         this.classTeacher = classTeacher;
     }
 
-    public int getclassCount() {
+    public int getClassCount() {
         return classCount;
     }
 
-    public void setclassCount(int classCount) {
+    public void setClassCount(int classCount) {
         this.classCount = classCount;
     }
 
@@ -156,28 +156,5 @@ public class SClass implements Serializable{
 
     public void setStudentList(List<Student> studentList) {
         this.studentList = studentList;
-    }
-
-    @Override
-    public String toString() {
-        return "SClass{" +
-                "classId='" + classId + '\'' +
-                ", className='" + className + '\'' +
-                ", classTeacher='" + classTeacher + '\'' +
-                ", classCount='" + classCount + '\'' +
-                ", chineseTeacher='" + chineseTeacher + '\'' +
-                ", mathematicsTeacher='" + mathematicsTeacher + '\'' +
-                ", englishTeacher='" + englishTeacher + '\'' +
-                ", politicsTeacher='" + politicsTeacher + '\'' +
-                ", historyTeacher='" + historyTeacher + '\'' +
-                ", geographyTeacher='" + geographyTeacher + '\'' +
-                ", biologyTeacher='" + biologyTeacher + '\'' +
-                ", chemistryTeacher='" + chemistryTeacher + '\'' +
-                ", physicsTeacher='" + physicsTeacher + '\'' +
-                ", musicTeacher='" + musicTeacher + '\'' +
-                ", artsTeacher='" + artsTeacher + '\'' +
-                ", sportsTeacher='" + sportsTeacher + '\'' +
-                ", studentList=" + studentList +
-                '}';
     }
 }

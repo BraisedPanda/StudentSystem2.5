@@ -82,7 +82,7 @@
     </update>
 
     <!--查询所有学生的班级id(distinct:取不同的值)-->
-    <select id="getAllClass" resultType="String">
+    <select id="listClass" resultType="String">
         select distinct(classId) from student
     </select>
 

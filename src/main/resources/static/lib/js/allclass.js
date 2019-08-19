@@ -9,7 +9,7 @@ $(function () {
 
     //查看班级信息
 
-    classdetail = function(data){
+    classDetail = function(data){
         layui.use('layer', function(){
             var layer = layui.layer;
 
@@ -17,7 +17,7 @@ $(function () {
 
                 title: ['班级信息'],
                 type: 2,
-                content: 'page/class/classdetail.html',
+                content: 'page/class/classDetail.html',
                 shadeClose: true,
                 area: ['1000px', '700px'],
                 success: function (layero,index) {
@@ -82,7 +82,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
         ,title: '班级表'
         ,page: true //开启分页
         ,title:'班级信息表'
-        ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+        ,toolbar: 'true ' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
 
         ,cols: [ [ //表头
             {type: 'checkbox', fixed: 'left'}
@@ -112,57 +112,14 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
         ] ]
     });
 
-    //监听头工具栏事件
-    table.on('toolbar(test)', function(obj){
-        var checkStatus = table.checkStatus(obj.config.id)
-            ,data = checkStatus.data; //获取选中的数据
-        switch(obj.event){
-            case 'add':
-                var url = 'class/toadd'
-                $(window).attr('location',url);
-                break;
-            case 'update':
-                if(data.length === 0){
-                    layer.msg('请选择一行');
-                } else if(data.length > 1){
-                    layer.msg('只能同时编辑一个');
-                } else {
-                    var userdata =  data[0];
-                    var classId = userdata.classId;
-                    var url = 'class/toeditclass/'+classId
-                    $(window).attr('location',url);
 
-                }
-                break;
-            case 'delete':
-                if(data.length === 0){
-                    layer.msg('请选择一行');
-                } else {
-                    layer.confirm("是否确认删除？",function () {
-                        for(var i=0;i<data.length;i++){
-                            var classId = data[i].classId;
-
-                            $.ajax({
-                                type:"post",
-                                url:'class/delete/'+classId
-
-                            });
-                            // window.location.reload();
-                        }
-                    });
-
-
-                }
-                break;
-        };
-    });
 
     //监听行工具事件
     table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
             ,layEvent = obj.event; //获得 lay-event 对应的值
         if(layEvent === 'detail'){
-            classdetail(data);
+            classDetail(data);
 
         } else if(layEvent === 'del'){
             layer.confirm('是否确认删除？', function(index){

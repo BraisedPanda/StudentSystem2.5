@@ -28,7 +28,7 @@ public interface StudentService {
     void updateStudent(Student student);
 
 
-    List<String> getAllClass();
+    List<String> listClass();
 
     @Cacheable(value="student" ,key="'getStudentConutByCid:'+#classid")
     int getStudentConutByCid(String classid);

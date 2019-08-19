@@ -30,10 +30,10 @@ public class ClassController {
 
     //批量生成学生测试数据
     @ResponseBody
-    @RequestMapping("addClass")
-    public List addClass(){
+    @RequestMapping("insertClass")
+    public List insertClass(){
         SClass sclass = new SClass();
-        List<String> classidList = studentService.getAllClass();
+        List<String> classidList = studentService.listClass();
         for (String classid:
              classidList) {
                 String[] teacherlist = new String[]{"节振国","赵大华","汤绍箕","黄强辉",
@@ -55,9 +55,10 @@ public class ClassController {
                 int k = random.nextInt(s);
                 int l = random.nextInt(s);
                 int m = random.nextInt(s);
-                sclass.setclassId(classid);
-                sclass.setclassName(classid);
-                sclass.setclassTeacher(teacherlist[a]);
+
+                sclass.setClassId(classid);
+                sclass.setClassName(classid);
+                sclass.setClassTeacher(teacherlist[a]);
                 sclass.setChineseTeacher(teacherlist[b]);
                 sclass.setMathematicsTeacher(teacherlist[c]);
                 sclass.setEnglishTeacher(teacherlist[d]);
@@ -72,8 +73,8 @@ public class ClassController {
                 sclass.setSportsTeacher(teacherlist[m]);
 
                 int count = studentService.getStudentConutByCid(classid);
-                sclass.setclassCount(count);
-                classService.addClass(sclass);
+                sclass.setClassCount(count);
+                classService.insertClass(sclass);
                 System.out.println(sclass);
 
 
@@ -91,9 +92,9 @@ public class ClassController {
     @RequestMapping("class/all")
     public @ResponseBody
     Map<String,Object> allClass(int page, int limit){
-        int count = classService.getAllClass().size();
+        int count = classService.listClass().size();
         PageHelper.startPage(page,limit);
-        List<SClass> sClassList1 = classService.getAllClass();
+        List<SClass> sClassList1 = classService.listClass();
 
         PageInfo<SClass> classPageInfo = new PageInfo<>(sClassList1);
 
@@ -131,7 +132,7 @@ public class ClassController {
         ModelAndView modelAndView = new ModelAndView();
        SClass sclass =  classService.getClassById(classId);
        modelAndView.addObject("class",sclass);
-       modelAndView.setViewName("class/edit_class");
+       modelAndView.setViewName("class/editClass");
         return modelAndView;
 
     }
@@ -171,7 +172,7 @@ public class ClassController {
      */
     @ResponseBody
     @RequestMapping("class/detail/{class_cid}")
-    public HashMap<String,Object> classdetail(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
+    public HashMap<String,Object> classDetail(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
 
 
         HashMap<String,Object> resultMap = new HashMap<>();
@@ -186,37 +187,37 @@ public class ClassController {
         for (Student student:
              studentList) {
             StudentGradesCustom studentGradesCustom = new StudentGradesCustom();
-            String stuId = student.getstuId();
+            String stuId = student.getStuId();
             //根据每个学生的学生id查找所该学生的学习成绩卡（每次考试对应一张成绩卡）
-            List<StudentGradesCard> student_grades_cardList
+            List<StudentGradesCard> studentGradesCardList
                     = gradesService.getGradesCard(stuId);
             //根据每张成绩卡，查询对应考试的详细成绩
             for (StudentGradesCard card:
-                 student_grades_cardList) {
-                String cardid = card.getstugradesCardId();
+                 studentGradesCardList) {
+                String cardid = card.getStugradesCardId();
 
-                StudentGrades student_grades =  gradesService.getGrades(cardid);
+                StudentGrades studentGrades =  gradesService.getGrades(cardid);
 
                 //设置相关的信息
-                studentGradesCustom.setstuName(student.getstuName());
-                studentGradesCustom.setstuId(stuId);
-                studentGradesCustom.settestTime(card.gettestTime());
-                studentGradesCustom.settestDescribe(card.gettestDescribe());
-                studentGradesCustom.setTotal(student_grades.getTotal());
-                studentGradesCustom.setAverage(student_grades.getAverage());
-                studentGradesCustom.setmaxScore(student_grades.getmaxScore());
-                studentGradesCustom.setminScore(student_grades.getminScore());
-                studentGradesCustom.setChinese(student_grades.getChinese());
-                studentGradesCustom.setMathematics(student_grades.getMathematics());
-                studentGradesCustom.setEnglish(student_grades.getEnglish());
-                studentGradesCustom.setPolitics(student_grades.getPolitics());
-                studentGradesCustom.setHistory(student_grades.getHistory());
-                studentGradesCustom.setGeography(student_grades.getGeography());
-                studentGradesCustom.setBiology(student_grades.getBiology());
-                studentGradesCustom.setChemistry(student_grades.getChemistry());
-                studentGradesCustom.setMusic(student_grades.getMusic());
-                studentGradesCustom.setArts(student_grades.getArts());
-                studentGradesCustom.setSports(student_grades.getSports());
+                studentGradesCustom.setStuName(student.getStuName());
+                studentGradesCustom.setStuId(stuId);
+                studentGradesCustom.setTestTime(card.getTestTime());
+                studentGradesCustom.setTestDescribe(card.getTestDescribe());
+                studentGradesCustom.setTotal(studentGrades.getTotal());
+                studentGradesCustom.setAverage(studentGrades.getAverage());
+                studentGradesCustom.setMaxScore(studentGrades.getMaxScore());
+                studentGradesCustom.setMinScore(studentGrades.getMinScore());
+                studentGradesCustom.setChinese(studentGrades.getChinese());
+                studentGradesCustom.setMathematics(studentGrades.getMathematics());
+                studentGradesCustom.setEnglish(studentGrades.getEnglish());
+                studentGradesCustom.setPolitics(studentGrades.getPolitics());
+                studentGradesCustom.setHistory(studentGrades.getHistory());
+                studentGradesCustom.setGeography(studentGrades.getGeography());
+                studentGradesCustom.setBiology(studentGrades.getBiology());
+                studentGradesCustom.setChemistry(studentGrades.getChemistry());
+                studentGradesCustom.setMusic(studentGrades.getMusic());
+                studentGradesCustom.setArts(studentGrades.getArts());
+                studentGradesCustom.setSports(studentGrades.getSports());
 
 
                 //存放在数组之中

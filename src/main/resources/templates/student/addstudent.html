@@ -190,7 +190,7 @@
                 <label class="layui-form-label">民族:</label>
                 <div class="layui-input-inline">
                     <select name="nationName" lay-verify="required">
-                        <option th:value="${nation.nationName}" th:each="nation:${nationList}" th:text="${nation.nationName}"></option>
+                        <option th:value="${nation.nationName}" th:each="nation:${nationlist}" th:text="${nation.nationName}"></option>
 
                     </select>
                 </div>
@@ -210,7 +210,7 @@
                     <label class="layui-form-label">班级:</label>
                     <div class="layui-input-inline">
                         <select name="classId" lay-verify="required">
-                            <option th:value="${class.classId}" th:each="class:${classList}" th:text="${class.className}"></option>
+                            <option th:value="${class.classId}" th:each="class:${classlist}" th:text="${class.className}"></option>
                         </select>
                     </div>
 

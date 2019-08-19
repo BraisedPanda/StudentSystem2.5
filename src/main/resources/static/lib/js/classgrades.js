@@ -82,7 +82,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
         ,title: '用户表'
         ,page: true //开启分页
         ,title:'学生信息表'
-        ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+        ,toolbar: 'true' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
 
         ,cols: [ [ //表头
             {type: 'checkbox', fixed: 'left'}
@@ -149,7 +149,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
             ,{field: 'sportsMin', title: '体育最低分', width:'9%', sort: true}
             ,{field: 'sportsAve', title: '体育平均分', width:'9%', sort: true}
 
-            ,{fixed: 'right', width: '9%', align:'center', toolbar: '#barDemo'}
+            // ,{fixed: 'right', width: '9%', align:'center', toolbar: '#barDemo'}
 
         ] ]
     });

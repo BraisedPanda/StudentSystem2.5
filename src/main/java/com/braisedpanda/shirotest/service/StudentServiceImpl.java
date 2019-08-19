@@ -44,8 +44,8 @@ public class StudentServiceImpl implements StudentService{
     }
     //查询所有学生的班级
     @Override
-    public List<String> getAllClass() {
-        List<String> classIdlist = studentMapper.getAllClass();
+    public List<String> listClass() {
+        List<String> classIdlist = studentMapper.listClass();
         return classIdlist;
     }
     //根据班级id查找学生的总数

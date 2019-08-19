@@ -14,8 +14,8 @@ public class UserServiceImpl implements  UserService{
 
     //查找所有的用户
     @Override
-    public List<User> getAllUser() {
-        List<User> userList = userMapper.getAllUser();
+    public List<User> listUsers() {
+        List<User> userList = userMapper.listUsers();
         return userList;
     }
 

@@ -41,7 +41,7 @@ public class UserController {
     @RequestMapping("/alluser")
     public ModelAndView allUser(){
         ModelAndView modelAndView = new ModelAndView();
-        List<User> userList = userService.getAllUser();
+        List<User> userList = userService.listUsers();
 
         modelAndView.addObject("useList",userList);
         modelAndView.setViewName("index");
@@ -52,7 +52,7 @@ public class UserController {
     @RequestMapping("/regist")
     public String regist(User user,Model model,String activeCode){
         if(activeCode ==null || activeCode.length()==0){
-            user.setactiveCode("0");
+            user.setActiveCode("0");
         }
         user.setImages("/images/2019-08-07/f8aa0870-e4ea-4170-9772-296204476267.jpg");
         userService.addUser(user);
@@ -120,9 +120,9 @@ public class UserController {
     @RequestMapping("/userlist/{startPage}")
     public ModelAndView  userlist(@PathVariable("startPage") int startPage){
         ModelAndView modelAndView = new ModelAndView();
-        int totalCount = userService.getAllUser().size();
+        int totalCount = userService.listUsers().size();
         PageHelper.startPage(startPage,8);
-        List<User> userList1 = userService.getAllUser();
+        List<User> userList1 = userService.listUsers();
         int totalPage ;
         if(totalCount % 8 ==0){
             totalPage = totalCount / 8;
@@ -168,9 +168,9 @@ public class UserController {
 
         userService.edit(user);
         ModelAndView modelAndView = new ModelAndView();
-        int totalCount = userService.getAllUser().size();
+        int totalCount = userService.listUsers().size();
         PageHelper.startPage(startPage,8);
-        List<User> userList1 = userService.getAllUser();
+        List<User> userList1 = userService.listUsers();
         int totalPage ;
         if(totalCount % 8 ==0){
             totalPage = totalCount / 8;
@@ -207,7 +207,7 @@ public class UserController {
     @RequestMapping("/adduser")
     public ModelAndView adduser(User user,Model model,String activeCode){
         if(activeCode ==null || activeCode.length()==0){
-            user.setactiveCode("0");
+            user.setActiveCode("0");
         }
         user.setImages("/images/2019-08-07/f8aa0870-e4ea-4170-9772-296204476267.jpg");
         userService.addUser(user);
@@ -217,9 +217,9 @@ public class UserController {
 
         userService.edit(user);
         ModelAndView modelAndView = new ModelAndView();
-        int totalCount = userService.getAllUser().size();
+        int totalCount = userService.listUsers().size();
         PageHelper.startPage(startPage,8);
-        List<User> userList1 = userService.getAllUser();
+        List<User> userList1 = userService.listUsers();
         int totalPage ;
         if(totalCount % 8 ==0){
             totalPage = totalCount / 8;
@@ -274,25 +274,25 @@ public class UserController {
 
     @RequestMapping("user/table")
     public @ResponseBody Map<String,Object> testtable(int page,int limit){
-        int count = userService.getAllUser().size();
+        int count = userService.listUsers().size();
         PageHelper.startPage(page,limit);
-        List<User> userList1 = userService.getAllUser();
+        List<User> userList1 = userService.listUsers();
 
         PageInfo<User> userPageInfo = new PageInfo<>(userList1);
 
         List<User> userList = userPageInfo.getList();
         for (User user:
              userList) {
-            List<UserRole> user_roleList = permissionService.getRoleById(user.getUid()+"");
+            List<UserRole> userRoleList = permissionService.getRoleById(user.getUid()+"");
             StringBuffer sb = new StringBuffer();
-            if(user_roleList ==null || user_roleList.size()==0){
+            if(userRoleList ==null || userRoleList.size()==0){
                 user.setRoleList("无角色");
             }
             else {
-                for (UserRole user_role :
-                        user_roleList) {
+                for (UserRole userRole :
+                        userRoleList) {
                     sb.append("【");
-                    sb.append(user_role.getRole());
+                    sb.append(userRole.getRole());
                     sb.append("】");
 
                 }

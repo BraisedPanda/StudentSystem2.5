@@ -7,9 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface ClassMapper {
-    void addClass(SClass sclass);
+    void insertClass(SClass sclass);
 
-    List<SClass> getAllClass();
+    List<SClass> listClass();
 
     //根据classid值删除class
     void deleteClassById(String classId);
@@ -18,5 +18,5 @@ public interface ClassMapper {
     //更新班级信息
     void updateClass(SClass sClass);
     //获取所有的班级id
-    List<String> getAllClassId();
+    List<String> listClassId();
 }

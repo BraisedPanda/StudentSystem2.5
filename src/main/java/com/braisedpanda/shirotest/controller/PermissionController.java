@@ -34,15 +34,15 @@ public class PermissionController {
     }
 
     //新增角色
-    @RequestMapping("addrole")
-    public String addrole(Role role, HttpServletRequest request,Model model){
+    @RequestMapping("insertRole")
+    public String insertRole(Role role, HttpServletRequest request,Model model){
         //添加角色信息
 
         String roleId = UUID.randomUUID()+"";
         roleId = roleId.replace("-","");
-        role.setroleId(roleId);
+        role.setRoleId(roleId);
 
-        permissionService.addRole(role);
+        permissionService.insertRole(role);
 
         String[] s = request.getParameterValues("permission");
         for (String s1:
@@ -52,14 +52,14 @@ public class PermissionController {
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
             rp.setrPId(rPId);
-            rp.setnationName(permission.getnationName());
+            rp.setPermissionId(permission.getPermissionId());
             rp.setPermission(permission.getPermission());
-            rp.setpermissionDescribe(permission.getpermissionDescribe());
-            rp.setroleId(roleId);
+            rp.setPermissionDescribe(permission.getPermissionDescribe());
+            rp.setRoleId(roleId);
             rp.setRole(role.getRole());
-            rp.setroleDescribe(role.getroleDescribe());
+            rp.setRoleDescribe(role.getRoleDescribe());
 
-            permissionService.addRole_Permission(rp);
+            permissionService.insertRolePermission(rp);
 
 
 
@@ -83,27 +83,27 @@ public class PermissionController {
     @RequestMapping("findrolebyid/{uid}")
     @Cacheable(value="permission" , key="#uid")
     public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
-        List<UserRole> user_RoleList = permissionService.getRoleById(uid);
+        List<UserRole> userRoleList = permissionService.getRoleById(uid);
         User user = userService.getUserByUid(Integer.parseInt(uid));
-       if(user_RoleList !=null && user_RoleList.size()>0){
-           model.addAttribute("roleList", user_RoleList);
+       if(userRoleList !=null && userRoleList.size()>0){
+           model.addAttribute("roleList", userRoleList);
        }else if(user!=null){ //用户存在，但是没有角色
            UserRole role = new UserRole();
            role.setRole("无");
            role.setUsername(user.getUsername());
-           user_RoleList.add(role);
-           model.addAttribute("roleList", user_RoleList);
+           userRoleList.add(role);
+           model.addAttribute("roleList", userRoleList);
        }else{  //用户名和角色都不存在
            UserRole role = new UserRole();
            role.setRole("无");
            role.setUsername("无");
-           user_RoleList.add(role);
-           model.addAttribute("roleList", user_RoleList);
+           userRoleList.add(role);
+           model.addAttribute("roleList", userRoleList);
        }
 
 
 
-        return user_RoleList;
+        return userRoleList;
     }
 
 
@@ -118,9 +118,9 @@ public class PermissionController {
                 model.addAttribute(roleList);
                 return "permission/addpermission";
             }
-            //先清空原先有的数据,在表user_role中
+            //先清空原先有的数据,在表userRole中
             permissionService.deleteRoleByUid(uid);
-            //在user_role中，添加相关的数据
+            //在userRole中，添加相关的数据
             String[] roles = request.getParameterValues("role");
             if(roles ==null || roles.length==0){
                 model.addAttribute("msg","***请选择至少一个角色");
@@ -131,16 +131,16 @@ public class PermissionController {
             for (String roleId:
                     roles) {
                Role role = permissionService.getRoleByroleId(roleId);
-               String u_r_id = UUID.randomUUID()+"";
-               u_r_id = u_r_id.replace("-","");
-               UserRole user_role = new UserRole();
-               user_role.setU_r_id(u_r_id);
-               user_role.setroleDescribe(role.getroleDescribe());
-               user_role.setRole(role.getRole());
-               user_role.setUid(user.getUid());
-               user_role.setUsername(user.getUsername());
-               user_role.setroleId(role.getroleId());
-               permissionService.addUser_Role(user_role);
+               String uRId = UUID.randomUUID()+"";
+               uRId = uRId.replace("-","");
+               UserRole userRole = new UserRole();
+               userRole.setuRId(uRId);
+               userRole.setRoleDescribe(role.getRoleDescribe());
+               userRole.setRole(role.getRole());
+               userRole.setUid(user.getUid());
+               userRole.setUsername(user.getUsername());
+               userRole.setRoleId(role.getRoleId());
+               permissionService.insertUserRole(userRole);
 
             }
         model.addAttribute("msg","操作成功");
@@ -148,20 +148,20 @@ public class PermissionController {
         return "menu/msg";
     }
 
-    //查询表role_permission表中所有内容
+    //查询表rolePermission表中所有内容
     @RequestMapping("allpermission")
     public @ResponseBody Map<String,Object> allpermission(int page,int limit){
 
 
-        List<RolePermission> role_permissionList = permissionService.getAllRole_Permission();
-        int count = role_permissionList.size();
+        List<RolePermission> rolePermissionList = permissionService.listRolePermission();
+        int count = rolePermissionList.size();
         PageHelper.startPage(page,limit);
 
-        List<RolePermission> role_permissionList1 = permissionService.getAllRole_Permission();
+        List<RolePermission> rolePermissionList1 = permissionService.listRolePermission();
 
-        PageInfo<RolePermission> role_permissionPageInfo = new PageInfo<>(role_permissionList1);
+        PageInfo<RolePermission> rolePermissionPageInfo = new PageInfo<>(rolePermissionList1);
 
-        List<RolePermission> role_permissionlist = role_permissionPageInfo.getList();
+        List<RolePermission> rolePermissionlist = rolePermissionPageInfo.getList();
 
         Map<String,Object> resultMap = new HashMap<String,Object>();
         resultMap.put("code",0);
@@ -169,12 +169,12 @@ public class PermissionController {
         resultMap.put("count",count);
 
 
-        resultMap.put("data",role_permissionlist);
+        resultMap.put("data",rolePermissionlist);
         return resultMap;
 
     }
 
-    //删除role_permission中，角色所有的权限
+    //删除rolePermission中，角色所有的权限
     @ResponseBody
     @RequestMapping("permission/delete/{rPId}")
     public void deleteRolePermissionById(@PathVariable("rPId")String rPId){
@@ -185,21 +185,21 @@ public class PermissionController {
     @RequestMapping("permission/toedit/{roleId}")
     public ModelAndView permission_toedit(@PathVariable("roleId")String roleId){
         ModelAndView modelAndView = new ModelAndView();
-        List<RolePermission> role_permissionlist =  permissionService.getRole_PermissionById(roleId);
+        List<RolePermission> rolePermissionlist =  permissionService.getRolePermissionById(roleId);
         List<Permission> permissionList= permissionService.getAllPermission();
         modelAndView.addObject("permissionList",permissionList);
 
-       modelAndView.addObject("role_permission",role_permissionlist.get(0));
+       modelAndView.addObject("rolePermission",rolePermissionlist.get(0));
 
-       modelAndView.setViewName("permission/editrole_permission");
+       modelAndView.setViewName("permission/editrolePermission");
        return modelAndView;
     }
 
     //编辑角色权限信息
-    @RequestMapping("editrole_permission")
-    public String edit_role_perission(RolePermission role_permission, HttpServletRequest request, Model model ){
+    @RequestMapping("editrolePermission")
+    public String edit_role_perission(RolePermission rolePermission, HttpServletRequest request, Model model ){
         //1、根据roleId删除原先角色所有的权限
-        String roleId = role_permission.getroleId();
+        String roleId = rolePermission.getRoleId();
 
         permissionService.deleteRolePermissionByroleId(roleId);
 
@@ -210,25 +210,25 @@ public class PermissionController {
         for (String s1:
                 permissionList) {
             Permission permission =  permissionService.getPermissionById(s1);
-            RolePermission role_permission1 = new RolePermission();
+            RolePermission rolePermission1 = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
-            role_permission1.setrPId(rPId);
-            role_permission1.setnationName(permission.getnationName());
-            role_permission1.setPermission(permission.getPermission());
-            role_permission1.setpermissionDescribe(permission.getpermissionDescribe());
-            role_permission1.setroleId(roleId);
-            role_permission1.setRole(role_permission.getRole());
-            role_permission1.setroleDescribe(role_permission.getroleDescribe());
-            System.out.println("role_permission:"+role_permission1);
+            rolePermission1.setrPId(rPId);
+            rolePermission1.setPermissionId(permission.getPermissionId());
+            rolePermission1.setPermission(permission.getPermission());
+            rolePermission1.setPermissionDescribe(permission.getPermissionDescribe());
+            rolePermission1.setRoleId(roleId);
+            rolePermission1.setRole(rolePermission.getRole());
+            rolePermission1.setRoleDescribe(rolePermission.getRoleDescribe());
+            System.out.println("rolePermission:"+rolePermission1);
             //在role表中更新role的相关权限、名称等信息
             Role role = new Role();
-            role.setroleId(roleId);
-            role.setroleDescribe(role_permission.getroleDescribe());
-            role.setRole(role_permission.getRole());
+            role.setRoleId(roleId);
+            role.setRoleDescribe(rolePermission.getRoleDescribe());
+            role.setRole(rolePermission.getRole());
             permissionService.updateRole(role);
 
-            permissionService.addRole_Permission(role_permission1);
+            permissionService.insertRolePermission(rolePermission1);
         }
         
        model.addAttribute("msg","修改用户权限成功");

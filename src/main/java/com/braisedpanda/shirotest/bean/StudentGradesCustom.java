@@ -30,44 +30,44 @@ public class StudentGradesCustom implements Serializable {
     private double arts;
     private double sports;
 
-    public String gettestTime() {
-        return testTime;
-    }
-
-    public void settestTime(String testTime) {
-        this.testTime = testTime;
-    }
-
-    public String getstuId() {
+    public String getStuId() {
         return stuId;
     }
 
-    public void setstuId(String stuId) {
+    public void setStuId(String stuId) {
         this.stuId = stuId;
     }
 
-    public String getstuName() {
+    public String getStuName() {
         return stuName;
     }
 
-    public void setstuName(String stuName) {
+    public void setStuName(String stuName) {
         this.stuName = stuName;
     }
 
-    public String getclassId() {
+    public String getClassId() {
         return classId;
     }
 
-    public void setclassId(String classId) {
+    public void setClassId(String classId) {
         this.classId = classId;
     }
 
-    public String gettestDescribe() {
+    public String getTestDescribe() {
         return testDescribe;
     }
 
-    public void settestDescribe(String testDescribe) {
+    public void setTestDescribe(String testDescribe) {
         this.testDescribe = testDescribe;
+    }
+
+    public String getTestTime() {
+        return testTime;
+    }
+
+    public void setTestTime(String testTime) {
+        this.testTime = testTime;
     }
 
     public double getTotal() {
@@ -86,19 +86,19 @@ public class StudentGradesCustom implements Serializable {
         this.average = average;
     }
 
-    public double getmaxScore() {
+    public double getMaxScore() {
         return maxScore;
     }
 
-    public void setmaxScore(double maxScore) {
+    public void setMaxScore(double maxScore) {
         this.maxScore = maxScore;
     }
 
-    public double getminScore() {
+    public double getMinScore() {
         return minScore;
     }
 
-    public void setminScore(double minScore) {
+    public void setMinScore(double minScore) {
         this.minScore = minScore;
     }
 
@@ -196,32 +196,5 @@ public class StudentGradesCustom implements Serializable {
 
     public void setSports(double sports) {
         this.sports = sports;
-    }
-
-    @Override
-    public String toString() {
-        return "StudentGradesCustom{" +
-                "stuId='" + stuId + '\'' +
-                ", stuName='" + stuName + '\'' +
-                ", classId='" + classId + '\'' +
-                ", testDescribe='" + testDescribe + '\'' +
-                ", testTime='" + testTime + '\'' +
-                ", total=" + total +
-                ", average=" + average +
-                ", maxScore=" + maxScore +
-                ", minScore=" + minScore +
-                ", chinese=" + chinese +
-                ", mathematics=" + mathematics +
-                ", english=" + english +
-                ", politics=" + politics +
-                ", history=" + history +
-                ", geography=" + geography +
-                ", biology=" + biology +
-                ", chemistry=" + chemistry +
-                ", physics=" + physics +
-                ", music=" + music +
-                ", arts=" + arts +
-                ", sports=" + sports +
-                '}';
     }
 }

@@ -20,8 +20,8 @@ public class NationServiceImpl implements NationService{
     }
     //查询所有的nation
     @Override
-    public List<Nation> getAllNation() {
-           List<Nation> nationList = nationMapper.getAllNation();
+    public List<Nation> listNations() {
+           List<Nation> nationList = nationMapper.listNations();
            return nationList;
     }
 }

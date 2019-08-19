@@ -18,7 +18,7 @@ public interface StudentMapper {
 
     void updateStudent(Student student);
 
-    List<String> getAllClass();
+    List<String> listClass();
 
     int getStudentCountByCid(String classid);
     //根据班级的id，查找出该班所有的学生

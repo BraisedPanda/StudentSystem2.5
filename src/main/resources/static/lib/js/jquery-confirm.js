@@ -226,36 +226,36 @@
              * Append html.
              */
             var template = $(this.template);
-            template.find('.jconfirm-box').addClass(this.animationParsed).addClass(this.backgroundDismissAnimationParsed).addClass(this.typeParsed);
+            template.find('.jconfirm-box').insertClass(this.animationParsed).insertClass(this.backgroundDismissAnimationParsed).insertClass(this.typeParsed);
 
             if(this.typeAnimated)
-                template.find('.jconfirm-box').addClass('jconfirm-type-animated');
+                template.find('.jconfirm-box').insertClass('jconfirm-type-animated');
 
             if(this.useBootstrap){
-                template.find('.jc-bs3-row').addClass(this.bootstrapClasses.row);
-                template.find('.jc-bs3-row').addClass('justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center');
+                template.find('.jc-bs3-row').insertClass(this.bootstrapClasses.row);
+                template.find('.jc-bs3-row').insertClass('justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center');
 
-                template.find('.jconfirm-box-container').addClass(this.columnClassParsed);
+                template.find('.jconfirm-box-container').insertClass(this.columnClassParsed);
 
                 if(this.containerFluid)
-                    template.find('.jc-bs3-container').addClass(this.bootstrapClasses.containerFluid);
+                    template.find('.jc-bs3-container').insertClass(this.bootstrapClasses.containerFluid);
                 else
-                    template.find('.jc-bs3-container').addClass(this.bootstrapClasses.container);
+                    template.find('.jc-bs3-container').insertClass(this.bootstrapClasses.container);
             }else{
                 template.find('.jconfirm-box').css('width', this.boxWidth);
             }
 
             if(this.titleClass)
-                template.find('.jconfirm-title-c').addClass(this.titleClass);
+                template.find('.jconfirm-title-c').insertClass(this.titleClass);
 
-            template.addClass(this.themeParsed);
+            template.insertClass(this.themeParsed);
             var ariaLabel = 'jconfirm-box' + this._id;
             template.find('.jconfirm-box').attr('aria-labelledby', ariaLabel).attr('tabindex', -1);
             template.find('.jconfirm-content').attr('id', ariaLabel);
             if(this.bgOpacity !== null)
                 template.find('.jconfirm-bg').css('opacity', this.bgOpacity);
             if(this.rtl)
-                template.addClass('jconfirm-rtl');
+                template.insertClass('jconfirm-rtl');
 
             this.$el = template.appendTo(this.container);
             this.$jconfirmBoxContainer = this.$el.find('.jconfirm-box-container');
@@ -339,7 +339,7 @@
         setType: function(type){
             var oldClass = this.typeParsed;
             this._parseType(type);
-            this.$jconfirmBox.removeClass(oldClass).addClass(this.typeParsed);
+            this.$jconfirmBox.removeClass(oldClass).insertClass(this.typeParsed);
         },
         themeParsed: '',
         _themePrefix: 'jconfirm-',
@@ -349,7 +349,7 @@
             this._parseTheme(this.theme);
             if(previous)
                 this.$el.removeClass(previous);
-            this.$el.addClass(this.themeParsed);
+            this.$el.insertClass(this.themeParsed);
             this.theme = theme;
         },
         _parseTheme: function(theme){
@@ -411,7 +411,7 @@
             }
             this.columnClass = colClass || this.columnClass;
             this._parseColumnClass(this.columnClass);
-            this.$jconfirmBoxContainer.addClass(this.columnClassParsed);
+            this.$jconfirmBoxContainer.insertClass(this.columnClassParsed);
         },
         _updateContentMaxHeight: function(){
             var height = $(window).height() - (this.$jconfirmBox.outerHeight() - this.$contentPane.outerHeight()) - (this.offsetTop + this.offsetBottom);
@@ -463,7 +463,7 @@
             this.resetDrag();
             if(this.draggable){
                 $t.on('mousedown', function(e){
-                    $t.addClass('jconfirm-hand');
+                    $t.insertClass('jconfirm-hand');
                     that.mouseX = e.clientX;
                     that.mouseY = e.clientY;
                     that.isDrag = true;
@@ -562,7 +562,7 @@
                     var wh = $(window).height();
                     var total = that.offsetTop + that.offsetBottom + that.$jconfirmBox.height() - that.$contentPane.height() + that.$content.height();
                     if(total < wh){
-                        that.$contentPane.addClass('no-scroll');
+                        that.$contentPane.insertClass('no-scroll');
                     }else{
                         that.$contentPane.removeClass('no-scroll');
                     }
@@ -579,7 +579,7 @@
             if(this._hilightAnimating)
                 return;
 
-            that.$body.addClass('hilight');
+            that.$body.insertClass('hilight');
             var duration = parseFloat(that.$body.css('animation-duration')) || 2;
             this._hilightAnimating = true;
             setTimeout(function(){
@@ -693,7 +693,7 @@
 
                 var button_element = $('<button type="button" class="btn"></button>')
                     .html(that.buttons[key].text)
-                    .addClass(that.buttons[key].btnClass)
+                    .insertClass(that.buttons[key].btnClass)
                     .prop('disabled', that.buttons[key].isDisabled)
                     .css('display', that.buttons[key].isHidden ? 'none' : '')
                     .click(function(e){
@@ -709,8 +709,8 @@
                 that.buttons[key].setText = function(text){
                     button_element.html(text);
                 };
-                that.buttons[key].addClass = function(className){
-                    button_element.addClass(className);
+                that.buttons[key].insertClass = function(className){
+                    button_element.insertClass(className);
                 };
                 that.buttons[key].removeClass = function(className){
                     button_element.removeClass(className);
@@ -870,7 +870,7 @@
         loadingSpinner: false,
         showLoading: function(disableButtons){
             this.loadingSpinner = true;
-            this.$jconfirmBox.addClass('loading');
+            this.$jconfirmBox.insertClass('loading');
             if(disableButtons)
                 this.$btnc.find('button').prop('disabled', true);
 
@@ -1086,8 +1086,8 @@
             that.$jconfirmBoxContainer.removeClass('jconfirm-no-transition');
 
             setTimeout(function(){
-                that.$body.addClass(that.closeAnimationParsed);
-                that.$jconfirmBg.addClass('jconfirm-bg-h');
+                that.$body.insertClass(that.closeAnimationParsed);
+                that.$jconfirmBg.insertClass('jconfirm-bg-h');
                 var closeTimer = (that.closeAnimation === 'none') ? 1 : that.animationSpeed;
 
                 setTimeout(function(){
@@ -1210,12 +1210,12 @@
                 that.$body.css({
                     'transition-property': that.$body.css('transition-property') + ', margin'
                 });
-                that.$jconfirmBoxContainer.addClass('jconfirm-no-transition');
+                that.$jconfirmBoxContainer.insertClass('jconfirm-no-transition');
                 that._modalReady.resolve();
                 if(typeof that.onOpen === 'function')
                     that.onOpen();
 
-                that.$el.addClass(that.loadedClass);
+                that.$el.insertClass(that.loadedClass);
             }, this.animationSpeed);
         },
         loadedClass: 'jconfirm-open',

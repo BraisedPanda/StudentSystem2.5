@@ -7,11 +7,11 @@ public class Role implements Serializable{
     private String role;
     private String roleDescribe;
 
-    public String getroleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setroleId(String roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
@@ -23,20 +23,11 @@ public class Role implements Serializable{
         this.role = role;
     }
 
-    public String getroleDescribe() {
+    public String getRoleDescribe() {
         return roleDescribe;
     }
 
-    public void setroleDescribe(String roleDescribe) {
+    public void setRoleDescribe(String roleDescribe) {
         this.roleDescribe = roleDescribe;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "roleId='" + roleId + '\'' +
-                ", role='" + role + '\'' +
-                ", roleDescribe='" + roleDescribe + '\'' +
-                '}';
     }
 }

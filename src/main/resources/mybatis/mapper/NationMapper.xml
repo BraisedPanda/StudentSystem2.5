@@ -11,7 +11,7 @@
     </select>
 
     <!--查找所有的nation-->
-    <select id="getAllNation" resultType="com.braisedpanda.shirotest.bean.Nation">
+    <select id="listNations" resultType="com.braisedpanda.shirotest.bean.Nation">
         select * from nation
     </select>
 

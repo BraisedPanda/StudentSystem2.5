@@ -14,7 +14,7 @@ public interface UserService {
     //查找所有的用户
 
 
-    List<User> getAllUser();
+    List<User> listUsers();
 
     //添加用户
 

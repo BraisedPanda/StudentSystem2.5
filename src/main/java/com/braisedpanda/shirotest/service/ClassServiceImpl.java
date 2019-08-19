@@ -12,13 +12,13 @@ public class ClassServiceImpl implements ClassService{
     @Autowired
     ClassMapper classMapper;
     @Override
-    public void addClass(SClass sclass) {
-        classMapper.addClass(sclass);
+    public void insertClass(SClass sclass) {
+        classMapper.insertClass(sclass);
     }
 
     @Override
-    public List<SClass> getAllClass() {
-        List<SClass> classList = classMapper.getAllClass();
+    public List<SClass> listClass() {
+        List<SClass> classList = classMapper.listClass();
         return classList;
     }
     //根据classid值删除class
@@ -46,8 +46,8 @@ public class ClassServiceImpl implements ClassService{
 
 
     @Override
-    public List<String> getAllClassId() {
-        List<String> list =  classMapper.getAllClassId();
+    public List<String> listClassId() {
+        List<String> list =  classMapper.listClassId();
         return list;
     }
 }

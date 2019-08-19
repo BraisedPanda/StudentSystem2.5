@@ -6,27 +6,19 @@ public class Nation implements Serializable{
     private String nationId;
     private String nationName;
 
-    public String getnationId() {
+    public String getNationId() {
         return nationId;
     }
 
-    public void setnationId(String nationId) {
+    public void setNationId(String nationId) {
         this.nationId = nationId;
     }
 
-    public String getnationName() {
+    public String getNationName() {
         return nationName;
     }
 
-    public void setnationName(String nationName) {
+    public void setNationName(String nationName) {
         this.nationName = nationName;
-    }
-
-    @Override
-    public String toString() {
-        return "Nation{" +
-                "nationId='" + nationId + '\'' +
-                ", nationName='" + nationName + '\'' +
-                '}';
     }
 }

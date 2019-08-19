@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     //查找所有的用户
-    List<User> getAllUser();
+    List<User> listUsers();
     //添加用户
     void addUser(User user);
     //根据用户名、密码查找用户

@@ -5,7 +5,7 @@
 <mapper namespace="com.braisedpanda.shirotest.mapper.UserMapper">
 
     <!--查找所有用户-->
-    <select id="getAllUser" resultType="com.braisedpanda.shirotest.bean.User">
+    <select id="listUsers" resultType="com.braisedpanda.shirotest.bean.User">
         select * from user
     </select>
 
@@ -44,12 +44,12 @@
     </update>
     <!--根据uid查找所有的role-->
     <select id="getRole" resultType="com.braisedpanda.shirotest.bean.UserRole">
-        select * from user_role where uid=#{uid}
+        select * from userRole where uid=#{uid}
     </select>
 
     <!--根据uid查找所有的permission-->
     <select id="getPermission" resultType="String">
-        select permission from role_permission where roleId=#{roleId}
+        select permission from rolePermission where roleId=#{roleId}
     </select>
 
 </mapper>

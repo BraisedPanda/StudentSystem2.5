@@ -3,7 +3,7 @@ package com.braisedpanda.shirotest.bean;
 import java.io.Serializable;
 
 public class UserRole implements Serializable {
-    private String u_r_id;
+    private String uRId;
 
     private int uid;
     private String username;
@@ -11,20 +11,12 @@ public class UserRole implements Serializable {
     private String role;
     private String roleDescribe;
 
-    public String getroleDescribe() {
-        return roleDescribe;
+    public String getuRId() {
+        return uRId;
     }
 
-    public void setroleDescribe(String roleDescribe) {
-        this.roleDescribe = roleDescribe;
-    }
-
-    public String getU_r_id() {
-        return u_r_id;
-    }
-
-    public void setU_r_id(String u_r_id) {
-        this.u_r_id = u_r_id;
+    public void setuRId(String uRId) {
+        this.uRId = uRId;
     }
 
     public int getUid() {
@@ -43,11 +35,11 @@ public class UserRole implements Serializable {
         this.username = username;
     }
 
-    public String getroleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setroleId(String roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
@@ -59,16 +51,11 @@ public class UserRole implements Serializable {
         this.role = role;
     }
 
+    public String getRoleDescribe() {
+        return roleDescribe;
+    }
 
-    @Override
-    public String toString() {
-        return "UserRole{" +
-                "u_r_id='" + u_r_id + '\'' +
-                ", uid=" + uid +
-                ", username='" + username + '\'' +
-                ", roleId='" + roleId + '\'' +
-                ", role='" + role + '\'' +
-                ", roleDescribe='" + roleDescribe + '\'' +
-                '}';
+    public void setRoleDescribe(String roleDescribe) {
+        this.roleDescribe = roleDescribe;
     }
 }

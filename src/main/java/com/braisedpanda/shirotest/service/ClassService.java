@@ -11,14 +11,14 @@ import java.util.List;
 @Transactional
 public interface ClassService {
 
-    @CacheEvict(value="class",key="'addClass:'+#sclass.classId",allEntries = true)
-    void addClass(SClass sclass);
+    @CacheEvict(value="class",key="'insertClass:'+#sclass.classId",allEntries = true)
+    void insertClass(SClass sclass);
 
 
 
 
 
-    List<SClass> getAllClass();
+    List<SClass> listClass();
     //根据classid值删除class
     @CacheEvict(value="class" , key="'deleteClassById:'+#classId")
     void deleteClassById(String classId);
@@ -30,5 +30,5 @@ public interface ClassService {
     void updateClass(SClass sClass);
     //获取所有的班级id
     @Cacheable(value = "class")
-    List<String> getAllClassId();
+    List<String> listClassId();
 }

@@ -47,378 +47,331 @@ public class ClassGrades implements Serializable{
     private double sportsAve;
 
 
-    public String getclassGradesId() {
+    public String getClassGradesId() {
         return classGradesId;
     }
 
-    public void setclassGradesId(String classGradesId) {
+    public void setClassGradesId(String classGradesId) {
         this.classGradesId = classGradesId;
     }
 
-    public String getclassGradesCardId() {
+    public String getClassGradesCardId() {
         return classGradesCardId;
     }
 
-    public void setclassGradesCardId(String classGradesCardId) {
+    public void setClassGradesCardId(String classGradesCardId) {
         this.classGradesCardId = classGradesCardId;
     }
 
-    public double gettotalAve() {
+    public double getTotalAve() {
         return totalAve;
     }
 
-    public void settotalAve(double totalAve) {
+    public void setTotalAve(double totalAve) {
         this.totalAve = totalAve;
     }
 
-    public double gettotalMax() {
+    public double getTotalMax() {
         return totalMax;
     }
 
-    public void settotalMax(double totalMax) {
+    public void setTotalMax(double totalMax) {
         this.totalMax = totalMax;
     }
 
-    public double gettotalMin() {
+    public double getTotalMin() {
         return totalMin;
     }
 
-    public void settotalMin(double totalMin) {
+    public void setTotalMin(double totalMin) {
         this.totalMin = totalMin;
     }
 
-    public double getchineseMax() {
+    public double getChineseMax() {
         return chineseMax;
     }
 
-    public void setchineseMax(double chineseMax) {
+    public void setChineseMax(double chineseMax) {
         this.chineseMax = chineseMax;
     }
 
-    public double getchineseMin() {
+    public double getChineseMin() {
         return chineseMin;
     }
 
-    public void setchineseMin(double chineseMin) {
+    public void setChineseMin(double chineseMin) {
         this.chineseMin = chineseMin;
     }
 
-    public double getchineseAve() {
+    public double getChineseAve() {
         return chineseAve;
     }
 
-    public void setchineseAve(double chineseAve) {
+    public void setChineseAve(double chineseAve) {
         this.chineseAve = chineseAve;
     }
 
-    public double getmathematicsMin() {
+    public double getMathematicsMin() {
         return mathematicsMin;
     }
 
-    public void setmathematicsMin(double mathematicsMin) {
+    public void setMathematicsMin(double mathematicsMin) {
         this.mathematicsMin = mathematicsMin;
     }
 
-    public double getmathematicsMax() {
+    public double getMathematicsMax() {
         return mathematicsMax;
     }
 
-    public void setmathematicsMax(double mathematicsMax) {
+    public void setMathematicsMax(double mathematicsMax) {
         this.mathematicsMax = mathematicsMax;
     }
 
-    public double getmathematicsAve() {
+    public double getMathematicsAve() {
         return mathematicsAve;
     }
 
-    public void setmathematicsAve(double mathematicsAve) {
+    public void setMathematicsAve(double mathematicsAve) {
         this.mathematicsAve = mathematicsAve;
     }
 
-    public double getenglishMax() {
+    public double getEnglishMax() {
         return englishMax;
     }
 
-    public void setenglishMax(double englishMax) {
+    public void setEnglishMax(double englishMax) {
         this.englishMax = englishMax;
     }
 
-    public double getenglishMin() {
+    public double getEnglishMin() {
         return englishMin;
     }
 
-    public void setenglishMin(double englishMin) {
+    public void setEnglishMin(double englishMin) {
         this.englishMin = englishMin;
     }
 
-    public double getenglishAve() {
+    public double getEnglishAve() {
         return englishAve;
     }
 
-    public void setenglishAve(double englishAve) {
+    public void setEnglishAve(double englishAve) {
         this.englishAve = englishAve;
     }
 
-    public double getpoliticsMin() {
+    public double getPoliticsMin() {
         return politicsMin;
     }
 
-    public void setpoliticsMin(double politicsMin) {
+    public void setPoliticsMin(double politicsMin) {
         this.politicsMin = politicsMin;
     }
 
-    public double getpoliticsMax() {
+    public double getPoliticsMax() {
         return politicsMax;
     }
 
-    public void setpoliticsMax(double politicsMax) {
+    public void setPoliticsMax(double politicsMax) {
         this.politicsMax = politicsMax;
     }
 
-    public double getpoliticsAve() {
+    public double getPoliticsAve() {
         return politicsAve;
     }
 
-    public void setpoliticsAve(double politicsAve) {
+    public void setPoliticsAve(double politicsAve) {
         this.politicsAve = politicsAve;
     }
 
-    public double gethistoryMax() {
+    public double getHistoryMax() {
         return historyMax;
     }
 
-    public void sethistoryMax(double historyMax) {
+    public void setHistoryMax(double historyMax) {
         this.historyMax = historyMax;
     }
 
-    public double gethistoryMin() {
+    public double getHistoryMin() {
         return historyMin;
     }
 
-    public void sethistoryMin(double historyMin) {
+    public void setHistoryMin(double historyMin) {
         this.historyMin = historyMin;
     }
 
-    public double gethistoryAve() {
+    public double getHistoryAve() {
         return historyAve;
     }
 
-    public void sethistoryAve(double historyAve) {
+    public void setHistoryAve(double historyAve) {
         this.historyAve = historyAve;
     }
 
-    public double getgeographyMin() {
+    public double getGeographyMin() {
         return geographyMin;
     }
 
-    public void setgeographyMin(double geographyMin) {
+    public void setGeographyMin(double geographyMin) {
         this.geographyMin = geographyMin;
     }
 
-    public double getgeographyAve() {
+    public double getGeographyAve() {
         return geographyAve;
     }
 
-    public void setgeographyAve(double geographyAve) {
+    public void setGeographyAve(double geographyAve) {
         this.geographyAve = geographyAve;
     }
 
-    public double getgeographyMax() {
+    public double getGeographyMax() {
         return geographyMax;
     }
 
-    public void setgeographyMax(double geographyMax) {
+    public void setGeographyMax(double geographyMax) {
         this.geographyMax = geographyMax;
     }
 
-    public double getbiologyMax() {
+    public double getBiologyMax() {
         return biologyMax;
     }
 
-    public void setbiologyMax(double biologyMax) {
+    public void setBiologyMax(double biologyMax) {
         this.biologyMax = biologyMax;
     }
 
-    public double getbiologyMin() {
+    public double getBiologyMin() {
         return biologyMin;
     }
 
-    public void setbiologyMin(double biologyMin) {
+    public void setBiologyMin(double biologyMin) {
         this.biologyMin = biologyMin;
     }
 
-    public double getbiologyAve() {
+    public double getBiologyAve() {
         return biologyAve;
     }
 
-    public void setbiologyAve(double biologyAve) {
+    public void setBiologyAve(double biologyAve) {
         this.biologyAve = biologyAve;
     }
 
-    public double getchemistryMin() {
+    public double getChemistryMin() {
         return chemistryMin;
     }
 
-    public void setchemistryMin(double chemistryMin) {
+    public void setChemistryMin(double chemistryMin) {
         this.chemistryMin = chemistryMin;
     }
 
-    public double getchemistryAve() {
+    public double getChemistryAve() {
         return chemistryAve;
     }
 
-    public void setchemistryAve(double chemistryAve) {
+    public void setChemistryAve(double chemistryAve) {
         this.chemistryAve = chemistryAve;
     }
 
-    public double getchemistryMax() {
+    public double getChemistryMax() {
         return chemistryMax;
     }
 
-    public void setchemistryMax(double chemistryMax) {
+    public void setChemistryMax(double chemistryMax) {
         this.chemistryMax = chemistryMax;
     }
 
-    public double getphysicsMin() {
+    public double getPhysicsMin() {
         return physicsMin;
     }
 
-    public void setphysicsMin(double physicsMin) {
+    public void setPhysicsMin(double physicsMin) {
         this.physicsMin = physicsMin;
     }
 
-    public double getphysicsAve() {
+    public double getPhysicsAve() {
         return physicsAve;
     }
 
-    public void setphysicsAve(double physicsAve) {
+    public void setPhysicsAve(double physicsAve) {
         this.physicsAve = physicsAve;
     }
 
-    public double getphysicsMax() {
+    public double getPhysicsMax() {
         return physicsMax;
     }
 
-    public void setphysicsMax(double physicsMax) {
+    public void setPhysicsMax(double physicsMax) {
         this.physicsMax = physicsMax;
     }
 
-    public double getmusicMin() {
+    public double getMusicMin() {
         return musicMin;
     }
 
-    public void setmusicMin(double musicMin) {
+    public void setMusicMin(double musicMin) {
         this.musicMin = musicMin;
     }
 
-    public double getmusicAve() {
+    public double getMusicAve() {
         return musicAve;
     }
 
-    public void setmusicAve(double musicAve) {
+    public void setMusicAve(double musicAve) {
         this.musicAve = musicAve;
     }
 
-    public double getmusicMax() {
+    public double getMusicMax() {
         return musicMax;
     }
 
-    public void setmusicMax(double musicMax) {
+    public void setMusicMax(double musicMax) {
         this.musicMax = musicMax;
     }
 
-    public double getartsMin() {
+    public double getArtsMin() {
         return artsMin;
     }
 
-    public void setartsMin(double artsMin) {
+    public void setArtsMin(double artsMin) {
         this.artsMin = artsMin;
     }
 
-    public double getartsAve() {
+    public double getArtsAve() {
         return artsAve;
     }
 
-    public void setartsAve(double artsAve) {
+    public void setArtsAve(double artsAve) {
         this.artsAve = artsAve;
     }
 
-    public double getartsMax() {
+    public double getArtsMax() {
         return artsMax;
     }
 
-    public void setartsMax(double artsMax) {
+    public void setArtsMax(double artsMax) {
         this.artsMax = artsMax;
     }
 
-    public double getsportsMin() {
+    public double getSportsMin() {
         return sportsMin;
     }
 
-    public void setsportsMin(double sportsMin) {
+    public void setSportsMin(double sportsMin) {
         this.sportsMin = sportsMin;
     }
 
-    public double getsportsMax() {
+    public double getSportsMax() {
         return sportsMax;
     }
 
-    public void setsportsMax(double sportsMax) {
+    public void setSportsMax(double sportsMax) {
         this.sportsMax = sportsMax;
     }
 
-    public double getsportsAve() {
+    public double getSportsAve() {
         return sportsAve;
     }
 
-    public void setsportsAve(double sportsAve) {
+    public void setSportsAve(double sportsAve) {
         this.sportsAve = sportsAve;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassGrades{" +
-                "classGradesId='" + classGradesId + '\'' +
-                ", classGradesCardId='" + classGradesCardId + '\'' +
-                ", totalAve=" + totalAve +
-                ", totalMax=" + totalMax +
-                ", totalMin=" + totalMin +
-                ", chineseMax=" + chineseMax +
-                ", chineseMin=" + chineseMin +
-                ", chineseAve=" + chineseAve +
-                ", mathematicsMin=" + mathematicsMin +
-                ", mathematicsMax=" + mathematicsMax +
-                ", mathematicsAve=" + mathematicsAve +
-                ", englishMax=" + englishMax +
-                ", englishMin=" + englishMin +
-                ", englishAve=" + englishAve +
-                ", politicsMin=" + politicsMin +
-                ", politicsMax=" + politicsMax +
-                ", politicsAve=" + politicsAve +
-                ", historyMax=" + historyMax +
-                ", historyMin=" + historyMin +
-                ", historyAve=" + historyAve +
-                ", geographyMin=" + geographyMin +
-                ", geographyAve=" + geographyAve +
-                ", geographyMax=" + geographyMax +
-                ", biologyMax=" + biologyMax +
-                ", biologyMin=" + biologyMin +
-                ", biologyAve=" + biologyAve +
-                ", chemistryMin=" + chemistryMin +
-                ", chemistryAve=" + chemistryAve +
-                ", chemistryMax=" + chemistryMax +
-                ", physicsMin=" + physicsMin +
-                ", physicsAve=" + physicsAve +
-                ", physicsMax=" + physicsMax +
-                ", musicMin=" + musicMin +
-                ", musicAve=" + musicAve +
-                ", musicMax=" + musicMax +
-                ", artsMin=" + artsMin +
-                ", artsAve=" + artsAve +
-                ", artsMax=" + artsMax +
-                ", sportsMin=" + sportsMin +
-                ", sportsMax=" + sportsMax +
-                ", sportsAve=" + sportsAve +
-                '}';
     }
 }

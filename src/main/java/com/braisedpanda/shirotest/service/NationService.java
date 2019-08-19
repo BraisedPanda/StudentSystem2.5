@@ -15,5 +15,5 @@ public interface NationService {
 
     //查询所有的nation
     @Cacheable(value="nation" )
-    List<Nation> getAllNation();
+    List<Nation> listNations();
 }

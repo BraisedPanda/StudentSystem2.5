@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Permission implements Serializable {
 
-    private String nationName;
+    private String permissionId;
     private String permission;
     private String permissionDescribe;
 
-    public String getnationName() {
-        return nationName;
+    public String getPermissionId() {
+        return permissionId;
     }
 
-    public void setnationName(String nationName) {
-        this.nationName = nationName;
+    public void setPermissionId(String permissionId) {
+        this.permissionId = permissionId;
     }
 
     public String getPermission() {
@@ -24,23 +24,11 @@ public class Permission implements Serializable {
         this.permission = permission;
     }
 
-    public String getpermissionDescribe() {
+    public String getPermissionDescribe() {
         return permissionDescribe;
     }
 
-    public void setpermissionDescribe(String permissionDescribe) {
+    public void setPermissionDescribe(String permissionDescribe) {
         this.permissionDescribe = permissionDescribe;
     }
-
-
-    @Override
-    public String toString() {
-        return "Permission{" +
-                "nationName='" + nationName + '\'' +
-                ", permission='" + permission + '\'' +
-                ", permissionDescribe='" + permissionDescribe + '\'' +
-                '}';
-    }
-
-
 }

@@ -45,19 +45,19 @@
 <div class="table">
     <h2 class="tablename">更改权限</h2>
     <hr class="layui-bg-green">
-    <form class="layui-form" th:action="@{/editrole_permission}">
+    <form class="layui-form" th:action="@{/editrolePermission}">
         <div class="layui-form-item">
-            <input type="hidden" name="roleId" th:value="${role_permission.roleId}">
+            <input type="hidden" name="roleId" th:value="${rolePermission.roleId}">
             <label class="layui-form-label">角色名称:</label>
             <div class="layui-input-block">
-                <input type="text" name="role" required  lay-verify="required" th:value="${role_permission.role}" autocomplete="off" class="layui-input">
+                <input type="text" name="role" required  lay-verify="required" th:value="${rolePermission.role}" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">描述信息:</label>
             <div class="layui-input-block">
-                <input type="text" name="roleDescribe" required th:value="${role_permission.roleDescribe}" lay-verify="required" placeholder="请输入角色描述信息" autocomplete="off" class="layui-input">
+                <input type="text" name="roleDescribe" required th:value="${rolePermission.roleDescribe}" lay-verify="required" placeholder="请输入角色描述信息" autocomplete="off" class="layui-input">
             </div>
         </div>
 

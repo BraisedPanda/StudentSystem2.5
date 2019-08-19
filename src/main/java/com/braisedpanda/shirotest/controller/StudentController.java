@@ -42,28 +42,28 @@ public class StudentController {
             String f = random.nextInt(56)+"";
             String uid = "2018"+a+"00"+b+c+d+e;
 
-            student.setstuId(uid);
-            student.setstuName("user_"+a+i);
-            student.setstuPassword("123456");
-            student.setstuEmail("user_"+i+"@163.com");
-            student.setstuIdCard("340123199"+a+"0"+c+d+e+"5866");
+            student.setStuId(uid);
+            student.setStuName("user_"+a+i);
+            student.setStuPassword("123456");
+            student.setStuEmail("user_"+i+"@163.com");
+            student.setStuIdCard("340123199"+a+"0"+c+d+e+"5866");
             if(random.nextInt(9)>5){
-                student.setstuSex("男");
+                student.setStuSex("男");
             }else {
-                student.setstuSex("女");
+                student.setStuSex("女");
             }
 
-            student.setstuBirthday("199"+a+"-0"+c+"-"+d+e);
+            student.setStuBirthday("199"+a+"-0"+c+"-"+d+e);
 //            Nation nation = nationService.getNationById("1");
 
-            student.setnationName("汉族");
-            student.setstuStatus("在校");
-            student.setstuAge(random.nextInt(9)+16+"");
-            student.setclassId("G"+a+"0"+b);
-            student.setstuenRollmentTime("2003-1-1");
-            student.setstuPolitical("团员");
-            student.setstuAddress("安徽省合肥市");
-            student.setstuImage("/images/2019-08-02/5705f0d1-4627-4f76-a630-9193866655fb.jpg");
+            student.setNationName("汉族");
+            student.setStuStatus("在校");
+            student.setStuAge(random.nextInt(9)+16+"");
+            student.setClassId("G"+a+"0"+b);
+            student.setStuenRollmentTime("2003-1-1");
+            student.setStuPolitical("团员");
+            student.setStuAddress("安徽省合肥市");
+            student.setStuImage("/images/2019-08-02/5705f0d1-4627-4f76-a630-9193866655fb.jpg");
             studentService.addStudent(student);
 
         }
@@ -81,7 +81,10 @@ public class StudentController {
         int count = studentService.getAllStudent().size();
         PageHelper.startPage(page,limit);
         List<Student> studentList1 = studentService.getAllStudent();
-
+        for (Student stu:
+             studentList1) {
+            System.out.println(stu);
+        }
         PageInfo<Student> studentPageInfo = new PageInfo<>(studentList1);
 
         List<Student> studentList = studentPageInfo.getList();
@@ -110,7 +113,7 @@ public class StudentController {
         List<Student> studentList = studentService.getAllStudent();
         for (Student s:
              studentList) {
-            String stuId = s.getstuId();
+            String stuId = s.getStuId();
             List<StudentGradesCard> cardList = gradesService.getGradesCard(stuId);
 
         }
@@ -125,7 +128,7 @@ public class StudentController {
         List<StudentGradesCard> cardList = gradesService.getGradesCard(stuId);
         for (StudentGradesCard card:
              cardList) {
-            StudentGrades grades = gradesService.getGrades(card.getstugradesCardId());
+            StudentGrades grades = gradesService.getGrades(card.getStugradesCardId());
             System.out.println(grades);
         }
 
@@ -155,10 +158,11 @@ public class StudentController {
     @RequestMapping("toaddstudent")
     public String tostudent(Model model){
 
-        List<Nation> nationList = nationService.getAllNation();
-        model.addAttribute("nationList",nationList);
-        List<SClass> classList = classService.getAllClass();
-        model.addAttribute("classList",classList);
+        List<Nation> nationList = nationService.listNations();
+
+        model.addAttribute("nationlist",nationList);
+        List<SClass> classList = classService.listClass();
+        model.addAttribute("classlist",classList);
         return "student/addstudent";
     }
 
@@ -168,32 +172,32 @@ public class StudentController {
         //注册学生信息
         String stuId = UUID.randomUUID()+"";
         stuId = stuId.replace("-","");
-        student.setstuId(stuId);
+        student.setStuId(stuId);
 
         studentService.addStudent(student);
 
         //注册学生信息时,自动注册用户信息
 
         User user = new User();
-        user.setUsername(student.getstuName());
-        user.setPassword(student.getstuPassword());
-        user.setEmail(student.getstuEmail());
-        user.setBirthday(student.getstuBirthday());
-        user.setGender(student.getstuSex());
-        user.setImages(student.getstuImage());
-        user.setactiveCode(stuId);
+        user.setUsername(student.getStuName());
+        user.setPassword(student.getStuPassword());
+        user.setEmail(student.getStuEmail());
+        user.setBirthday(student.getStuBirthday());
+        user.setGender(student.getStuSex());
+        user.setImages(student.getStuImage());
+        user.setActiveCode(stuId);
         userService.addUser(user);
 
         //授予该学生权限
 
-        UserRole user_role = new UserRole();
-        user_role.setUid(user.getUid());
-        user_role.setU_r_id(stuId);
-        user_role.setUsername(student.getstuName());
-        user_role.setroleId("cccdd017ff3b4f9dba8ff77c7836e1f6");
-        user_role.setRole("学生");
-        user_role.setroleDescribe("学生可以查看学生、班级信息、我的成绩");
-        permissionService.addUser_Role(user_role);
+        UserRole userRole = new UserRole();
+        userRole.setUid(user.getUid());
+        userRole.setuRId(stuId);
+        userRole.setUsername(student.getStuName());
+        userRole.setRoleId("cccdd017ff3b4f9dba8ff77c7836e1f6");
+        userRole.setRole("学生");
+        userRole.setRoleDescribe("学生可以查看学生、班级信息、我的成绩");
+        permissionService.insertUserRole(userRole);
 
 
         return "menu/msg";

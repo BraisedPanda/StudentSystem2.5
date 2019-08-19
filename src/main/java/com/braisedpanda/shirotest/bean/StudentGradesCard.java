@@ -9,45 +9,35 @@ public class StudentGradesCard implements Serializable {
     private String testDescribe;
 
 
-    public String getstugradesCardId() {
+    public String getStugradesCardId() {
         return stugradesCardId;
     }
 
-    public void setstugradesCardId(String stugradesCardId) {
+    public void setStugradesCardId(String stugradesCardId) {
         this.stugradesCardId = stugradesCardId;
     }
 
-    public String getstuId() {
+    public String getStuId() {
         return stuId;
     }
 
-    public void setstuId(String stuId) {
+    public void setStuId(String stuId) {
         this.stuId = stuId;
     }
 
-    public String gettestTime() {
+    public String getTestTime() {
         return testTime;
     }
 
-    public void settestTime(String testTime) {
+    public void setTestTime(String testTime) {
         this.testTime = testTime;
     }
 
-    public String gettestDescribe() {
+    public String getTestDescribe() {
         return testDescribe;
     }
 
-    public void settestDescribe(String testDescribe) {
+    public void setTestDescribe(String testDescribe) {
         this.testDescribe = testDescribe;
-    }
-
-    @Override
-    public String toString() {
-        return "StudentGradesCard{" +
-                "stugradesCardId='" + stugradesCardId + '\'' +
-                ", stuId='" + stuId + '\'' +
-                ", testTime='" + testTime + '\'' +
-                ", testDescribe='" + testDescribe + '\'' +
-                '}';
     }
 }

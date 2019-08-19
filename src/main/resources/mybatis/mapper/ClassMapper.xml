@@ -6,7 +6,7 @@
 
 
     <!--添加班级-->
-    <insert id="addClass" parameterType="com.braisedpanda.shirotest.bean.SClass"
+    <insert id="insertClass" parameterType="com.braisedpanda.shirotest.bean.SClass"
 
     >
         insert into class
@@ -48,7 +48,7 @@
 
 
     <!--查询所有的班级-->
-    <select id="getAllClass" resultType="com.braisedpanda.shirotest.bean.SClass">
+    <select id="listClass" resultType="com.braisedpanda.shirotest.bean.SClass">
         select * from class
     </select>
 
@@ -91,7 +91,7 @@
 
 
     <!--获取所有的班级id-->
-    <select id="getAllClassId" resultType="String">
+    <select id="listClassId" resultType="String">
         select classId from class
     </select>
 

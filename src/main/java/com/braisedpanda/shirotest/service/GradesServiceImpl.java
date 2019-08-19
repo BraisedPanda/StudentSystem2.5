@@ -25,14 +25,14 @@ public class GradesServiceImpl implements GradesService{
     }
 
     @Override
-    public void addGrades(StudentGrades student_grades) {
-        gradesMapper.addGrades(student_grades);
+    public void insertGrades(StudentGrades studentGrades) {
+        gradesMapper.insertGrades(studentGrades);
     }
 
     @Override
     public StudentGrades getGrades(String stugradesCardId) {
-        StudentGrades student_grades = gradesMapper.getGrades(stugradesCardId);
-        return student_grades;
+        StudentGrades studentGrades = gradesMapper.getGrades(stugradesCardId);
+        return studentGrades;
     }
 
     @Override
@@ -51,8 +51,8 @@ public class GradesServiceImpl implements GradesService{
 
     //批量生成学生成绩卡
     @Override
-    public void addClassGradesCard(ClassGradesCard cgcrad) {
-        gradesMapper.addClassGradesCard(cgcrad);
+    public void insertClassGradesCard(ClassGradesCard cgcrad) {
+        gradesMapper.insertClassGradesCard(cgcrad);
     }
 
 
@@ -60,8 +60,8 @@ public class GradesServiceImpl implements GradesService{
 
 
     @Override
-    public List<ClassGradesCard> getAllClassGradesCard() {
-        List<ClassGradesCard> list = gradesMapper.getAllClassGradesCard();
+    public List<ClassGradesCard> listClassGradesCard() {
+        List<ClassGradesCard> list = gradesMapper.listClassGradesCard();
         return list;
     }
 
@@ -74,15 +74,15 @@ public class GradesServiceImpl implements GradesService{
     }
 
     @Override
-    public void addClassGrades(ClassGrades ClassGrades) {
-        gradesMapper.addClassGrades(ClassGrades);
+    public void insertClassGrades(ClassGrades ClassGrades) {
+        gradesMapper.insertClassGrades(ClassGrades);
     }
 
     //查找所有的班级成绩
 
     @Override
-    public List<ClassGrades> getAllClassGrades() {
-        List<ClassGrades> list = gradesMapper.getAllClassGrades();
+    public List<ClassGrades> listClassGrades() {
+        List<ClassGrades> list = gradesMapper.listClassGrades();
         return list;
     }
     //根据id查找班级成绩卡

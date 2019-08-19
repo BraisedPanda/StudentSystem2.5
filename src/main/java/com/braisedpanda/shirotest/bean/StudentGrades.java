@@ -22,19 +22,19 @@ public class StudentGrades implements Serializable{
     private double arts;
     private double sports;
 
-    public String getstugradesId() {
+    public String getStugradesId() {
         return stugradesId;
     }
 
-    public void setstugradesId(String stugradesId) {
+    public void setStugradesId(String stugradesId) {
         this.stugradesId = stugradesId;
     }
 
-    public String getstugradesCardId() {
+    public String getStugradesCardId() {
         return stugradesCardId;
     }
 
-    public void setstugradesCardId(String stugradesCardId) {
+    public void setStugradesCardId(String stugradesCardId) {
         this.stugradesCardId = stugradesCardId;
     }
 
@@ -54,19 +54,19 @@ public class StudentGrades implements Serializable{
         this.average = average;
     }
 
-    public double getmaxScore() {
+    public double getMaxScore() {
         return maxScore;
     }
 
-    public void setmaxScore(double maxScore) {
+    public void setMaxScore(double maxScore) {
         this.maxScore = maxScore;
     }
 
-    public double getminScore() {
+    public double getMinScore() {
         return minScore;
     }
 
-    public void setminScore(double minScore) {
+    public void setMinScore(double minScore) {
         this.minScore = minScore;
     }
 
@@ -164,29 +164,5 @@ public class StudentGrades implements Serializable{
 
     public void setSports(double sports) {
         this.sports = sports;
-    }
-
-    @Override
-    public String toString() {
-        return "StudentGrades{" +
-                "stugradesId='" + stugradesId + '\'' +
-                ", stugradesCardId='" + stugradesCardId + '\'' +
-                ", total=" + total +
-                ", average=" + average +
-                ", maxScore=" + maxScore +
-                ", minScore=" + minScore +
-                ", chinese=" + chinese +
-                ", mathematics=" + mathematics +
-                ", english=" + english +
-                ", politics=" + politics +
-                ", history=" + history +
-                ", geography=" + geography +
-                ", biology=" + biology +
-                ", chemistry=" + chemistry +
-                ", physics=" + physics +
-                ", music=" + music +
-                ", arts=" + arts +
-                ", sports=" + sports +
-                '}';
     }
 }

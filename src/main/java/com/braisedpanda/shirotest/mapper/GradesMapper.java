@@ -14,7 +14,7 @@ public interface GradesMapper {
 
     List<StudentGradesCard> getGradesCard(String stuId);
 
-    void addGrades(StudentGrades student_grades);
+    void insertGrades(StudentGrades studentGrades);
 
     StudentGrades getGrades(String stugradesCardId);
 
@@ -22,15 +22,15 @@ public interface GradesMapper {
     //获取部分的学生成绩卡信息(只获取考试时间和考试描述)
     List<StudentGradesCard> getSGCard();
     //批量生成学生成绩卡
-    void addClassGradesCard(ClassGradesCard cgcrad);
+    void insertClassGradesCard(ClassGradesCard cgcrad);
     //获取所有的班级成绩卡
-    List<ClassGradesCard> getAllClassGradesCard();
+    List<ClassGradesCard> listClassGradesCard();
 
     StudentGradesCard getGradesCardById_and_DesCribe(@Param("stuId") String stuId, @Param("testDescribe") String time_describe);
 
-    void addClassGrades(ClassGrades ClassGrades);
+    void insertClassGrades(ClassGrades ClassGrades);
     //查找所有的班级成绩
-    List<ClassGrades> getAllClassGrades();
+    List<ClassGrades> listClassGrades();
     //根据id查找班级成绩卡
     ClassGradesCard getClassGradesCardByID(String classGradesCardId);
 }
