@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.mapper;
 
-import com.braisedpanda.shirotest.bean.Student;
+import com.braisedpanda.shirotest.bean.po.Student;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

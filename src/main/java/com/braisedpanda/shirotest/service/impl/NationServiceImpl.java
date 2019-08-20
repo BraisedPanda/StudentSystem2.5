@@ -1,10 +1,9 @@
 package com.braisedpanda.shirotest.service.impl;
 
-import com.braisedpanda.shirotest.bean.Nation;
+import com.braisedpanda.shirotest.bean.po.Nation;
 import com.braisedpanda.shirotest.mapper.NationMapper;
 import com.braisedpanda.shirotest.service.NationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

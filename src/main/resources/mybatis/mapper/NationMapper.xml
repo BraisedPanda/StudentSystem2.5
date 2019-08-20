@@ -6,12 +6,12 @@
 
 
     <!--根据nationid查找nation-->
-    <select id="getNationById" resultType="com.braisedpanda.shirotest.bean.Nation">
+    <select id="getNationById" resultType="com.braisedpanda.shirotest.bean.po.Nation">
         select * from nation where nationId=#{nationId}
     </select>
 
     <!--查找所有的nation-->
-    <select id="listNations" resultType="com.braisedpanda.shirotest.bean.Nation">
+    <select id="listNations" resultType="com.braisedpanda.shirotest.bean.po.Nation">
         select * from nation
     </select>
 

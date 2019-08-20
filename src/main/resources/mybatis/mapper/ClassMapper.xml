@@ -6,7 +6,7 @@
 
 
     <!--添加班级-->
-    <insert id="insertClass" parameterType="com.braisedpanda.shirotest.bean.SClass"
+    <insert id="insertClass" parameterType="com.braisedpanda.shirotest.bean.po.SClass"
 
     >
         insert into class
@@ -48,7 +48,7 @@
 
 
     <!--查询所有的班级-->
-    <select id="listClass" resultType="com.braisedpanda.shirotest.bean.SClass">
+    <select id="listClass" resultType="com.braisedpanda.shirotest.bean.po.SClass">
         select * from class
     </select>
 
@@ -58,12 +58,12 @@
     </delete>
 
     <!--根据classid查找出class-->
-    <select id="getClassById" resultType="com.braisedpanda.shirotest.bean.SClass">
+    <select id="getClassById" resultType="com.braisedpanda.shirotest.bean.po.SClass">
         select * from class where classId = #{classId}
     </select>
 
     <!--更新班级信息-->
-    <update id="updateClass" parameterType="com.braisedpanda.shirotest.bean.SClass">
+    <update id="updateClass" parameterType="com.braisedpanda.shirotest.bean.po.SClass">
 
         update class set
         className=#{className},

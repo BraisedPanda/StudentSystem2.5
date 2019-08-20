@@ -1,15 +1,11 @@
 package com.braisedpanda.shirotest.controller;
 
-import com.braisedpanda.shirotest.bean.User;
-import com.braisedpanda.shirotest.bean.UserRole;
+import com.braisedpanda.shirotest.bean.po.User;
 import com.braisedpanda.shirotest.biz.UserBiz;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller

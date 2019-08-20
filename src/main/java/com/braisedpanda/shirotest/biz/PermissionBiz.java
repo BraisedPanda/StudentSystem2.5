@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.biz;
 
-import com.braisedpanda.shirotest.bean.*;
+import com.braisedpanda.shirotest.bean.po.*;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -10,7 +10,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +32,7 @@ public class PermissionBiz {
 
     //新增角色
 
-    public String insertRole(Role role, HttpServletRequest request,Model model){
+    public String insertRole(Role role, HttpServletRequest request, Model model){
         //添加角色信息
 
         String roleId = UUID.randomUUID()+"";
@@ -49,7 +48,8 @@ public class PermissionBiz {
             RolePermission rp = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
-            rp.setrPId(rPId);
+
+            rp.setRPId(rPId);
             rp.setPermissionId(permission.getPermissionId());
             rp.setPermission(permission.getPermission());
             rp.setPermissionDescribe(permission.getPermissionDescribe());
@@ -131,7 +131,7 @@ public class PermissionBiz {
                String uRId = UUID.randomUUID()+"";
                uRId = uRId.replace("-","");
                UserRole userRole = new UserRole();
-               userRole.setuRId(uRId);
+               userRole.setURId(uRId);
                userRole.setRoleDescribe(role.getRoleDescribe());
                userRole.setRole(role.getRole());
                userRole.setUid(user.getUid());
@@ -205,7 +205,7 @@ public class PermissionBiz {
             RolePermission rolePermission1 = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
-            rolePermission1.setrPId(rPId);
+            rolePermission1.setRPId(rPId);
             rolePermission1.setPermissionId(permission.getPermissionId());
             rolePermission1.setPermission(permission.getPermission());
             rolePermission1.setPermissionDescribe(permission.getPermissionDescribe());

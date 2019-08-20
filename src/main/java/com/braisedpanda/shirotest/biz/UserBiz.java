@@ -1,14 +1,13 @@
 package com.braisedpanda.shirotest.biz;
 
-import com.braisedpanda.shirotest.bean.User;
-import com.braisedpanda.shirotest.bean.UserRole;
+import com.braisedpanda.shirotest.bean.po.User;
+import com.braisedpanda.shirotest.bean.po.UserRole;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

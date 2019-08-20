@@ -1,11 +1,11 @@
 package com.braisedpanda.shirotest.controller;
 
-import com.braisedpanda.shirotest.bean.*;
+import com.braisedpanda.shirotest.bean.po.Role;
+import com.braisedpanda.shirotest.bean.po.RolePermission;
+import com.braisedpanda.shirotest.bean.po.UserRole;
 import com.braisedpanda.shirotest.biz.PermissionBiz;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 public class PermissionController {
@@ -35,7 +33,7 @@ public class PermissionController {
 
     //新增角色
     @RequestMapping("insertRole")
-    public String insertRole2(Role role, HttpServletRequest request,Model model){
+    public String insertRole2(Role role, HttpServletRequest request, Model model){
         String str = permissionBiz.insertRole(role,request,model);
 
 

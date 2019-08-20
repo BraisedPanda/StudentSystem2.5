@@ -1,10 +1,13 @@
 package com.braisedpanda.shirotest.service.impl;
 
-import com.braisedpanda.shirotest.bean.*;
+import com.braisedpanda.shirotest.bean.po.ClassGrades;
+import com.braisedpanda.shirotest.bean.po.ClassGradesCard;
+import com.braisedpanda.shirotest.bean.po.StudentGrades;
+import com.braisedpanda.shirotest.bean.po.StudentGradesCard;
+import com.braisedpanda.shirotest.bean.vo.StudentGradesCustom;
 import com.braisedpanda.shirotest.mapper.GradesMapper;
 import com.braisedpanda.shirotest.service.GradesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

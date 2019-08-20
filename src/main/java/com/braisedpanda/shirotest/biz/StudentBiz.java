@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.biz;
 
-import com.braisedpanda.shirotest.bean.*;
+import com.braisedpanda.shirotest.bean.po.*;
 import com.braisedpanda.shirotest.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -191,7 +190,7 @@ public class StudentBiz {
 
         UserRole userRole = new UserRole();
         userRole.setUid(user.getUid());
-        userRole.setuRId(stuId);
+        userRole.setURId(stuId);
         userRole.setUsername(student.getStuName());
         userRole.setRoleId("cccdd017ff3b4f9dba8ff77c7836e1f6");
         userRole.setRole("学生");

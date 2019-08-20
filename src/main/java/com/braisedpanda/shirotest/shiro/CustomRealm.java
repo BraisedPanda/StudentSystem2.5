@@ -2,8 +2,8 @@ package com.braisedpanda.shirotest.shiro;
 
 
 
-import com.braisedpanda.shirotest.bean.User;
-import com.braisedpanda.shirotest.bean.UserRole;
+import com.braisedpanda.shirotest.bean.po.User;
+import com.braisedpanda.shirotest.bean.po.UserRole;
 import com.braisedpanda.shirotest.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

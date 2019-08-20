@@ -1,13 +1,11 @@
 package com.braisedpanda.shirotest.controller;
 
-import com.braisedpanda.shirotest.bean.*;
+import com.braisedpanda.shirotest.bean.po.SClass;
 import com.braisedpanda.shirotest.biz.ClassBiz;
 import com.braisedpanda.shirotest.service.ClassService;
 import com.braisedpanda.shirotest.service.GradesService;
 import com.braisedpanda.shirotest.service.NationService;
 import com.braisedpanda.shirotest.service.StudentService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,7 +76,7 @@ public class ClassController {
 
     //编辑班级信息（提交到数据库）
     @RequestMapping("editclass")
-    public String editClass2(SClass sClass,Model model){
+    public String editClass2(SClass sClass, Model model){
         String str = classBiz.editClass(sClass,model);
 
         return str;

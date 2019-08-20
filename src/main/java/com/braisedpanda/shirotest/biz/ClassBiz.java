@@ -1,6 +1,10 @@
 package com.braisedpanda.shirotest.biz;
 
-import com.braisedpanda.shirotest.bean.*;
+import com.braisedpanda.shirotest.bean.po.SClass;
+import com.braisedpanda.shirotest.bean.po.Student;
+import com.braisedpanda.shirotest.bean.po.StudentGrades;
+import com.braisedpanda.shirotest.bean.po.StudentGradesCard;
+import com.braisedpanda.shirotest.bean.vo.StudentGradesCustom;
 import com.braisedpanda.shirotest.service.ClassService;
 import com.braisedpanda.shirotest.service.GradesService;
 import com.braisedpanda.shirotest.service.NationService;
@@ -11,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
