@@ -2,10 +2,14 @@ package com.braisedpanda.shirotest.model.po;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 @Data
+@Table(name="class")
 public class SClass implements Serializable{
+    @Id
     private String classId;                //班级id
     private String className;              //班级名称
     private String classTeacher;           //班主任

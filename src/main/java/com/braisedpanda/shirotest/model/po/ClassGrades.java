@@ -2,10 +2,14 @@ package com.braisedpanda.shirotest.model.po;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Data
+@Table(name="classgrades")
 public class ClassGrades implements Serializable{
+    @Id
     private String classGradesId;      //classGradesId
     private String classGradesCardId; //根据classGradesCardId，作为查找入口
     private double totalAve;             //各项班级总分、平均分、最低分、最高分

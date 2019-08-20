@@ -9,6 +9,8 @@ import java.util.List;
 public interface ClassMapper {
     void insertClass(SClass sclass);
 
+
+
     List<SClass> listClass();
 
     //根据classid值删除class
