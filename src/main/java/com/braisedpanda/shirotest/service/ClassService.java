@@ -4,11 +4,12 @@ import com.braisedpanda.shirotest.bean.SClass;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+@Service
 public interface ClassService {
 
     @CacheEvict(value="class",key="'insertClass:'+#sclass.classId",allEntries = true)

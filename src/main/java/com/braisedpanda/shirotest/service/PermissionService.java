@@ -6,11 +6,12 @@ import com.braisedpanda.shirotest.bean.RolePermission;
 import com.braisedpanda.shirotest.bean.UserRole;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+@Service
 public interface PermissionService {
     @CacheEvict(value="permission",key="'insertRole:'+#role.roleId")
     void insertRole(Role role);

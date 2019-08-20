@@ -1,14 +1,16 @@
-package com.braisedpanda.shirotest.service;
+package com.braisedpanda.shirotest.service.impl;
 
 import com.braisedpanda.shirotest.bean.*;
 import com.braisedpanda.shirotest.mapper.GradesMapper;
+import com.braisedpanda.shirotest.service.GradesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-public class GradesServiceImpl implements GradesService{
+@Service
+public class GradesServiceImpl implements GradesService {
     @Autowired
     GradesMapper gradesMapper;
 

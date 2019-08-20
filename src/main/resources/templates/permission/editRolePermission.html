@@ -66,14 +66,14 @@
             <label class="layui-form-label">操作权限:</label>
             <div class="layui-input-block">
 
-                <input type="checkbox" name="permission" th:value="${permission.nationName}" th:title="${permission.permissionDescribe}" th:each="permission:${permissionList}" th:if="${permission.nationName =='01' || permission.nationName =='02'|| permission.nationName =='03'|| permission.nationName =='04'}">
+                <input type="checkbox" name="permission" th:value="${permission.permissionId}" th:title="${permission.permissionDescribe}" th:each="permission:${permissionList}" th:if="${permission.permissionId =='01' || permission.permissionId =='02'|| permission.permissionId =='03'|| permission.permissionId =='04'}">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">菜单权限:</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="permission" th:value="${permission.nationName}" th:title="${permission.permissionDescribe}" th:each="permission:${permissionList}" th:if="${permission.nationName !='01' && permission.nationName !='02'&& permission.nationName !='03'&& permission.nationName !='04'}">
+                <input type="checkbox" name="permission" th:value="${permission.permissionId}" th:title="${permission.permissionDescribe}" th:each="permission:${permissionList}" th:if="${permission.permissionId !='01' && permission.permissionId !='02'&& permission.permissionId !='03'&& permission.permissionId !='04'}">
 
             </div>
         </div>

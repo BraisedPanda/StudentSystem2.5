@@ -6,10 +6,11 @@ import com.braisedpanda.shirotest.bean.UserRole;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Transactional
+@Service
 public interface UserService {
     //查找所有的用户
 
@@ -23,7 +24,7 @@ public interface UserService {
 
     //根据用户名和密码查找用户
 
-    @Cacheable(value="users",key="'getUser:'+#username")
+
     User getUser(String username, String password);
     @CacheEvict(value="users",allEntries = true,key="'delete:'+#uid")
     void delete(String uid);

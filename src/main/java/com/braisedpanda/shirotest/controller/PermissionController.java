@@ -191,7 +191,7 @@ public class PermissionController {
 
        modelAndView.addObject("rolePermission",rolePermissionlist.get(0));
 
-       modelAndView.setViewName("permission/editrolePermission");
+       modelAndView.setViewName("permission/editRolePermission");
        return modelAndView;
     }
 

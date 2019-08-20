@@ -3,11 +3,12 @@ package com.braisedpanda.shirotest.service;
 import com.braisedpanda.shirotest.bean.*;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+@Service
 public interface GradesService {
     @CacheEvict(value="grades",allEntries = true,key="'add:'+#card.stugradesCardId")
     void add(StudentGradesCard card);

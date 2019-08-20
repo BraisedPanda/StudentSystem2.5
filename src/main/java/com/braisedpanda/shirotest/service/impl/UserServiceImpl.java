@@ -1,14 +1,16 @@
-package com.braisedpanda.shirotest.service;
+package com.braisedpanda.shirotest.service.impl;
 
 import com.braisedpanda.shirotest.bean.User;
 import com.braisedpanda.shirotest.bean.UserRole;
 import com.braisedpanda.shirotest.mapper.UserMapper;
+import com.braisedpanda.shirotest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Component
-public class UserServiceImpl implements  UserService{
+@Service
+public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
