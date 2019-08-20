@@ -1,10 +1,10 @@
 package com.braisedpanda.shirotest.mapper;
 
-import com.braisedpanda.shirotest.bean.po.ClassGrades;
-import com.braisedpanda.shirotest.bean.po.ClassGradesCard;
-import com.braisedpanda.shirotest.bean.po.StudentGrades;
-import com.braisedpanda.shirotest.bean.po.StudentGradesCard;
-import com.braisedpanda.shirotest.bean.vo.StudentGradesCustom;
+import com.braisedpanda.shirotest.model.po.ClassGrades;
+import com.braisedpanda.shirotest.model.po.ClassGradesCard;
+import com.braisedpanda.shirotest.model.po.StudentGrades;
+import com.braisedpanda.shirotest.model.po.StudentGradesCard;
+import com.braisedpanda.shirotest.model.vo.StudentGradesCustom;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

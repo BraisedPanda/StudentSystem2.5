@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.biz;
 
-import com.braisedpanda.shirotest.bean.po.*;
+import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
 import com.github.pagehelper.PageHelper;

@@ -1,9 +1,9 @@
 package com.braisedpanda.shirotest.service.impl;
 
-import com.braisedpanda.shirotest.bean.po.Permission;
-import com.braisedpanda.shirotest.bean.po.Role;
-import com.braisedpanda.shirotest.bean.po.RolePermission;
-import com.braisedpanda.shirotest.bean.po.UserRole;
+import com.braisedpanda.shirotest.model.po.Permission;
+import com.braisedpanda.shirotest.model.po.Role;
+import com.braisedpanda.shirotest.model.po.RolePermission;
+import com.braisedpanda.shirotest.model.po.UserRole;
 import com.braisedpanda.shirotest.mapper.PermissionMapper;
 import com.braisedpanda.shirotest.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;

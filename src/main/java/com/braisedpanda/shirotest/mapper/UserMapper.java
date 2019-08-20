@@ -1,8 +1,8 @@
 package com.braisedpanda.shirotest.mapper;
 
 
-import com.braisedpanda.shirotest.bean.po.User;
-import com.braisedpanda.shirotest.bean.po.UserRole;
+import com.braisedpanda.shirotest.model.po.User;
+import com.braisedpanda.shirotest.model.po.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

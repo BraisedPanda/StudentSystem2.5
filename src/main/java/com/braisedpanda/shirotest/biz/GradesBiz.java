@@ -1,10 +1,10 @@
 package com.braisedpanda.shirotest.biz;
 
 
-import com.braisedpanda.shirotest.Utils.Utils;
-import com.braisedpanda.shirotest.bean.po.*;
-import com.braisedpanda.shirotest.bean.vo.CustomClassGrades;
-import com.braisedpanda.shirotest.bean.vo.StudentGradesCustom;
+import com.braisedpanda.shirotest.utils.Utils;
+import com.braisedpanda.shirotest.model.po.*;
+import com.braisedpanda.shirotest.model.vo.CustomClassGrades;
+import com.braisedpanda.shirotest.model.vo.StudentGradesCustom;
 import com.braisedpanda.shirotest.service.ClassService;
 import com.braisedpanda.shirotest.service.GradesService;
 import com.braisedpanda.shirotest.service.NationService;

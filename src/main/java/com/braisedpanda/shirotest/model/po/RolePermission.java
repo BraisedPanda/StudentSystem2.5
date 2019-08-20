@@ -1,4 +1,4 @@
-package com.braisedpanda.shirotest.bean.po;
+package com.braisedpanda.shirotest.model.po;
 
 import lombok.Data;
 

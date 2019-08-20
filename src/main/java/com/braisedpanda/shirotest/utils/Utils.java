@@ -1,9 +1,5 @@
-package com.braisedpanda.shirotest.Utils;
+package com.braisedpanda.shirotest.utils;
 
-import com.alibaba.druid.util.StringUtils;
-import com.github.pagehelper.util.StringUtil;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Utils {

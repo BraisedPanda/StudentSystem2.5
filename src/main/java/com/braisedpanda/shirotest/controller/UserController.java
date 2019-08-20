@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.controller;
 
-import com.braisedpanda.shirotest.bean.po.User;
+import com.braisedpanda.shirotest.model.po.User;
 import com.braisedpanda.shirotest.biz.UserBiz;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;

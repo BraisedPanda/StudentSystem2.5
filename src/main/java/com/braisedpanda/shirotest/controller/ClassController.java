@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.controller;
 
-import com.braisedpanda.shirotest.bean.po.SClass;
+import com.braisedpanda.shirotest.model.po.SClass;
 import com.braisedpanda.shirotest.biz.ClassBiz;
 import com.braisedpanda.shirotest.service.ClassService;
 import com.braisedpanda.shirotest.service.GradesService;

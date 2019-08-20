@@ -1,15 +1,18 @@
-package com.braisedpanda.shirotest.bean.po;
+package com.braisedpanda.shirotest.model.vo;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class ClassGrades implements Serializable{
+public class CustomClassGrades {
+
+
+    private String classId;
+    private String testTime;
+    private String testDescribe;
     private String classGradesId;      //classGradesId
     private String classGradesCardId; //根据classGradesCardId，作为查找入口
     private double totalAve;             //各项班级总分、平均分、最低分、最高分
-    private double totalMax;        //测试上传2019-8-19 21:19:26
+    private double totalMax;
     private double totalMin;
     private double chineseMax;
     private double chineseMin;
@@ -47,6 +50,7 @@ public class ClassGrades implements Serializable{
     private double sportsMin;
     private double sportsMax;
     private double sportsAve;
+
 
 
 }

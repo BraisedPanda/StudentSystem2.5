@@ -5,12 +5,12 @@
 <mapper namespace="com.braisedpanda.shirotest.mapper.UserMapper">
 
     <!--查找所有用户-->
-    <select id="listUsers" resultType="com.braisedpanda.shirotest.bean.po.User">
+    <select id="listUsers" resultType="com.braisedpanda.shirotest.model.po.User">
         select * from user
     </select>
 
     <!--添加用户-->
-    <insert id="addUser" parameterType="com.braisedpanda.shirotest.bean.po.User"
+    <insert id="addUser" parameterType="com.braisedpanda.shirotest.model.po.User"
         useGeneratedKeys="true" keyProperty="uid"
     >
         insert into user
@@ -20,7 +20,7 @@
     </insert>
 
     <!--根据用户名密码查找用户-->
-    <select id="getUser" resultType="com.braisedpanda.shirotest.bean.po.User" parameterType="String">
+    <select id="getUser" resultType="com.braisedpanda.shirotest.model.po.User" parameterType="String">
         select * from user where username=#{username} and password=#{password}
     </select>
 
@@ -30,12 +30,12 @@
     </delete>
 
     <!--根据uid查找用户-->
-    <select id="getUserByUid" resultType="com.braisedpanda.shirotest.bean.po.User">
+    <select id="getUserByUid" resultType="com.braisedpanda.shirotest.model.po.User">
       select * from user where uid = #{uid}
     </select>
 
     <!--修改用户信息-->
-    <update id="edit" parameterType="com.braisedpanda.shirotest.bean.po.User">
+    <update id="edit" parameterType="com.braisedpanda.shirotest.model.po.User">
         update user set
         username=#{username},password=#{password},email=#{email},birthday=#{birthday},
         activeCode=#{activeCode},gender=#{gender}
@@ -43,7 +43,7 @@
 
     </update>
     <!--根据uid查找所有的role-->
-    <select id="getRole" resultType="com.braisedpanda.shirotest.bean.po.UserRole">
+    <select id="getRole" resultType="com.braisedpanda.shirotest.model.po.UserRole">
         select * from userRole where uid=#{uid}
     </select>
 

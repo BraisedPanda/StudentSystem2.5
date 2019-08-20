@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.service.impl;
 
-import com.braisedpanda.shirotest.bean.po.Student;
+import com.braisedpanda.shirotest.model.po.Student;
 import com.braisedpanda.shirotest.mapper.StudentMapper;
 import com.braisedpanda.shirotest.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

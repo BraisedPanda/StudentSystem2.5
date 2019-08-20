@@ -1,6 +1,6 @@
 package com.braisedpanda.shirotest.service;
 
-import com.braisedpanda.shirotest.bean.po.Nation;
+import com.braisedpanda.shirotest.model.po.Nation;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 

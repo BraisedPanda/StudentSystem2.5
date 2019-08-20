@@ -1,7 +1,7 @@
 package com.braisedpanda.shirotest.service.impl;
 
-import com.braisedpanda.shirotest.bean.po.User;
-import com.braisedpanda.shirotest.bean.po.UserRole;
+import com.braisedpanda.shirotest.model.po.User;
+import com.braisedpanda.shirotest.model.po.UserRole;
 import com.braisedpanda.shirotest.mapper.UserMapper;
 import com.braisedpanda.shirotest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
