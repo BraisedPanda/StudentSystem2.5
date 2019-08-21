@@ -3,6 +3,8 @@ package com.braisedpanda.shirotest.service.impl;
 import com.braisedpanda.shirotest.model.po.SClass;
 import com.braisedpanda.shirotest.mapper.ClassMapper;
 import com.braisedpanda.shirotest.service.ClassService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,10 +55,17 @@ public class ClassServiceImpl implements ClassService {
     }
 
 
+    //分页查找班级
 
 
+    @Override
+    public List<SClass> listClass(int page, int limit) {
+        PageHelper.startPage(page,limit);
+        List<SClass> list = classMapper.listClass();
+        PageInfo pageInfo = new PageInfo<>(list);
+        List resultList = pageInfo.getList();
+        return  resultList;
 
 
-
-
+    }
 }

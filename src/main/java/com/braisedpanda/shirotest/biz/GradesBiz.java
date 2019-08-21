@@ -1,7 +1,9 @@
 package com.braisedpanda.shirotest.biz;
 
 
-import com.braisedpanda.shirotest.utils.ResultMapUtil;
+import com.braisedpanda.shirotest.utils.JsonUtils;
+
+import com.braisedpanda.shirotest.utils.ResultType;
 import com.braisedpanda.shirotest.utils.Utils;
 import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.model.vo.CustomClassGrades;
@@ -158,7 +160,7 @@ public class GradesBiz {
      * 2、根据成绩卡，查找出每次考试的详细成绩
      * 3、把成绩封装到对象中，传给前端
      */
-    public Map<String,Object> getStudentGrades(@PathVariable("stuId") String stuId,int page,int limit){
+    public String getStudentGrades(@PathVariable("stuId") String stuId,int page,int limit){
         List<StudentGradesCustom> sgcList = new ArrayList<StudentGradesCustom>();
 
         //根据学生id查找学生
@@ -227,12 +229,13 @@ public class GradesBiz {
         int count = sgcList.size();
 
         PageHelper.startPage(page,limit);
-   ;
-        ResultMapUtil mapUtil = new ResultMapUtil();
+        PageInfo pageInfo = new PageInfo(sgcList);
+        List resultList = pageInfo.getList();
 
-        Map resultMap = mapUtil.getResultMap(count,sgcList);
 
-        return resultMap;
+        String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
+
+        return result;
 
 
 
@@ -503,7 +506,7 @@ public class GradesBiz {
      * @param limit
      * @return
      */
-    public Map<String,Object> classgrades(int page,int limit){
+    public String classgrades(int page,int limit){
 
 
 
@@ -567,12 +570,17 @@ public class GradesBiz {
             customList.add(custom);
 
         }
-        ResultMapUtil mapUtil = new ResultMapUtil();
 
-        Map resultMap = mapUtil.getResultMap(count,customList);
+        //用Pagehelper分页助手进行分页
+        PageHelper.startPage(page,limit);
+        //对studentGradesCustomList进行分页
+        PageInfo pageInfo = new PageInfo<>(customList);
 
+        List resultList = pageInfo.getList();
 
-        return resultMap;
+        String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
+
+        return result;
 
 
     }

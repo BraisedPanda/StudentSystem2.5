@@ -3,22 +3,21 @@ package com.braisedpanda.shirotest.biz;
 import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
-import com.braisedpanda.shirotest.utils.ResultMapUtil;
+import com.braisedpanda.shirotest.utils.JsonUtils;
+import com.braisedpanda.shirotest.utils.PageHelperUtils;
+
+import com.braisedpanda.shirotest.utils.ResultType;
 import com.github.pagehelper.PageHelper;
+
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 import java.util.UUID;
 
 @Service
@@ -69,56 +68,27 @@ public class PermissionBiz {
     }
 
 
-    /**
-     * 根据uid查找所对应的角色
-     * @param uid
-     * @param model
-     * 1、根据传入的uid值了，在userrole表中查询
-     * 2、根据有无角色，有无用户进行判断返回
-     */
-
-    public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
-        List<UserRole> userRoleList = permissionService.getRoleById(uid);
-        User user = userService.getUserByUid(Integer.parseInt(uid));
-       if(userRoleList !=null && userRoleList.size()>0){
-           model.addAttribute("roleList", userRoleList);
-       }else if(user!=null){ //用户存在，但是没有角色
-           UserRole role = new UserRole();
-           role.setRole("无");
-           role.setUsername(user.getUsername());
-           userRoleList.add(role);
-           model.addAttribute("roleList", userRoleList);
-       }else{  //用户名和角色都不存在
-           UserRole role = new UserRole();
-           role.setRole("无");
-           role.setUsername("无");
-           userRoleList.add(role);
-           model.addAttribute("roleList", userRoleList);
-       }
-
-      return userRoleList;
-    }
-
 
 
 
 
 
     //查询表rolePermission表中所有内容
-    public @ResponseBody Map<String,Object> allpermission(int page,int limit){
+    public String allpermission(int page,int limit){
 
 
         List<RolePermission> rolePermissionList = permissionService.listRolePermission();
         int count = rolePermissionList.size();
-        PageHelper.startPage(page,limit);
 
+        PageHelper.startPage(page,limit);
         List<RolePermission> rolePermissionList1 = permissionService.listRolePermission();
 
-        ResultMapUtil mapUtil = new ResultMapUtil();
+        List resultList = PageHelperUtils.getResultList(rolePermissionList1);
 
-        Map resultMap = mapUtil.getResultMap(count,rolePermissionList1);
+        String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
 
-        return resultMap;
+
+        return result;
 
     }
 
@@ -173,19 +143,20 @@ public class PermissionBiz {
 
     //查询表role表中所有内容
 
-    public  Map<String,Object> allrole(int page,int limit){
+    public  String allrole(int page,int limit){
 
         List<Role> roleList = permissionService.getAllRole();
         int count = roleList.size();
         PageHelper.startPage(page,limit);
 
         List<Role> roleList1 = permissionService.getAllRole();
+        PageInfo pageInfo = new PageInfo(roleList1);
+        List<Role> resultList = pageInfo.getList();
 
-        ResultMapUtil resultMapUtil = new ResultMapUtil();
+        String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
 
-        Map resultMap = resultMapUtil.getResultMap(count,roleList1);
 
-        return resultMap;
+        return result;
 
     }
 

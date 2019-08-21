@@ -55,12 +55,37 @@ public class PermissionController {
         return modelAndView;
     }
 
-    //根据uid查找所对应的角色
+
+    /**
+     * 根据uid查找所对应的角色
+     * @param uid
+     * @param model
+     * 1、根据传入的uid值了，在userrole表中查询
+     * 2、根据有无角色，有无用户进行判断返回
+     */
+
     @ResponseBody
     @RequestMapping("findrolebyid/{uid}")
-    @Cacheable(value="permission" , key="#uid")
-    public List<UserRole> findrolebyid2(@PathVariable("uid") String uid, Model model){
-        List<UserRole> userRoleList = permissionBiz.findrolebyid(uid,model);
+
+    public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
+        List<UserRole> userRoleList = permissionService.getRoleById(uid);
+        User user = userService.getUserByUid(Integer.parseInt(uid));
+        if(userRoleList !=null && userRoleList.size()>0){
+            model.addAttribute("roleList", userRoleList);
+        }else if(user!=null){ //用户存在，但是没有角色
+            UserRole role = new UserRole();
+            role.setRole("无");
+            role.setUsername(user.getUsername());
+            userRoleList.add(role);
+            model.addAttribute("roleList", userRoleList);
+        }else{  //用户名和角色都不存在
+            UserRole role = new UserRole();
+            role.setRole("无");
+            role.setUsername("无");
+            userRoleList.add(role);
+            model.addAttribute("roleList", userRoleList);
+        }
+
         return userRoleList;
     }
 
@@ -118,11 +143,11 @@ public class PermissionController {
 
     //查询表rolePermission表中所有内容
     @RequestMapping("allpermission")
-    public @ResponseBody Map<String,Object> allpermission2(int page,int limit){
+    public @ResponseBody String allpermission2(int page,int limit){
 
-        Map<String,Object> map = permissionBiz.allpermission(page,limit);
+        String result = permissionBiz.allpermission(page,limit);
 
-        return map;
+        return result;
 
     }
 
@@ -178,11 +203,11 @@ public class PermissionController {
 
     //查询表role表中所有内容
     @RequestMapping("allrole")
-    public @ResponseBody Map<String,Object> allrole2(int page,int limit){
+    public @ResponseBody String allrole2(int page,int limit){
 
-        Map<String,Object> map = permissionBiz.allrole(page,limit);
+        String result = permissionBiz.allrole(page,limit);
 
-        return map;
+        return result;
 
     }
 

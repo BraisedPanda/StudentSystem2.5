@@ -15,8 +15,12 @@ public interface ClassService {
 
 
 
-
+    //查找出所有的班级
     List<SClass> listClass();
+
+    //分页查找班级
+    List<SClass> listClass(int page,int limit);
+
     //根据classid值删除class
 
     void deleteClassById(String classId);

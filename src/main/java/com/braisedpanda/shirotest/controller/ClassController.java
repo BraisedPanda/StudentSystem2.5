@@ -34,11 +34,10 @@ public class ClassController {
     //批量生成学生测试数据
     @ResponseBody
     @RequestMapping("insertClass")
-    public List insertClass2(){
+    public void insertClass2(){
 
-        List classidList = classBiz.insertClass();
+       classBiz.insertClass();
 
-        return classidList;
 
     }
 
@@ -46,11 +45,11 @@ public class ClassController {
     //查询所有班级
     @RequestMapping("class/all")
     public @ResponseBody
-    Map<String,Object> allClass2(int page, int limit){
+    String allClass2(int page, int limit){
 
-       Map<String,Object> resultMap = classBiz.allClass(page,limit);
+       String  result = classBiz.allClass(page,limit);
 
-        return resultMap;
+        return result;
 
     }
 
@@ -114,11 +113,12 @@ public class ClassController {
 
     @ResponseBody
     @RequestMapping("class/detail/{class_cid}")
-    public Map<String,Object> classDetail2(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
+    public String classDetail2(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
+        model.addAttribute("class_cid",class_cid);
 
-        Map<String,Object> resultMap = classBiz.classDetail(class_cid,page,limit,model);
+        String result = classBiz.classDetail(class_cid,page,limit);
 
-        return resultMap;
+        return result;
 
     }
 

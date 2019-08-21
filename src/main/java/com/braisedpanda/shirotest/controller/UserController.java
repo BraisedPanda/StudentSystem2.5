@@ -116,21 +116,7 @@ public class UserController {
         }
     }
 
-    //测试用户（此方法废弃）
-//    @GetMapping("test1")
-//    public String test1(){
-//        return "user/userlist";
-//    }
 
-    //查找所有用户(使用分页助手)
-//    @RequiresPermissions("finds")
-//    @RequestMapping("/userlist/{startPage}")
-//    public ModelAndView  userlist2(@PathVariable("startPage") int startPage){
-//        ModelAndView modelAndView = userBiz.userlist(startPage);
-//
-//
-//        return modelAndView;
-//    }
 
     //删除用户
     @RequestMapping("/delete/{uid}")
@@ -152,12 +138,7 @@ public class UserController {
         return modelAndView;
     }
 
-    //修改用户信息(此方法废弃)
-//    @RequestMapping("user/edit")
-//    public ModelAndView  edituser2(User user){
-//        ModelAndView modelAndView = userBiz.edituser(user);
-//        return modelAndView;
-//    }
+
 
 
     //编辑用户(后台编辑)
@@ -172,15 +153,7 @@ public class UserController {
         return "user/success";
     }
 
-    //新增用户（后台添加）
 
-//    @RequestMapping("/adduser")
-//    public ModelAndView adduser2(User user,Model model,String activeCode){
-//        ModelAndView modelAndView = userBiz.adduser(user,model,activeCode);
-//        return modelAndView;
-//
-//
-//    }
 
 
     //添加用户(layui弹出层)
@@ -209,10 +182,11 @@ public class UserController {
 
     //查询用户角色表
     @RequestMapping("user/table")
-    public @ResponseBody Map<String,Object> testtable2(int page,int limit){
-        Map<String,Object> map = userBiz.testtable(page,limit);
+    public @ResponseBody String testtable2(int page,int limit){
 
-        return map;
+       String result = userBiz.testtable(page,limit);
+
+        return result;
 
     }
 
@@ -228,10 +202,11 @@ public class UserController {
     //图片上传测试
     @ResponseBody
     @RequestMapping("upload")
-    public Map upload2(MultipartFile file,HttpServletRequest request){
-        Map map = userBiz.upload(file,request);
+    public String upload2(MultipartFile file,HttpServletRequest request){
 
-        return map;
+        String result = userBiz.upload(file,request);
+
+        return result;
 
     }
 
@@ -251,4 +226,38 @@ public class UserController {
     }
 
 
+    /****************废弃的方法****************/
+
+    //新增用户（后台添加）
+
+//    @RequestMapping("/adduser")
+//    public ModelAndView adduser2(User user,Model model,String activeCode){
+//        ModelAndView modelAndView = userBiz.adduser(user,model,activeCode);
+//        return modelAndView;
+//
+//
+//    }
+    //修改用户信息(此方法废弃)
+//    @RequestMapping("user/edit")
+//    public ModelAndView  edituser2(User user){
+//        ModelAndView modelAndView = userBiz.edituser(user);
+//        return modelAndView;
+//    }
+    //测试用户（此方法废弃）
+//    @GetMapping("test1")
+//    public String test1(){
+//        return "user/userlist";
+//    }
+
+    //查找所有用户(使用分页助手)
+//    @RequiresPermissions("finds")
+//    @RequestMapping("/userlist/{startPage}")
+//    public ModelAndView  userlist2(@PathVariable("startPage") int startPage){
+//        ModelAndView modelAndView = userBiz.userlist(startPage);
+//
+//
+//        return modelAndView;
+//    }
+
+    /****************废弃的方法****************/
 }

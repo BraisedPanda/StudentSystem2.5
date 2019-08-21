@@ -45,10 +45,10 @@ public class StudentController {
     //查询所有学生
     @RequestMapping("student/all")
     public @ResponseBody
-    Map<String,Object> allStudent2(int page, int limit){
-        Map<String,Object> map = studentBiz.allStudent(page,limit);
+    String allStudent2(int page, int limit){
+        String result = studentBiz.allStudent(page,limit);
 
-        return map;
+        return result;
 
     }
 
@@ -119,9 +119,10 @@ public class StudentController {
     @RequestMapping("student/addstudent")
     public String addstudent2(Student student){
 
-        String str = studentBiz.addstudent(student);
+        studentBiz.addstudent(student);
 
-        return str;
+        return "menu/msg";
+
 
     }
 

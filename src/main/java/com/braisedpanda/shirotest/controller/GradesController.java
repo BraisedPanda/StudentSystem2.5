@@ -55,11 +55,11 @@ public class GradesController {
     //查询学生成绩
     @ResponseBody
     @RequestMapping("grades/sudent/{stuId}")
-    public Map<String,Object> getStudentGrades2(@PathVariable("stuId") String stuId,int page,int limit){
+    public String getStudentGrades2(@PathVariable("stuId") String stuId,int page,int limit){
 
-        Map<String,Object> resultMap = gradesBiz.getStudentGrades(stuId,page,limit);
+        String result = gradesBiz.getStudentGrades(stuId,page,limit);
 
-        return resultMap;
+        return result;
 
     }
 
@@ -89,6 +89,7 @@ public class GradesController {
     @ResponseBody
     @RequestMapping("insertClassGrades")
     public void insertClassGrades2(){
+
          gradesBiz.insertClassGrades();
 
 
@@ -98,10 +99,10 @@ public class GradesController {
     //查询班级分数
     @ResponseBody
     @RequestMapping("classgrades")
-    public Map<String,Object> classgrades2(int page,int limit){
-        Map<String,Object> map = gradesBiz.classgrades(page,limit);
+    public String classgrades2(int page,int limit){
+        String result = gradesBiz.classgrades(page,limit);
 
-        return map;
+        return result;
 
     }
 

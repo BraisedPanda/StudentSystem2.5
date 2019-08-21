@@ -2,16 +2,18 @@ package com.braisedpanda.shirotest.biz;
 
 import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.service.*;
-import com.braisedpanda.shirotest.utils.ResultMapUtil;
+import com.braisedpanda.shirotest.utils.JsonUtils;
+import com.braisedpanda.shirotest.utils.PageHelperUtils;
+
+import com.braisedpanda.shirotest.utils.ResultType;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.*;
 
@@ -79,19 +81,19 @@ public class StudentBiz {
 
     //查询所有学生
 
-    public Map<String,Object> allStudent(int page, int limit){
+    public String allStudent(int page, int limit){
         int count = studentService.getAllStudent().size();
 
         PageHelper.startPage(page,limit);
 
         List<Student> studentList1 = studentService.getAllStudent();
 
-        ResultMapUtil mapUtil = new ResultMapUtil();
-
-        Map resultMap = mapUtil.getResultMap(count,studentList1);
+        List resultList = PageHelperUtils.getResultList(studentList1);
 
 
-        return resultMap;
+        String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
+
+        return result;
 
     }
 
@@ -128,7 +130,7 @@ public class StudentBiz {
 
     //添加学生信息
 
-    public String addstudent(Student student){
+    public void addstudent(Student student){
         //注册学生信息
         String stuId = UUID.randomUUID()+"";
         stuId = stuId.replace("-","");
@@ -158,9 +160,6 @@ public class StudentBiz {
         userRole.setRole("学生");
         userRole.setRoleDescribe("学生可以查看学生、班级信息、我的成绩");
         permissionService.insertUserRole(userRole);
-
-
-        return "menu/msg";
 
     }
 
