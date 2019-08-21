@@ -6,6 +6,7 @@ import com.braisedpanda.shirotest.service.PermissionService;
 import com.braisedpanda.shirotest.service.UserService;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,43 +36,102 @@ public class UserController {
     //查找所有的用户
     @RequestMapping("/alluser")
     public ModelAndView allUser2(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<User> userList = userService.listUsers();
 
-        ModelAndView modelAndView = userBiz.allUser();
-
+        modelAndView.addObject("useList",userList);
+        modelAndView.setViewName("index");
         return modelAndView;
     }
+
 
     //用户注册
     @RequestMapping("/regist")
     public String regist2(User user,Model model,String activeCode){
 
-        String str = userBiz.regist(user,model,activeCode);
+        if(activeCode ==null || activeCode.length()==0){
+            user.setActiveCode("0");
+        }
+        //设置用户默认头像
+        user.setImages("/images/2019-08-07/f8aa0870-e4ea-4170-9772-296204476267.jpg");
+        userService.addUser(user);
 
-        return str;
+        model.addAttribute("user",user);
+
+        return "redirect:/";
     }
 
-    //用户登录
+    /**
+     * 用户登录，使用shiro进行验证登录
+     * @param username
+     * @param password
+     * @param session
+     * 1、从SecurityUtils里边创建一个 subject
+     * 2、在认证提交前准备 token（令牌）
+     * 3、开始认证登录
+     */
     @PostMapping("/login")
     public ModelAndView login2(String username, String password, HttpSession session){
-        ModelAndView modelAndView = userBiz.login(username,password,session);
-        return modelAndView;
+        ModelAndView modelAndView = new ModelAndView();
+
+
+        // 从SecurityUtils里边创建一个 subject
+        Subject subject = SecurityUtils.getSubject();
+        // 在认证提交前准备 token（令牌）
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        // 执行认证登陆
+        try {
+            subject.login(token);
+        } catch (UnknownAccountException uae) {
+            modelAndView.addObject("tips","*未知账户~");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        } catch (IncorrectCredentialsException ice) {
+            modelAndView.addObject("tips","*密码不正确~");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        } catch (LockedAccountException lae) {
+            modelAndView.addObject("tips","*账户已锁定~");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        } catch (ExcessiveAttemptsException eae) {
+            modelAndView.addObject("tips","*用户名或密码错误次数过多~");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        } catch (AuthenticationException ae) {
+            modelAndView.addObject("tips","*用户名或密码不正确~");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
+        if (subject.isAuthenticated()) {
+            User user = userService.getUser(username,password);
+            session.setAttribute("user",user);
+            modelAndView.setViewName("menu/main");
+            return modelAndView;
+        } else {
+            token.clear();
+            modelAndView.addObject("tips","*未知账户~");
+            modelAndView.setViewName("index");
+            return modelAndView;
+        }
     }
 
-//
-    @GetMapping("test1")
-    public String test1(){
-        return "user/userlist";
-    }
+    //测试用户（此方法废弃）
+//    @GetMapping("test1")
+//    public String test1(){
+//        return "user/userlist";
+//    }
 
     //查找所有用户(使用分页助手)
-    @RequiresPermissions("finds")
-    @RequestMapping("/userlist/{startPage}")
-    public ModelAndView  userlist2(@PathVariable("startPage") int startPage){
-        ModelAndView modelAndView = userBiz.userlist(startPage);
+//    @RequiresPermissions("finds")
+//    @RequestMapping("/userlist/{startPage}")
+//    public ModelAndView  userlist2(@PathVariable("startPage") int startPage){
+//        ModelAndView modelAndView = userBiz.userlist(startPage);
+//
+//
+//        return modelAndView;
+//    }
 
-
-        return modelAndView;
-    }
     //删除用户
     @RequestMapping("/delete/{uid}")
     public String delete(@PathVariable("uid") String uid){
@@ -84,17 +144,20 @@ public class UserController {
 
     @RequestMapping("edituser/{uid}")
     public ModelAndView getuser2(@PathVariable("uid") int uid){
-        ModelAndView modelAndView = userBiz.getuser(uid);
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.getUserByUid(uid);
 
+        modelAndView.addObject("user",user);
+        modelAndView.setViewName("user/edit");
         return modelAndView;
     }
 
-    //修改用户信息
-    @RequestMapping("user/edit")
-    public ModelAndView  edituser2(User user){
-        ModelAndView modelAndView = userBiz.edituser(user);
-        return modelAndView;
-    }
+    //修改用户信息(此方法废弃)
+//    @RequestMapping("user/edit")
+//    public ModelAndView  edituser2(User user){
+//        ModelAndView modelAndView = userBiz.edituser(user);
+//        return modelAndView;
+//    }
 
 
     //编辑用户(后台编辑)
@@ -111,21 +174,25 @@ public class UserController {
 
     //新增用户（后台添加）
 
-    @RequestMapping("/adduser")
-    public ModelAndView adduser2(User user,Model model,String activeCode){
-        ModelAndView modelAndView = userBiz.adduser(user,model,activeCode);
-        return modelAndView;
+//    @RequestMapping("/adduser")
+//    public ModelAndView adduser2(User user,Model model,String activeCode){
+//        ModelAndView modelAndView = userBiz.adduser(user,model,activeCode);
+//        return modelAndView;
+//
+//
+//    }
 
 
-    }
     //添加用户(layui弹出层)
     //新增用户（后台添加）
     @RequestMapping("/add_user")
     public String add_user2(User user){
+        user.setImages("/images/2019-08-07/f8aa0870-e4ea-4170-9772-296204476267.jpg");
 
-       String str =  userBiz.add_user(user);
+        userService.addUser(user);
 
-       return str;
+
+        return "user/success";
 
 
     }
@@ -140,7 +207,7 @@ public class UserController {
     }
 
 
-
+    //查询用户角色表
     @RequestMapping("user/table")
     public @ResponseBody Map<String,Object> testtable2(int page,int limit){
         Map<String,Object> map = userBiz.testtable(page,limit);
@@ -173,8 +240,13 @@ public class UserController {
 
     @RequestMapping("userinfo")
     public ModelAndView userinfo2(HttpSession session){
-        ModelAndView modelAndView = userBiz.userinfo(session);
+        User user1 = (User)session.getAttribute("user");
+        int uid = user1.getUid();
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.getUserByUid(uid);
 
+        modelAndView.addObject("user",user);
+        modelAndView.setViewName("user/userlist2");
         return modelAndView;
     }
 

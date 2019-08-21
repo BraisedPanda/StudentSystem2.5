@@ -1,5 +1,7 @@
 package com.braisedpanda.shirotest.controller;
 
+import com.braisedpanda.shirotest.model.po.Nation;
+import com.braisedpanda.shirotest.model.po.SClass;
 import com.braisedpanda.shirotest.model.po.Student;
 import com.braisedpanda.shirotest.biz.StudentBiz;
 import com.braisedpanda.shirotest.service.*;
@@ -31,10 +33,11 @@ public class StudentController {
 
     //批量生成学生测试数据
     @RequestMapping("addStudent")
-    public String addStudent2(){
-        String str = studentBiz.addStudent();
+    public void addStudent2(){
 
-        return str;
+         studentBiz.addStudent();
+
+
 
     }
 
@@ -58,31 +61,41 @@ public class StudentController {
 
     //查询学生的学习成绩卡
     @RequestMapping("student/findcard")
-    public String findCard2(){
-        String str = studentBiz.findCard();
+    public void findCard2(){
 
-        return str;
+         studentBiz.findCard();
+
+
     }
 
     //查询学生成绩
     @RequestMapping("student/grades/{stuId}")
-    public String findStudentGrades2(@PathVariable("stuId") String stuId){
-        String str = studentBiz.findStudentGrades(stuId);
+    public void findStudentGrades2(@PathVariable("stuId") String stuId){
 
-        return str;
+       studentBiz.findStudentGrades(stuId);
+
+
     }
 
-    //更新用户信息
+    //编辑学生信息
     @RequestMapping("/editstudent")
     public String editstudent(Student student){
-       studentService.updateStudent(student);
+        studentService.updateStudent(student);
         return "student/allstudent";
     }
+
 
     //根据stuId查找用户信息，并返回到界面
     @RequestMapping("student/toeditstudent/{stuId}")
     public ModelAndView toeditstudent2(@PathVariable("stuId") String stuId){
-        ModelAndView modelAndView = studentBiz.toeditstudent(stuId);
+        ModelAndView modelAndView = new ModelAndView();
+
+        Student student = studentService.getStudentById(stuId);
+
+        modelAndView.addObject("student",student);
+
+        modelAndView.setViewName("student/editstudent");
+
 
         return modelAndView;
     }
@@ -90,14 +103,22 @@ public class StudentController {
     //跳转到添加学生界面
     @RequestMapping("toaddstudent")
     public String tostudent2(Model model){
-        String str = studentBiz.tostudent(model);
 
-        return str;
+        List<Nation> nationList = nationService.listNations();
+
+        model.addAttribute("nationlist",nationList);
+
+        List<SClass> classList = classService.listClass();
+
+        model.addAttribute("classlist",classList);
+
+        return "student/addstudent";
     }
 
     //添加学生信息
     @RequestMapping("student/addstudent")
     public String addstudent2(Student student){
+
         String str = studentBiz.addstudent(student);
 
         return str;

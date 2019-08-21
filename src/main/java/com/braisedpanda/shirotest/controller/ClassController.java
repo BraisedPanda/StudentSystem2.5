@@ -30,12 +30,14 @@ public class ClassController {
     @Autowired
     ClassBiz classBiz;
 
+
     //批量生成学生测试数据
     @ResponseBody
     @RequestMapping("insertClass")
     public List insertClass2(){
 
         List classidList = classBiz.insertClass();
+
         return classidList;
 
     }
@@ -45,7 +47,9 @@ public class ClassController {
     @RequestMapping("class/all")
     public @ResponseBody
     Map<String,Object> allClass2(int page, int limit){
+
        Map<String,Object> resultMap = classBiz.allClass(page,limit);
+
         return resultMap;
 
     }
@@ -60,6 +64,7 @@ public class ClassController {
     //根据classid值删除class
     @ResponseBody
     @RequestMapping("class/delete/{classId}")
+
     public void deleteClassById(@PathVariable("classId") String classId){
 
         classService.deleteClassById(classId);
@@ -68,7 +73,14 @@ public class ClassController {
     //跳转到编辑班级界面
     @RequestMapping("class/toeditclass/{classId}")
     public ModelAndView toeidtclass2(@PathVariable("classId") String classId){
-        ModelAndView modelAndView = classBiz.toeidtclass(classId);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        SClass sclass =  classService.getClassById(classId);
+
+        modelAndView.addObject("class",sclass);
+
+        modelAndView.setViewName("class/editClass");
 
         return modelAndView;
 
@@ -77,9 +89,12 @@ public class ClassController {
     //编辑班级信息（提交到数据库）
     @RequestMapping("editclass")
     public String editClass2(SClass sClass, Model model){
-        String str = classBiz.editClass(sClass,model);
 
-        return str;
+        classService.updateClass(sClass);
+
+        model.addAttribute("msg","编辑班级信息成功");
+
+        return "menu/msg";
     }
 
 
@@ -93,19 +108,15 @@ public class ClassController {
     }
 
 
-    /**
-     * 根据班级的classid查询出该班级所有学生的每次考试成绩，并把数据返回给前端
-     * 通过ajax调用
-     * @param class_cid
-     * @param page
-     * @param limit
-     * @return
-     */
+
+
+    //根据班级的classid查询出该班级所有学生的每次考试成绩，并把数据返回给前端
+
     @ResponseBody
     @RequestMapping("class/detail/{class_cid}")
-    public HashMap<String,Object> classDetail2(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
+    public Map<String,Object> classDetail2(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
 
-        HashMap<String,Object> resultMap = classBiz.classDetail(class_cid,page,limit,model);
+        Map<String,Object> resultMap = classBiz.classDetail(class_cid,page,limit,model);
 
         return resultMap;
 

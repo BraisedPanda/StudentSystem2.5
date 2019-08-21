@@ -1,6 +1,7 @@
 package com.braisedpanda.shirotest.biz;
 
 
+import com.braisedpanda.shirotest.utils.ResultMapUtil;
 import com.braisedpanda.shirotest.utils.Utils;
 import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.model.vo.CustomClassGrades;
@@ -13,13 +14,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-@Controller
+@Service
 public class GradesBiz {
     @Autowired
     StudentService studentService;
@@ -31,10 +33,14 @@ public class GradesBiz {
     ClassService classService;
 
 
-
-    //批量生成学生成绩卡数据
-
-    public String insertGradesCard(){
+    /**
+     * 批量生成学生成绩卡数据
+     * 1、得到所有的学生
+     * 2、根据每个学生的id值，创建学生的成绩卡
+     * 3、把成绩卡存入到数据库中
+     * @return
+     */
+    public void insertGradesCard(){
         StudentGradesCard card = new StudentGradesCard();
         List<Student> studentList = studentService.getAllStudent();
         for (Student s:
@@ -60,14 +66,17 @@ public class GradesBiz {
             }
         }
 
-
-        return "user/blank";
-
     }
 
-    //批量生成学生成绩
-
-    public String insertGrades(){
+    /**
+     * 批量生成学生测试成绩
+     * 1、查询到所有的学生
+     * 2、根据每个学生的id查找出所有学生的成绩卡
+     * 3、根据查出的学生成绩卡id值，插入考试成绩
+     * 4、考试成绩存入到数据库中
+     * @return
+     */
+    public void insertGrades(){
         List<Student> studentList = studentService.getAllStudent();
         for (Student s:
              studentList) {
@@ -136,12 +145,19 @@ public class GradesBiz {
 
         }
 
-        return "user/blank";
-
     }
-    //查询学生成绩
 
 
+    /**
+     * 根据学生的id查询学生成绩
+     * @param stuId
+     * @param page
+     * @param limit
+     *
+     * 1、根据学生的ID值查找出该学生的学生成绩卡
+     * 2、根据成绩卡，查找出每次考试的详细成绩
+     * 3、把成绩封装到对象中，传给前端
+     */
     public Map<String,Object> getStudentGrades(@PathVariable("stuId") String stuId,int page,int limit){
         List<StudentGradesCustom> sgcList = new ArrayList<StudentGradesCustom>();
 
@@ -206,43 +222,30 @@ public class GradesBiz {
             sgcList.add(sgc);
         }
 
-
+        //使用分页传给前端
 
         int count = sgcList.size();
+
         PageHelper.startPage(page,limit);
    ;
+        ResultMapUtil mapUtil = new ResultMapUtil();
 
-        PageInfo<StudentGradesCustom> studentGradesPageInfo = new PageInfo<>(sgcList);
+        Map resultMap = mapUtil.getResultMap(count,sgcList);
 
-        List<StudentGradesCustom> studentGradesList = studentGradesPageInfo.getList();
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("code",0);
-        resultMap.put("msg","");
-        resultMap.put("count",count);
-
-
-        resultMap.put("data",studentGradesList);
         return resultMap;
 
 
 
 
     }
-    //跳转到我的成绩
 
-    public String tostudentgrades(Model model,HttpSession session){
-        User user = (User)session.getAttribute("user");
-        String stuId = user.getActiveCode();
 
-        model.addAttribute("stuId",stuId);
-
-        return "student/studentgrades";
-
-    }
-
-    //批量生成班级成绩卡
-
+    /**
+     * 批量生成班级成绩卡的测试数据
+     * 1、查询出所有的班级，准备为每个班级生成班级成绩卡
+     * 2、根据学生成绩卡的信息，统计出总共有几次考试，并把相关的考试记录同步到班级成绩卡中
+     * 3、插入数据到数据库中
+     */
     public void autoinsertClass_gardes_card(){
         //获取部分的学生成绩卡信息(只获取考试时间和考试描述)
        List<StudentGradesCard> sg_cardlist = gradesService.getSGCard();
@@ -270,10 +273,15 @@ public class GradesBiz {
 
     }
 
-    //批量生成班级成绩统计
+    /**
+     * 批量生成班级成绩统计测试数据
+     * 1、获取各个班的所有学生，并所有所有的班级成绩卡
+     * 2、遍历每个班级，查找出该班级的所有学生，把学生的成绩统计出来
+     * 3、把班级成绩存入到数据库中
+     * @return
+     */
+    public void insertClassGrades(){
 
-    public HashMap<String,Object> insertClassGrades(){
-        HashMap<String,Object> resultMap = new HashMap<>();
 
         //获取各个班的所有学生
         ClassGrades ClassGrades = new ClassGrades();
@@ -483,32 +491,33 @@ public class GradesBiz {
 
                  }
 
-
-
-
-        return null;
-
     }
 
 
-
-    public HashMap<String,Object> classgrades(int page,int limit){
-        HashMap<String,Object> resultMap = new HashMap<>();
+    /**
+     * 查找出所有班级的成绩
+     * 1、查出所有班级的成绩
+     * 2、封装成绩数据到customGrades中
+     * 3、使用分页把前端数据传给前端
+     * @param page
+     * @param limit
+     * @return
+     */
+    public Map<String,Object> classgrades(int page,int limit){
 
 
 
         int count = gradesService.listClassGrades().size();
+
         PageHelper.startPage(page,limit);
+
         List<ClassGrades> ClassGradeslist1 = gradesService.listClassGrades();
 
-        PageInfo<ClassGrades> ClassGradesPageInfo = new PageInfo<>(ClassGradeslist1);
-
-        List<ClassGrades> ClassGradeslist2 = ClassGradesPageInfo.getList();
 
         List<Object> customList = new ArrayList<>();
 
         for (ClassGrades cgrades:
-                ClassGradeslist2 ) {
+                ClassGradeslist1 ) {
             String classGradesCardId = cgrades.getClassGradesCardId();
             ClassGradesCard card = gradesService.getClassGradesCardByID(classGradesCardId);
             CustomClassGrades custom = new CustomClassGrades();
@@ -555,38 +564,18 @@ public class GradesBiz {
             custom.setSportsMin(cgrades.getSportsMin());
             custom.setSportsAve(cgrades.getSportsAve());
 
-
-
-
-
-
             customList.add(custom);
 
         }
+        ResultMapUtil mapUtil = new ResultMapUtil();
+
+        Map resultMap = mapUtil.getResultMap(count,customList);
 
 
-
-        resultMap.put("code",0);
-        resultMap.put("msg","");
-        resultMap.put("count",count);
-
-
-        resultMap.put("data",customList);
         return resultMap;
 
 
-
-
-
     }
-
-
-
-
-
-
-
-
 
 
 }

@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@EnableCaching
+
 //@MapperScan("com.braisedpanda.shirotest.mapper")
 public class ShirotestApplication {
 

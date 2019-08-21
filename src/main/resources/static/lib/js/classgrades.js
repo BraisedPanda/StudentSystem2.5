@@ -77,11 +77,11 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
     //执行一个 table 实例
     table.render({
         elem: '#demo'
-        ,height: 500
+        ,height: 550
         ,url: 'classgrades' //数据接口
-        ,title: '用户表'
+
         ,page: true //开启分页
-        ,title:'学生信息表'
+        ,title:'班级成绩表'
         ,toolbar: 'true' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
 
         ,cols: [ [ //表头

@@ -70,4 +70,6 @@ public class UserServiceImpl implements UserService {
         List<String> permissionlist = userMapper.getPermission(uid);
         return permissionlist;
     }
+
+
 }

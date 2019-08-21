@@ -2,6 +2,9 @@ package com.braisedpanda.shirotest.controller;
 
 import com.braisedpanda.shirotest.mapper.ClassMapper;
 import com.braisedpanda.shirotest.model.po.SClass;
+import com.braisedpanda.shirotest.model.po.User;
+import com.braisedpanda.shirotest.service.ClassService;
+import com.braisedpanda.shirotest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,14 +86,5 @@ public class JumpController {
         return null;
     }
 
-    @Autowired
-    ClassMapper classMapper;
-
-//    @ResponseBody
-//    @RequestMapping("testtk")
-//    public List<SClass> testtk(){
-//        List<SClass> classList = classMapper.selectAll();
-//        return classList;
-//     }
 
 }

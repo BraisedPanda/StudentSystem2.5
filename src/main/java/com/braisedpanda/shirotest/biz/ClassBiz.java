@@ -9,17 +9,20 @@ import com.braisedpanda.shirotest.service.ClassService;
 import com.braisedpanda.shirotest.service.GradesService;
 import com.braisedpanda.shirotest.service.NationService;
 import com.braisedpanda.shirotest.service.StudentService;
+import com.braisedpanda.shirotest.utils.ResultMapUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
-@Controller
+@Service
 public class ClassBiz {
     @Autowired
     StudentService studentService;
@@ -30,11 +33,19 @@ public class ClassBiz {
     @Autowired
     ClassService classService;
 
-    //批量生成学生测试数据
 
+    /**
+     * 批量生成学生测试数据，插入到数据库中
+     * @return
+     */
     public List insertClass(){
         SClass sclass = new SClass();
         List<String> classidList = studentService.listClass();
+        /**
+         * 1、得到所有的班级id
+         * 2、遍历所有的id，并给每个班级赋随机的任课教师
+         * 3、把对象存进数据库中
+         */
         for (String classid:
              classidList) {
                 String[] teacherlist = new String[]{"节振国","赵大华","汤绍箕","黄强辉",
@@ -76,76 +87,51 @@ public class ClassBiz {
                 int count = studentService.getStudentConutByCid(classid);
                 sclass.setClassCount(count);
 
-
-
-
-
-
-
-
         }
         return classidList;
 
     }
 
 
-    //查询所有班级
+    /**
+     * 查询所有班级，
+     * @param page:当前页数
+     * @param limit：每页显示的数据数
+     * @return
+     */
+    public Map<String,Object> allClass(int page, int limit){
 
-    public
-    Map<String,Object> allClass(int page, int limit){
         int count = classService.listClass().size();
+
         PageHelper.startPage(page,limit);
+
         List<SClass> sClassList1 = classService.listClass();
 
-        PageInfo<SClass> classPageInfo = new PageInfo<>(sClassList1);
+        ResultMapUtil mapUtil = new ResultMapUtil();
 
-        List<SClass> classtList = classPageInfo.getList();
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("code",0);
-        resultMap.put("msg","");
-        resultMap.put("count",count);
+        Map map =  mapUtil.getResultMap(count,sClassList1);
 
 
-        resultMap.put("data",classtList);
-        return resultMap;
+        return map;
 
-    }
-
-    //跳转到编辑班级界面
-
-    public ModelAndView toeidtclass(@PathVariable("classId") String classId){
-        ModelAndView modelAndView = new ModelAndView();
-       SClass sclass =  classService.getClassById(classId);
-       modelAndView.addObject("class",sclass);
-       modelAndView.setViewName("class/editClass");
-        return modelAndView;
-
-    }
-
-    //编辑班级信息（提交到数据库）
-    public String editClass(SClass sClass,Model model){
-
-        classService.updateClass(sClass);
-
-        model.addAttribute("msg","编辑班级信息成功");
-        return "menu/msg";
     }
 
 
     /**
      * 根据班级的classid查询出该班级所有学生的每次考试成绩，并把数据返回给前端
      * 通过ajax调用
-     * @param class_cid
-     * @param page
-     * @param limit
-     * @return
+     *
+     * 1、创建学生成绩,来存放改班级所有学生的成绩
+     * 2、根据班级的cid查找出所有的学生信息
+     * 3、根据每个学生的学生id查找所该学生的学习成绩卡（每次考试对应一张成绩卡）
+     * 4、根据每张成绩卡，查询对应考试的详细成绩
+     * 5、在StudentGradesCustom中设置学生相关的成绩
+     * 6、存放在数组中
+     * 7、使用分页把数据传给前端
+     *
      */
+    public Map<String,Object> classDetail(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
 
-    public HashMap<String,Object> classDetail(@PathVariable("class_cid") String class_cid,int page,int limit,Model model){
-
-
-        HashMap<String,Object> resultMap = new HashMap<>();
         //创建学生成绩,来存放改班级所有学生的成绩
         List<StudentGradesCustom> studentGradesCustomList
                 = new ArrayList<>();
@@ -189,30 +175,19 @@ public class ClassBiz {
                 studentGradesCustom.setArts(studentGrades.getArts());
                 studentGradesCustom.setSports(studentGrades.getSports());
 
-
                 //存放在数组之中
                 studentGradesCustomList.add(studentGradesCustom);
 
-
-
             }
-
-
 
         }
         int count = studentGradesCustomList.size();
         //用Pagehelper分页助手进行分页
         PageHelper.startPage(page,limit);
-        PageInfo<StudentGradesCustom> gradesInfo =new PageInfo<>(studentGradesCustomList);
 
-        List<StudentGradesCustom> resultList =  gradesInfo.getList();
+        ResultMapUtil mapUtil = new ResultMapUtil();
 
-        resultMap.put("code",0);
-        resultMap.put("msg","");
-        resultMap.put("count",count);
-
-
-        resultMap.put("data",resultList);
+        Map resultMap =  mapUtil.getResultMap(count,studentGradesCustomList);
 
         return resultMap;
 
