@@ -14,15 +14,29 @@ public class NationServiceImpl implements NationService {
     @Autowired
     NationMapper nationMapper;
 
+    /**
+    * @Description: 根据nation_id查找nation
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public Nation getNationById(String nationId) {
-        Nation nation = nationMapper.getNationById(nationId);
-        return nation;
+    public Nation selectNationByPrimaryKey(Nation nation) {
+        Nation nation2 = nationMapper.selectByPrimaryKey(nation);
+
+        return nation2;
     }
-    //查询所有的nation
+
+    /**
+    * @Description: 查询所有的nation
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public List<Nation> listNations() {
-           List<Nation> nationList = nationMapper.listNations();
+    public List<Nation> selectAllNation() {
+        List<Nation> nationList = nationMapper.selectAll();
+
            return nationList;
     }
 }

@@ -37,7 +37,7 @@ public class UserController {
     @RequestMapping("/alluser")
     public ModelAndView allUser2(){
         ModelAndView modelAndView = new ModelAndView();
-        List<User> userList = userService.listUsers();
+        List<User> userList = userService.selectAllUser();
 
         modelAndView.addObject("useList",userList);
         modelAndView.setViewName("index");
@@ -54,7 +54,7 @@ public class UserController {
         }
         //设置用户默认头像
         user.setImages("/images/2019-08-07/f8aa0870-e4ea-4170-9772-296204476267.jpg");
-        userService.addUser(user);
+        userService.insertUser(user);
 
         model.addAttribute("user",user);
 
@@ -104,7 +104,7 @@ public class UserController {
             return modelAndView;
         }
         if (subject.isAuthenticated()) {
-            User user = userService.getUser(username,password);
+            User user = userService.selectUserByUsernameAndPasword(username,password);
             session.setAttribute("user",user);
             modelAndView.setViewName("menu/main");
             return modelAndView;
@@ -121,7 +121,9 @@ public class UserController {
     //删除用户
     @RequestMapping("/delete/{uid}")
     public String delete(@PathVariable("uid") String uid){
-        userService.delete(uid);
+        User user = new User();
+        user.setUid(Integer.parseInt(uid));
+        userService.deleteUser(user);
 
         return "user/blank";
     }
@@ -131,7 +133,9 @@ public class UserController {
     @RequestMapping("edituser/{uid}")
     public ModelAndView getuser2(@PathVariable("uid") int uid){
         ModelAndView modelAndView = new ModelAndView();
-        User user = userService.getUserByUid(uid);
+        User user1 = new User();
+        user1.setUid(uid);
+        User user = userService.selectUserById(user1);
 
         modelAndView.addObject("user",user);
         modelAndView.setViewName("user/edit");
@@ -147,7 +151,7 @@ public class UserController {
     public String user_edit(User user){
 
 
-        userService.edit(user);
+        userService.updateUserById(user);
 
 
         return "user/success";
@@ -162,7 +166,7 @@ public class UserController {
     public String add_user2(User user){
         user.setImages("/images/2019-08-07/f8aa0870-e4ea-4170-9772-296204476267.jpg");
 
-        userService.addUser(user);
+        userService.insertUser(user);
 
 
         return "user/success";
@@ -216,9 +220,9 @@ public class UserController {
     @RequestMapping("userinfo")
     public ModelAndView userinfo2(HttpSession session){
         User user1 = (User)session.getAttribute("user");
-        int uid = user1.getUid();
+//        int uid = user1.getUid();
         ModelAndView modelAndView = new ModelAndView();
-        User user = userService.getUserByUid(uid);
+        User user = userService.selectUserById(user1);
 
         modelAndView.addObject("user",user);
         modelAndView.setViewName("user/userlist2");

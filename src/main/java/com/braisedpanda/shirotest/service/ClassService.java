@@ -10,27 +10,22 @@ import java.util.List;
 @Service
 public interface ClassService {
 
-
+    //添加班级
     void insertClass(SClass sclass);
 
-
-
     //查找出所有的班级
-    List<SClass> listClass();
+    List<SClass> selectAllSClass();
 
-    //分页查找班级
-    List<SClass> listClass(int page,int limit);
 
     //根据classid值删除class
+    void deleteSClassById(SClass sClass);
 
-    void deleteClassById(String classId);
-    //根据class查找对应的class
+    //根据classid查找对应的class
+    SClass selectSClassById(SClass sClass);
 
-    SClass getClassById(String classId);
-    //更新班级信息
+    // 更新班级信息
+    void updateSClassById(SClass sClass);
 
-    void updateClass(SClass sClass);
     //获取所有的班级id
-
     List<String> listClassId();
 }

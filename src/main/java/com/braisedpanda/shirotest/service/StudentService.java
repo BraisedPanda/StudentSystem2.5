@@ -11,27 +11,27 @@ import java.util.List;
 @Service
 public interface StudentService {
 
+    //添加学生
+    void insertStudent(Student student);
 
-    void addStudent(Student student);
+    //得到所有的学生
+    List<Student> selectAllStudent();
 
+    //删除学生信息
+    void deleteStudentById(Student student);
 
+    //根据id查找学生信息
+    Student selectStudentById(Student student);
 
-    List<Student> getAllStudent();
-
-    void delete(String stuId);
-
-
-    Student getStudentById(String stuId);
-
-
+    //更新学生信息
     void updateStudent(Student student);
 
-
-    List<String> listClass();
+    //查询所有班级的Id
+    List<String> selectAllClassId();
 
 
     int getStudentConutByCid(String classid);
-    //根据班级id值获取所有的学生
 
+    //根据班级id值获取所有的学生
     List<Student> getStudentByClassId(String classId);
 }

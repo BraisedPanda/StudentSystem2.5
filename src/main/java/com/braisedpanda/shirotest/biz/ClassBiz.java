@@ -15,7 +15,6 @@ import com.braisedpanda.shirotest.utils.PageHelperUtils;
 import com.braisedpanda.shirotest.utils.ResultType;
 import com.github.pagehelper.PageHelper;
 
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -48,10 +47,10 @@ public class ClassBiz {
         try{
             //如果操作成功，向前台返回数据
 //            int i = 2/0;
-            int count = classService.listClass().size();
+            int count = classService.selectAllSClass().size();
             //使用分页助手进行分页
             PageHelper.startPage(page,limit);
-            List<SClass> classlist = classService.listClass();
+            List<SClass> classlist = classService.selectAllSClass();
 
             List resultList = PageHelperUtils.getResultList(classlist);
             String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
@@ -153,7 +152,7 @@ public class ClassBiz {
      */
     public void insertClass(){
         SClass sclass = new SClass();
-        List<String> classidList = studentService.listClass();
+        List<String> classidList = studentService.selectAllClassId();
         /**
          * 1、得到所有的班级id
          * 2、遍历所有的id，并给每个班级赋随机的任课教师

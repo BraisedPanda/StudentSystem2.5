@@ -11,38 +11,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface UserService {
+
     //查找所有的用户
-
-
-    List<User> listUsers();
+    List<User> selectAllUser();
 
     //添加用户
-
-
-    void addUser(User user);
+    void insertUser(User user);
 
     //根据用户名和密码查找用户
+    User selectUserByUsernameAndPasword(String username, String password);
 
+    //删除用户
+    void deleteUser(User user);
 
-    User getUser(String username, String password);
+    //根据uid查找用户
+    User selectUserById(User user);
 
-    void delete(String uid);
-
-    User getUserByUid(int uid);
-
-
-    void edit(User user);
-
-
-
-    List<UserRole> getRole(int uid);
-
-
-    List<String> getPermission(String uid);
-
-
-
-
-
+    //更新用户信息
+    void updateUserById(User user);
 
 }

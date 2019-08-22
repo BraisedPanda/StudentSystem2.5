@@ -46,9 +46,9 @@ public class UserBiz {
 
      */
     public  String testtable(int page,int limit){
-        int count = userService.listUsers().size();
+        int count = userService.selectAllUser().size();
         PageHelper.startPage(page,limit);
-        List<User> userList1 = userService.listUsers();
+        List<User> userList1 = userService.selectAllUser();
 
         for (User user:
                 userList1) {

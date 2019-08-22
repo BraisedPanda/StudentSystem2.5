@@ -60,4 +60,7 @@ public interface PermissionService {
     //根据roleId删除role表中的role
 
     void deleteRoleByroleId(String roleId);
+
+
+    List<String> getPermission(String uid);
 }

@@ -117,4 +117,12 @@ public class PermissionServiceImpl implements PermissionService {
     public void deleteRoleByroleId(String roleId) {
         permissionMapper.deleteRoleByroleId(roleId);
     }
+
+
+    @Override
+    public List<String> getPermission(String uid) {
+        List<String> permissionlist = permissionMapper.getPermission(uid);
+        return permissionlist;
+    }
+
 }

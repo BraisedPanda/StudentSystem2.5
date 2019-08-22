@@ -69,7 +69,7 @@ public class StudentBiz {
             student.setStuPolitical("团员");
             student.setStuAddress("安徽省合肥市");
             student.setStuImage("/images/2019-08-02/5705f0d1-4627-4f76-a630-9193866655fb.jpg");
-            studentService.addStudent(student);
+            studentService.insertStudent(student);
 
         }
 
@@ -82,11 +82,11 @@ public class StudentBiz {
     //查询所有学生
 
     public String allStudent(int page, int limit){
-        int count = studentService.getAllStudent().size();
+        int count = studentService.selectAllStudent().size();
 
         PageHelper.startPage(page,limit);
 
-        List<Student> studentList1 = studentService.getAllStudent();
+        List<Student> studentList1 = studentService.selectAllStudent();
 
         List resultList = PageHelperUtils.getResultList(studentList1);
 
@@ -102,7 +102,7 @@ public class StudentBiz {
     //查询学生的学习成绩卡
 
     public void findCard(){
-        List<Student> studentList = studentService.getAllStudent();
+        List<Student> studentList = studentService.selectAllStudent();
         for (Student s:
              studentList) {
             String stuId = s.getStuId();
@@ -136,7 +136,7 @@ public class StudentBiz {
         stuId = stuId.replace("-","");
         student.setStuId(stuId);
 
-        studentService.addStudent(student);
+        studentService.insertStudent(student);
 
         //注册学生信息时,自动注册用户信息
 
@@ -148,7 +148,7 @@ public class StudentBiz {
         user.setGender(student.getStuSex());
         user.setImages(student.getStuImage());
         user.setActiveCode(stuId);
-        userService.addUser(user);
+        userService.insertUser(user);
 
         //授予该学生权限
 

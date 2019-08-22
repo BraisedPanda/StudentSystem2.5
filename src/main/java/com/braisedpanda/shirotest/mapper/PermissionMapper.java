@@ -41,4 +41,6 @@ public interface PermissionMapper {
     void updateRole(Role role);
     //根据roleId删除role表中的role
     void deleteRoleByroleId(String roleId);
+
+    List<String> getPermission(String uid);
 }

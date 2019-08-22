@@ -4,6 +4,8 @@ package com.braisedpanda.shirotest.shiro;
 
 import com.braisedpanda.shirotest.model.po.User;
 import com.braisedpanda.shirotest.model.po.UserRole;
+import com.braisedpanda.shirotest.service.PermissionService;
+import com.braisedpanda.shirotest.service.UserRoleService;
 import com.braisedpanda.shirotest.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -18,7 +20,10 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     UserService userService;
-
+    @Autowired
+    UserRoleService userRoleService;
+    @Autowired
+    PermissionService permissionService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("========开始权限验证========");
@@ -27,7 +32,7 @@ public class CustomRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //查询登录用户所拥有的角色，并添加角色
         int uid = user.getUid();
-        List<UserRole> roleList = userService.getRole(uid);
+        List<UserRole> roleList = userRoleService.selectUserRoleByUid(uid);
 
         for (UserRole role:
              roleList) {
@@ -35,7 +40,7 @@ public class CustomRealm extends AuthorizingRealm {
 
 
            String roleId= role.getRoleId();
-            List<String> permissionList= userService.getPermission(roleId);
+            List<String> permissionList= permissionService.getPermission(roleId);
             //查询登录用户所拥有的权限，并添加权限
             for (String  permission:
                     permissionList) {
@@ -56,7 +61,7 @@ public class CustomRealm extends AuthorizingRealm {
         String password = new String((char[]) authenticationToken.getCredentials());
 
 
-        User user = userService.getUser(username,password);
+        User user = userService.selectUserByUsernameAndPasword(username,password);
 
         if (user == null) {
             throw new AccountException("用户名或密码错误");

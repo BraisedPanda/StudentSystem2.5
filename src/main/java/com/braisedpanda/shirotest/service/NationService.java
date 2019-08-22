@@ -10,9 +10,10 @@ import java.util.List;
 public interface NationService {
 
 
-    Nation getNationById(String nationId);
+    //根据nation_id查找nation
+    Nation selectNationByPrimaryKey(Nation nation);
 
-    //查询所有的nation
-
-    List<Nation> listNations();
+    
+    //查找所有的nation
+    List<Nation> selectAllNation();
 }

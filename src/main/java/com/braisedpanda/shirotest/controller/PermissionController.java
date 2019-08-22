@@ -69,7 +69,9 @@ public class PermissionController {
 
     public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
         List<UserRole> userRoleList = permissionService.getRoleById(uid);
-        User user = userService.getUserByUid(Integer.parseInt(uid));
+        User user1 = new User();
+        user1.setUid(Integer.parseInt(uid));
+        User user = userService.selectUserById(user1);
         if(userRoleList !=null && userRoleList.size()>0){
             model.addAttribute("roleList", userRoleList);
         }else if(user!=null){ //用户存在，但是没有角色
@@ -102,7 +104,9 @@ public class PermissionController {
 
     @RequestMapping("addpermission")
     public String addpermission2(int uid,HttpServletRequest request,Model model){
-        User user = userService.getUserByUid(uid);
+        User user1 = new User();
+        user1.setUid(uid);
+        User user = userService.selectUserById(user1);
 
         if(user == null){
             model.addAttribute("msg","**该用户不存在，请检查id是否输入正确");

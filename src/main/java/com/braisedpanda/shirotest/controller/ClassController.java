@@ -65,8 +65,9 @@ public class ClassController {
     @RequestMapping("class/delete/{classId}")
 
     public void deleteClassById(@PathVariable("classId") String classId){
-
-        classService.deleteClassById(classId);
+        SClass sClass = new SClass();
+        sClass.setClassId(classId);
+        classService.deleteSClassById(sClass);
     }
 
     //跳转到编辑班级界面
@@ -74,8 +75,9 @@ public class ClassController {
     public ModelAndView toeidtclass2(@PathVariable("classId") String classId){
 
         ModelAndView modelAndView = new ModelAndView();
-
-        SClass sclass =  classService.getClassById(classId);
+        SClass sClass = new SClass();
+        sClass.setClassId(classId);
+        SClass sclass =  classService.selectSClassById(sClass);
 
         modelAndView.addObject("class",sclass);
 
@@ -89,7 +91,7 @@ public class ClassController {
     @RequestMapping("editclass")
     public String editClass2(SClass sClass, Model model){
 
-        classService.updateClass(sClass);
+        classService.updateSClassById(sClass);
 
         model.addAttribute("msg","编辑班级信息成功");
 

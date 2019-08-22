@@ -44,7 +44,7 @@ public class GradesBiz {
      */
     public void insertGradesCard(){
         StudentGradesCard card = new StudentGradesCard();
-        List<Student> studentList = studentService.getAllStudent();
+        List<Student> studentList = studentService.selectAllStudent();
         for (Student s:
              studentList) {
             String stuId = s.getStuId();
@@ -79,7 +79,7 @@ public class GradesBiz {
      * @return
      */
     public void insertGrades(){
-        List<Student> studentList = studentService.getAllStudent();
+        List<Student> studentList = studentService.selectAllStudent();
         for (Student s:
              studentList) {
             String stuId = s.getStuId();
@@ -164,7 +164,9 @@ public class GradesBiz {
         List<StudentGradesCustom> sgcList = new ArrayList<StudentGradesCustom>();
 
         //根据学生id查找学生
-        Student student = studentService.getStudentById(stuId);
+        Student stu = new Student();
+        stu.setStuId(stuId);
+        Student student = studentService.selectStudentById(stu);
 
         //成绩卡，根据学生的id在成绩卡中，查询多次考试的成绩单号
         StudentGradesCard gcard = new StudentGradesCard();

@@ -14,58 +14,80 @@ import java.util.List;
 public class ClassServiceImpl implements ClassService {
     @Autowired
     ClassMapper classMapper;
+
+   /** 
+   * @Description: 插入班级 
+   * @Param:  
+   * @return: 
+   * @Date: 2019/8/22 0022 
+   */ 
     @Override
     public void insertClass(SClass sclass) {
-        classMapper.insertClass(sclass);
+        classMapper.insert(sclass);
     }
-
+    
+    
+   /** 
+   * @Description: 查找所有的班级 
+   * @Param:  
+   * @return: 
+   * @Date: 2019/8/22 0022 
+   */ 
     @Override
-    public List<SClass> listClass() {
-        List<SClass> classList = classMapper.listClass();
+    public List<SClass> selectAllSClass() {
+        List<SClass> classList = classMapper.selectAll();
         return classList;
     }
-    //根据classid值删除class
 
+
+    /** 
+    * @Description: 根据班级的classid值删除班级 
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
-    public void deleteClassById(String classId) {
-        classMapper.deleteClassById(classId);
+    public void deleteSClassById(SClass sclass) {
+        classMapper.deleteByPrimaryKey(sclass);
+
     }
-    //根据classid查找出对应的class
 
+    /** 
+    * @Description: 根据classid查找出对应的class 
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
-    public SClass getClassById(String classId) {
-        SClass sClass = classMapper.getClassById(classId);
+    public SClass selectSClassById(SClass sclass) {
+        SClass sClass = classMapper.selectByPrimaryKey(sclass);
         return sClass;
     }
 
-    //更新班级信息
-     @Override
-    public void updateClass(SClass sClass) {
-        classMapper.updateClass(sClass);
+    /** 
+    * @Description: 更新班级信息 
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
+    @Override
+    public void updateSClassById(SClass sClass) {
+         classMapper.updateByPrimaryKey(sClass);
     }
 
 
-    ////获取所有的班级id
-
-
+    /** 
+    * @Description: 获取所有班级的class
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
     public List<String> listClassId() {
         List<String> list =  classMapper.listClassId();
         return list;
-    }
-
-
-    //分页查找班级
-
-
-    @Override
-    public List<SClass> listClass(int page, int limit) {
-        PageHelper.startPage(page,limit);
-        List<SClass> list = classMapper.listClass();
-        PageInfo pageInfo = new PageInfo<>(list);
-        List resultList = pageInfo.getList();
-        return  resultList;
-
 
     }
+
+
 }

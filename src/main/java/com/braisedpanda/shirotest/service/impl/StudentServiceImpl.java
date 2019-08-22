@@ -1,10 +1,12 @@
 package com.braisedpanda.shirotest.service.impl;
 
+import com.braisedpanda.shirotest.model.po.SClass;
 import com.braisedpanda.shirotest.model.po.Student;
 import com.braisedpanda.shirotest.mapper.StudentMapper;
 import com.braisedpanda.shirotest.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -13,58 +15,114 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentMapper studentMapper;
 
-    //新增学生信息
+    /** 
+    * @Description: 添加学生
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
-    public void addStudent(Student student) {
-        studentMapper.addStudent(student);
+    public void insertStudent(Student student) {
+
+        studentMapper.insert(student);
     }
 
-    //查找所有学生
+    /**
+    * @Description: 查找所有学生
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public List<Student> getAllStudent() {
-        List<Student> studentList = studentMapper.getAllStudent();
+    public List<Student> selectAllStudent() {
+
+        List<Student> studentList = studentMapper.selectAll();
         return studentList;
     }
 
-    //根据学生id删除学生
+    /**
+    * @Description: 根据学生id删除学生
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public void delete(String stuId) {
-        studentMapper.delete(stuId);
+    public void deleteStudentById(Student student) {
+
+        studentMapper.deleteByPrimaryKey(student);
     }
 
-    //根据学校id查找学生
+    /**
+    * @Description: 根据学校id查找学生
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public Student getStudentById(String stuId) {
-      Student student =  studentMapper.getStudentById(stuId);
-      return student;
+    public Student selectStudentById(Student student) {
+        Student student2 = studentMapper.selectByPrimaryKey(student);
+
+      return student2;
     }
-    //更新学生信息
+
+    /**
+    * @Description: 更新学生信息
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
     public void updateStudent(Student student) {
-        studentMapper.updateStudent(student);
-    }
-    //查询所有学生的班级
-    @Override
-    public List<String> listClass() {
-        List<String> classIdlist = studentMapper.listClass();
-        return classIdlist;
-    }
-    //根据班级id查找学生的总数
+        studentMapper.updateByPrimaryKey(student);
 
+    }
+    /**
+    * @Description: 查询所有学生的班级
+    * @Param:
+    * @return: classId值
+    * @Date: 2019/8/22 0022
+    */
+    @Override
+    public List<String> selectAllClassId() {
+       List<String> classIdlist = studentMapper.selectAllClassId();
+
+        return classIdlist;
+
+    }
+
+    /**
+    * @Description: 根据班级id查找学生的总数
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
     public int getStudentConutByCid(String classid) {
-       int count =  studentMapper.getStudentCountByCid(classid);
+
+        Example example = new Example(Student.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("classId",classid);
+        int count = studentMapper.selectCountByExample(example);
        return count;
     }
 
 
 
-    //根据班级的classid查找出该班的所有学生
+   
 
-
+    /** 
+    * @Description: 根据班级的classid查找出该班的所有学生
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
     public List<Student> getStudentByClassId(String classId) {
-        List<Student> list = studentMapper.getStudentByClassId(classId);
+
+        Example example = new Example(Student.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("classId",classId);
+        List<Student> list = studentMapper.selectByExample(example);
         return list;
     }
 }

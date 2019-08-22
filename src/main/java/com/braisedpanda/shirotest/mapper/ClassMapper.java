@@ -7,18 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface ClassMapper extends tk.mybatis.mapper.common.Mapper<SClass>{
-    void insertClass(SClass sclass);
 
 
-
-    List<SClass> listClass();
-
-    //根据classid值删除class
-    void deleteClassById(String classId);
-    //根据classid查找出class
-    SClass getClassById(String classId);
-    //更新班级信息
-    void updateClass(SClass sClass);
-    //获取所有的班级id
+    /**
+    * @Description: 获取所有班级的id
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     List<String> listClassId();
 }

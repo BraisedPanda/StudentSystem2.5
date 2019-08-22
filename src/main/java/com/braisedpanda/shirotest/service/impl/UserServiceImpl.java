@@ -6,6 +6,7 @@ import com.braisedpanda.shirotest.mapper.UserMapper;
 import com.braisedpanda.shirotest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 @Service
@@ -13,63 +14,87 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    //查找所有的用户
+    /**
+    * @Description: 查找所有的用户
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public List<User> listUsers() {
-        List<User> userList = userMapper.listUsers();
+    public List<User> selectAllUser() {
+//        List<User> userList = userMapper.listUsers();
+        List<User> userList = userMapper.selectAll();
         return userList;
+
     }
 
-    //添加用户
-
-
+    /**
+    * @Description: 新增用户
+    * @Param:
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public void addUser(User user) {
-        userMapper.addUser(user);
+    public void insertUser(User user) {
+        userMapper.insert(user);
+//        userMapper.addUser(user);
     }
 
-    //根据用户名和密码查找用户
 
+    /**
+    * @Description: 根据用户名和密码查找用户
+    * @Param:  username:用户名  password:密码
+    * @return:
+    * @Date: 2019/8/22 0022
+    */
     @Override
-    public User getUser(String username, String password) {
-        User user = userMapper.getUser(username,password);
-
-        return user;
+    public User selectUserByUsernameAndPasword(String username, String password) {
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username",username);
+        criteria.andEqualTo("password",password);
+//        User user = userMapper.getUser(username,password);
+        User user =userMapper.selectOneByExample(example);
+            return user;
     }
-    //删除用户
-
+    
+    /** 
+    * @Description: 删除用户 
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
-    public void delete(String uid) {
-        userMapper.delete(uid);
+    public void deleteUser(User user) {
+        userMapper.delete(user);
+//        userMapper.delete(uid);
     }
-    //根据uid查找用户
 
+    /** 
+    * @Description: 根据Uid查找用户
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/22 0022 
+    */ 
     @Override
-    public User getUserByUid(int uid) {
-     User user = userMapper.getUserByUid(uid);
-     return user;
+    public User selectUserById(User user) {
+        User user1 = userMapper.selectByPrimaryKey(user);
+//     User user = userMapper.getUserByUid(uid);
+     return user1;
     }
-    //修改用户信息
 
-
+   /** 
+   * @Description: 更新用户信息
+   * @Param:  
+   * @return: 
+   * @Date: 2019/8/22 0022 
+   */ 
     @Override
-    public void edit(User user) {
-        userMapper.edit(user);
+    public void updateUserById(User user) {
+        userMapper.updateByPrimaryKey(user);
+//    userMapper.edit(user);
     }
 
-    //根据用户名查找权限
-
-    @Override
-    public List<UserRole> getRole(int uid) {
-        List<UserRole> roleList = userMapper.getRole(uid);
-        return roleList;
-    }
-
-    @Override
-    public List<String> getPermission(String uid) {
-        List<String> permissionlist = userMapper.getPermission(uid);
-        return permissionlist;
-    }
 
 
 }

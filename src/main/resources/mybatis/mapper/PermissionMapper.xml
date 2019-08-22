@@ -142,6 +142,9 @@
     </delete>
 
 
-
+    <!--根据uid查找所有的permission-->
+    <select id="getPermission" resultType="String">
+        select permission from rolePermission where roleId=#{roleId}
+    </select>
 
 </mapper>

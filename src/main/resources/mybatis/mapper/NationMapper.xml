@@ -5,14 +5,4 @@
 <mapper namespace="com.braisedpanda.shirotest.mapper.NationMapper">
 
 
-    <!--根据nationid查找nation-->
-    <select id="getNationById" resultType="com.braisedpanda.shirotest.model.po.Nation">
-        select * from nation where nationId=#{nationId}
-    </select>
-
-    <!--查找所有的nation-->
-    <select id="listNations" resultType="com.braisedpanda.shirotest.model.po.Nation">
-        select * from nation
-    </select>
-
 </mapper>

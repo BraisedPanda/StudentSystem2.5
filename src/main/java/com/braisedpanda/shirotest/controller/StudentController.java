@@ -55,7 +55,9 @@ public class StudentController {
     //删除学生信息
     @RequestMapping("student/delete/{stuId}")
     public String delete(@PathVariable("stuId")String stuId){
-        studentService.delete(stuId);
+        Student stu = new Student();
+        stu.setStuId(stuId);
+        studentService.deleteStudentById(stu);
         return "user/blank";
     }
 
@@ -89,8 +91,9 @@ public class StudentController {
     @RequestMapping("student/toeditstudent/{stuId}")
     public ModelAndView toeditstudent2(@PathVariable("stuId") String stuId){
         ModelAndView modelAndView = new ModelAndView();
-
-        Student student = studentService.getStudentById(stuId);
+        Student stu = new Student();
+        stu.setStuId(stuId);
+        Student student = studentService.selectStudentById(stu);
 
         modelAndView.addObject("student",student);
 
@@ -104,11 +107,11 @@ public class StudentController {
     @RequestMapping("toaddstudent")
     public String tostudent2(Model model){
 
-        List<Nation> nationList = nationService.listNations();
+        List<Nation> nationList = nationService.selectAllNation();
 
         model.addAttribute("nationlist",nationList);
 
-        List<SClass> classList = classService.listClass();
+        List<SClass> classList = classService.selectAllSClass();
 
         model.addAttribute("classlist",classList);
 
