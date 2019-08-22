@@ -5,6 +5,7 @@ package com.braisedpanda.shirotest.shiro;
 import com.braisedpanda.shirotest.model.po.User;
 import com.braisedpanda.shirotest.model.po.UserRole;
 import com.braisedpanda.shirotest.service.PermissionService;
+import com.braisedpanda.shirotest.service.RolePermissionService;
 import com.braisedpanda.shirotest.service.UserRoleService;
 import com.braisedpanda.shirotest.service.UserService;
 import org.apache.shiro.authc.*;
@@ -24,6 +25,8 @@ public class CustomRealm extends AuthorizingRealm {
     UserRoleService userRoleService;
     @Autowired
     PermissionService permissionService;
+    @Autowired
+    RolePermissionService rolePermissionService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("========开始权限验证========");
@@ -40,7 +43,7 @@ public class CustomRealm extends AuthorizingRealm {
 
 
            String roleId= role.getRoleId();
-            List<String> permissionList= permissionService.getPermission(roleId);
+            List<String> permissionList= rolePermissionService.getPermission(roleId);
             //查询登录用户所拥有的权限，并添加权限
             for (String  permission:
                     permissionList) {

@@ -2,6 +2,8 @@ package com.braisedpanda.shirotest.biz;
 
 import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.service.PermissionService;
+import com.braisedpanda.shirotest.service.RolePermissionService;
+import com.braisedpanda.shirotest.service.RoleService;
 import com.braisedpanda.shirotest.service.UserService;
 import com.braisedpanda.shirotest.utils.JsonUtils;
 import com.braisedpanda.shirotest.utils.PageHelperUtils;
@@ -27,7 +29,10 @@ public class PermissionBiz {
     PermissionService permissionService;
     @Autowired
     UserService userService;
-
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    RolePermissionService rolePermissionService;
 
     /**
      * 新增角色
@@ -44,12 +49,14 @@ public class PermissionBiz {
         roleId = roleId.replace("-","");
         role.setRoleId(roleId);
 
-        permissionService.insertRole(role);
+        roleService.insertRole(role);
 
         String[] s = request.getParameterValues("permission");
         for (String s1:
              s) {
-           Permission permission =  permissionService.getPermissionById(s1);
+            Permission per =new Permission();
+            per.setPermissionId(s1);
+           Permission permission =  permissionService.selectPermissionById(per);
             RolePermission rp = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
@@ -62,7 +69,7 @@ public class PermissionBiz {
             rp.setRole(role.getRole());
             rp.setRoleDescribe(role.getRoleDescribe());
 
-            permissionService.insertRolePermission(rp);
+            rolePermissionService.insertRolePermission(rp);
         }
 
     }
@@ -77,11 +84,11 @@ public class PermissionBiz {
     public String allpermission(int page,int limit){
 
 
-        List<RolePermission> rolePermissionList = permissionService.listRolePermission();
+        List<RolePermission> rolePermissionList = rolePermissionService.selectAllRolePermission();
         int count = rolePermissionList.size();
 
         PageHelper.startPage(page,limit);
-        List<RolePermission> rolePermissionList1 = permissionService.listRolePermission();
+        List<RolePermission> rolePermissionList1 = rolePermissionService.selectAllRolePermission();
 
         List resultList = PageHelperUtils.getResultList(rolePermissionList1);
 
@@ -106,7 +113,7 @@ public class PermissionBiz {
         //1、根据roleId删除原先角色所有的权限
         String roleId = rolePermission.getRoleId();
 
-        permissionService.deleteRolePermissionByroleId(roleId);
+        rolePermissionService.deleteRolePermissionByroleId(roleId);
 
         //2、根据表单内容添加角色对应的权限
 
@@ -114,7 +121,9 @@ public class PermissionBiz {
 
         for (String s1:
                 permissionList) {
-            Permission permission =  permissionService.getPermissionById(s1);
+            Permission per = new Permission();
+            per.setPermissionId(s1);
+            Permission permission =  permissionService.selectPermissionById(per);
             RolePermission rolePermission1 = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
@@ -131,9 +140,9 @@ public class PermissionBiz {
             role.setRoleId(roleId);
             role.setRoleDescribe(rolePermission.getRoleDescribe());
             role.setRole(rolePermission.getRole());
-            permissionService.updateRole(role);
+            roleService.updateRole(role);
 
-            permissionService.insertRolePermission(rolePermission1);
+            rolePermissionService.insertRolePermission(rolePermission1);
         }
 
 
@@ -145,11 +154,11 @@ public class PermissionBiz {
 
     public  String allrole(int page,int limit){
 
-        List<Role> roleList = permissionService.getAllRole();
+        List<Role> roleList = roleService.selectAllRole();
         int count = roleList.size();
         PageHelper.startPage(page,limit);
 
-        List<Role> roleList1 = permissionService.getAllRole();
+        List<Role> roleList1 = roleService.selectAllRole();
         PageInfo pageInfo = new PageInfo(roleList1);
         List<Role> resultList = pageInfo.getList();
 

@@ -31,6 +31,8 @@ public class StudentBiz {
     PermissionService permissionService;
     @Autowired
     ClassService classService;
+    @Autowired
+    UserRoleService userRoleService;
 
 
     //批量生成学生测试数据
@@ -159,7 +161,7 @@ public class StudentBiz {
         userRole.setRoleId("cccdd017ff3b4f9dba8ff77c7836e1f6");
         userRole.setRole("学生");
         userRole.setRoleDescribe("学生可以查看学生、班级信息、我的成绩");
-        permissionService.insertUserRole(userRole);
+        userRoleService.insertUserRole(userRole);
 
     }
 

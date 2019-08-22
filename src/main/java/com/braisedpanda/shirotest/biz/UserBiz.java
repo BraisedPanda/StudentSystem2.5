@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.braisedpanda.shirotest.model.po.User;
 import com.braisedpanda.shirotest.model.po.UserRole;
 import com.braisedpanda.shirotest.service.PermissionService;
+import com.braisedpanda.shirotest.service.UserRoleService;
 import com.braisedpanda.shirotest.service.UserService;
 import com.braisedpanda.shirotest.utils.JsonUtils;
 import com.braisedpanda.shirotest.utils.PageHelperUtils;
@@ -36,6 +37,8 @@ public class UserBiz {
 
     @Autowired
     PermissionService permissionService;
+    @Autowired
+    UserRoleService userRoleService;
 
 
     /**
@@ -52,7 +55,7 @@ public class UserBiz {
 
         for (User user:
                 userList1) {
-            List<UserRole> userRoleList = permissionService.getRoleById(user.getUid()+"");
+            List<UserRole> userRoleList = userRoleService.selectUserRoleByUid(user.getUid());
             StringBuffer sb = new StringBuffer();
             //如果没有角色，追加【无角色】样式
             if(userRoleList ==null || userRoleList.size()==0){

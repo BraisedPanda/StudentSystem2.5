@@ -2,8 +2,7 @@ package com.braisedpanda.shirotest.controller;
 
 import com.braisedpanda.shirotest.model.po.*;
 import com.braisedpanda.shirotest.biz.PermissionBiz;
-import com.braisedpanda.shirotest.service.PermissionService;
-import com.braisedpanda.shirotest.service.UserService;
+import com.braisedpanda.shirotest.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
@@ -27,8 +26,12 @@ public class PermissionController {
     UserService userService;
     @Autowired
     PermissionBiz permissionBiz;
-
-
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    UserRoleService userRoleService;
+    @Autowired
+    RolePermissionService rolePermissionService;
 
     //新增角色
     @RequestMapping("insertRole")
@@ -46,7 +49,7 @@ public class PermissionController {
     public ModelAndView  toaddpermission2(){
         ModelAndView modelAndView = new ModelAndView();
 
-        List<Role> roleList = permissionService.getAllRole();
+        List<Role> roleList = roleService.selectAllRole();
 
         modelAndView.addObject(roleList);
 
@@ -68,7 +71,7 @@ public class PermissionController {
     @RequestMapping("findrolebyid/{uid}")
 
     public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
-        List<UserRole> userRoleList = permissionService.getRoleById(uid);
+        List<UserRole> userRoleList = userRoleService.selectUserRoleByUid(Integer.parseInt(uid));
         User user1 = new User();
         user1.setUid(Integer.parseInt(uid));
         User user = userService.selectUserById(user1);
@@ -110,23 +113,25 @@ public class PermissionController {
 
         if(user == null){
             model.addAttribute("msg","**该用户不存在，请检查id是否输入正确");
-            List<Role> roleList = permissionService.getAllRole();
+            List<Role> roleList = roleService.selectAllRole();
             model.addAttribute(roleList);
             return "permission/addpermission";
         }
         //先清空原先有的数据,在表userRole中
-        permissionService.deleteRoleByUid(uid);
+        userRoleService.deleteRoleByUid(uid);
         //在userRole中，添加相关的数据
         String[] roles = request.getParameterValues("role");
         if(roles ==null || roles.length==0){
             model.addAttribute("msg","***请选择至少一个角色");
-            List<Role> roleList = permissionService.getAllRole();
+            List<Role> roleList = roleService.selectAllRole();
             model.addAttribute(roleList);
             return "permission/addpermission";
         }else
             for (String roleId:
                     roles) {
-                Role role = permissionService.getRoleByroleId(roleId);
+                Role ro = new Role();
+                ro.setRoleId(roleId);
+                Role role = roleService.selectRoleById(ro);
                 String uRId = UUID.randomUUID()+"";
                 uRId = uRId.replace("-","");
                 UserRole userRole = new UserRole();
@@ -136,7 +141,7 @@ public class PermissionController {
                 userRole.setUid(user.getUid());
                 userRole.setUsername(user.getUsername());
                 userRole.setRoleId(role.getRoleId());
-                permissionService.insertUserRole(userRole);
+                userRoleService.insertUserRole(userRole);
 
             }
         model.addAttribute("msg","操作成功");
@@ -159,7 +164,9 @@ public class PermissionController {
     @ResponseBody
     @RequestMapping("permission/delete/{rPId}")
     public void deleteRolePermissionById(@PathVariable("rPId")String rPId){
-        permissionService.deleteRolePermissionById(rPId);
+        RolePermission rolePermission = new RolePermission();
+        rolePermission.setRPId(rPId);
+        rolePermissionService.deleteRolePermissionById(rolePermission);
     }
 
 
@@ -167,9 +174,9 @@ public class PermissionController {
     @RequestMapping("permission/toedit/{roleId}")
     public ModelAndView permission_toedit2(@PathVariable("roleId")String roleId){
         ModelAndView modelAndView = new ModelAndView();
-        List<RolePermission> rolePermissionlist =  permissionService.getRolePermissionById(roleId);
+        List<RolePermission> rolePermissionlist =  rolePermissionService.selectRolePermissionByRoleId(roleId);
 
-        List<Permission> permissionList= permissionService.getAllPermission();
+        List<Permission> permissionList= permissionService.selecAllPermission();
 
         modelAndView.addObject("permissionList",permissionList);
 
@@ -196,7 +203,7 @@ public class PermissionController {
     public ModelAndView torole2(){
         ModelAndView modelAndView = new ModelAndView();
 
-        List<Permission> permissionList= permissionService.getAllPermission();
+        List<Permission> permissionList= permissionService.selecAllPermission();
 
         modelAndView.addObject("permissionList",permissionList);
 
@@ -220,7 +227,9 @@ public class PermissionController {
     @RequestMapping("permission/deleterole/{roleId}")
 
     public void deleterole(@PathVariable("roleId") String roleId){
-        permissionService.deleteRoleByroleId(roleId);
+        Role role = new Role();
+        role.setRoleId(roleId);
+        roleService.deleteRoleByroleId(role);
     }
 
 }

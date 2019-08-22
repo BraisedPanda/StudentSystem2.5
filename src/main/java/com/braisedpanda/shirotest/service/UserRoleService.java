@@ -9,4 +9,12 @@ import java.util.List;
 public interface UserRoleService {
     //根据uid查找所有的UserRole
     List<UserRole> selectUserRoleByUid(int uid);
+
+
+    //新增userRole信息
+    void  insertUserRole(UserRole userRole);
+
+
+    //删除userRole表中所有uid用户
+    void deleteRoleByUid(int uid);
 }
