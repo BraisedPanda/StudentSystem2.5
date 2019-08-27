@@ -1,26 +1,20 @@
 package com.braisedpanda.shirotest.biz;
 
 
+import com.braisedpanda.shirotest.service.*;
 import com.braisedpanda.shirotest.utils.JsonUtils;
 
 import com.braisedpanda.shirotest.utils.ResultType;
 import com.braisedpanda.shirotest.utils.Utils;
 import com.braisedpanda.shirotest.model.po.*;
-import com.braisedpanda.shirotest.model.vo.CustomClassGrades;
-import com.braisedpanda.shirotest.model.vo.StudentGradesCustom;
-import com.braisedpanda.shirotest.service.ClassService;
-import com.braisedpanda.shirotest.service.GradesService;
-import com.braisedpanda.shirotest.service.NationService;
-import com.braisedpanda.shirotest.service.StudentService;
+import com.braisedpanda.shirotest.model.vo.CustomClassGradesVO;
+import com.braisedpanda.shirotest.model.vo.StudentGradesCustomVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service
@@ -33,7 +27,14 @@ public class GradesBiz {
     GradesService gradesService;
     @Autowired
     ClassService classService;
-
+    @Autowired
+    StudentGradesService studentGradesService;
+    @Autowired
+    StudentGradesCardService studentGradesCardService;
+    @Autowired
+    ClassGradesCardService classGradesCardService;
+    @Autowired
+    ClassGradesService classGradesService;
 
     /**
      * 批量生成学生成绩卡数据
@@ -63,7 +64,7 @@ public class GradesBiz {
                 }else {
                     card.setTestDescribe("期末考试");
                 }
-                gradesService.add(card);
+                studentGradesCardService.insertStudentGradesCard(card);
 
             }
         }
@@ -83,7 +84,7 @@ public class GradesBiz {
         for (Student s:
              studentList) {
             String stuId = s.getStuId();
-            List<StudentGradesCard> studentGradesCardList = gradesService.getGradesCard(stuId);
+            List<StudentGradesCard> studentGradesCardList = studentGradesCardService.listStudentGradesCardByStuId(stuId);
             StudentGrades studentGrades = new StudentGrades();
             for (StudentGradesCard studentGradesCard:
                     studentGradesCardList ) {
@@ -139,7 +140,7 @@ public class GradesBiz {
                 studentGrades.setAverage(ave);
 
 
-                gradesService.insertGrades(studentGrades);
+                studentGradesService.insertStudentGrades(studentGrades);
 
             }
 
@@ -161,7 +162,7 @@ public class GradesBiz {
      * 3、把成绩封装到对象中，传给前端
      */
     public String getStudentGrades(@PathVariable("stuId") String stuId,int page,int limit){
-        List<StudentGradesCustom> sgcList = new ArrayList<StudentGradesCustom>();
+        List<StudentGradesCustomVO> sgcList = new ArrayList<StudentGradesCustomVO>();
 
         //根据学生id查找学生
         Student stu = new Student();
@@ -170,15 +171,16 @@ public class GradesBiz {
 
         //成绩卡，根据学生的id在成绩卡中，查询多次考试的成绩单号
         StudentGradesCard gcard = new StudentGradesCard();
-        List<StudentGradesCard> gcardList =  gradesService.getGradesCard(stuId);
+        List<StudentGradesCard> gcardList =  studentGradesCardService.listStudentGradesCardByStuId(stuId);
         for (StudentGradesCard card:
                 gcardList) {
+
             //创建前端展示的成绩单
-            StudentGradesCustom sgc = new StudentGradesCustom();
+            StudentGradesCustomVO sgc = new StudentGradesCustomVO();
 
             String cardid = card.getStugradesCardId();
             //多次成绩单号已经查到
-           StudentGrades grades = gradesService.getGrades(cardid);
+           StudentGrades grades = studentGradesService.getStudentGradesByCardId(cardid);
 
             //设置学生id
             sgc.setStuId(stuId);
@@ -271,7 +273,7 @@ public class GradesBiz {
                 cgcrad.setTestDescribe(sgc.getTestDescribe());
 
 
-               gradesService.insertClassGradesCard(cgcrad);
+                classGradesCardService.insertClassGradesCard(cgcrad);
             }
 
         }
@@ -291,7 +293,7 @@ public class GradesBiz {
         //获取各个班的所有学生
         ClassGrades ClassGrades = new ClassGrades();
         //获取所有的班级成绩卡片
-        List<ClassGradesCard> ClassGradesCardList = gradesService.listClassGradesCard();
+        List<ClassGradesCard> ClassGradesCardList = classGradesCardService.listClassGradesCard();
 
         for (ClassGradesCard ClassGradesCard:
                 ClassGradesCardList  ) {
@@ -329,13 +331,13 @@ public class GradesBiz {
 
                                 //根据每个学生的学生stuId，查找出该学生的成绩卡
                                 String stuId = stu.getStuId();
-                                String time_describe = ClassGradesCard.getTestDescribe();
+                                String timeDescribe = ClassGradesCard.getTestDescribe();
 
-                                StudentGradesCard studentGradesCard = gradesService.getGradesCardById_and_DesCribe(stuId,time_describe);
+                                StudentGradesCard studentGradesCard = studentGradesCardService.getGradesCardById_and_DesCribe(stuId,timeDescribe);
 
                                 String stugradesCardId = studentGradesCard.getStugradesCardId();
 
-                                StudentGrades studentGrades =  gradesService.getGrades(stugradesCardId);
+                                StudentGrades studentGrades =  studentGradesService.getStudentGradesByCardId(stugradesCardId);
 
                                 double total = studentGrades.getTotal();
                                 double chinese = studentGrades.getChinese();
@@ -492,7 +494,7 @@ public class GradesBiz {
 
 
 
-                            gradesService.insertClassGrades(ClassGrades);
+                            classGradesService.insertClassGrades(ClassGrades);
 
                  }
 
@@ -511,21 +513,19 @@ public class GradesBiz {
     public String classgrades(int page,int limit){
 
 
-
-        int count = gradesService.listClassGrades().size();
+        int count = classGradesService.countClassGrades();
 
         PageHelper.startPage(page,limit);
 
-        List<ClassGrades> ClassGradeslist1 = gradesService.listClassGrades();
-
+        List<ClassGrades> ClassGradeslist1 = classGradesService.listClassGrades();
 
         List<Object> customList = new ArrayList<>();
 
         for (ClassGrades cgrades:
                 ClassGradeslist1 ) {
             String classGradesCardId = cgrades.getClassGradesCardId();
-            ClassGradesCard card = gradesService.getClassGradesCardByID(classGradesCardId);
-            CustomClassGrades custom = new CustomClassGrades();
+            ClassGradesCard card = classGradesCardService.getClassGradesCardByID(classGradesCardId);
+            CustomClassGradesVO custom = new CustomClassGradesVO();
             custom.setClassId(card.getClassId());
             custom.setTestDescribe(card.getTestDescribe());
             custom.setTestTime(card.getTestTime());

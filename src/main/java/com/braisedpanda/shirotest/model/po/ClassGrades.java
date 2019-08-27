@@ -10,89 +10,91 @@ import java.io.Serializable;
 @Data
 @Table(name="classgrades")
 public class ClassGrades implements Serializable{
+
+    private static final long serialVersionUID = 1536811172206548570L;
     @Id
     @Column(name="classGradesId")
     private String classGradesId;      //classGradesId
     @Column(name="classGradesCardId")
     private String classGradesCardId; //根据classGradesCardId，作为查找入口
     @Column(name="totalAve")
-    private double totalAve;             //各项班级总分、平均分、最低分、最高分
+    private Double totalAve;             //各项班级总分、平均分、最低分、最高分
     @Column(name="totalMax")
-    private double totalMax;        //测试上传2019-8-19 21:19:26
+    private Double totalMax;
     @Column(name="totalMin")
-    private double totalMin;
+    private Double totalMin;
     @Column(name="chineseMax")
-    private double chineseMax;
+    private Double chineseMax;
     @Column(name="chineseMin")
-    private double chineseMin;
+    private Double chineseMin;
     @Column(name="chineseAve")
-    private double chineseAve;
+    private Double chineseAve;
     @Column(name="mathematicsMin")
-    private double mathematicsMin;
+    private Double mathematicsMin;
     @Column(name="mathematicsMax")
-    private double mathematicsMax;
+    private Double mathematicsMax;
     @Column(name="mathematicsAve")
-    private double mathematicsAve;
+    private Double mathematicsAve;
     @Column(name="englishMax")
-    private double englishMax;
+    private Double englishMax;
     @Column(name="englishMin")
-    private double englishMin;
+    private Double englishMin;
     @Column(name="englishAve")
-    private double englishAve;
+    private Double englishAve;
     @Column(name="politicsMin")
-    private double politicsMin;
+    private Double politicsMin;
     @Column(name="politicsMax")
-    private double politicsMax;
+    private Double politicsMax;
     @Column(name="politicsAve")
-    private double politicsAve;
+    private Double politicsAve;
     @Column(name="historyMax")
-    private double historyMax;
+    private Double historyMax;
     @Column(name="historyMin")
-    private double historyMin;
+    private Double historyMin;
     @Column(name="historyAve")
-    private double historyAve;
+    private Double historyAve;
     @Column(name="geographyMin")
-    private double geographyMin;
+    private Double geographyMin;
     @Column(name="geographyAve")
-    private double geographyAve;
+    private Double geographyAve;
     @Column(name="geographyMax")
-    private double geographyMax;
+    private Double geographyMax;
     @Column(name="biologyMax")
-    private double biologyMax;
+    private Double biologyMax;
     @Column(name="biologyMin")
-    private double biologyMin;
+    private Double biologyMin;
     @Column(name="biologyAve")
-    private double biologyAve;
+    private Double biologyAve;
     @Column(name="chemistryMin")
-    private double chemistryMin;
+    private Double chemistryMin;
     @Column(name="chemistryAve")
-    private double chemistryAve;
+    private Double chemistryAve;
     @Column(name="chemistryMax")
-    private double chemistryMax;
+    private Double chemistryMax;
     @Column(name="physicsMin")
-    private double physicsMin;
+    private Double physicsMin;
     @Column(name="physicsAve")
-    private double physicsAve;
+    private Double physicsAve;
     @Column(name="physicsMax")
-    private double physicsMax;
+    private Double physicsMax;
     @Column(name="musicMin")
-    private double musicMin;
+    private Double musicMin;
     @Column(name="musicAve")
-    private double musicAve;
+    private Double musicAve;
     @Column(name="musicMax")
-    private double musicMax;
+    private Double musicMax;
     @Column(name="artsMin")
-    private double artsMin;
+    private Double artsMin;
     @Column(name="artsAve")
-    private double artsAve;
+    private Double artsAve;
     @Column(name="artsMax")
-    private double artsMax;
+    private Double artsMax;
     @Column(name="sportsMin")
-    private double sportsMin;
+    private Double sportsMin;
     @Column(name="sportsMax")
-    private double sportsMax;
+    private Double sportsMax;
     @Column(name="sportsAve")
-    private double sportsAve;
+    private Double sportsAve;
 
 
 }

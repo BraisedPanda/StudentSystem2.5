@@ -33,6 +33,10 @@ public class StudentBiz {
     ClassService classService;
     @Autowired
     UserRoleService userRoleService;
+    @Autowired
+    StudentGradesCardService studentGradesCardService;
+    @Autowired
+    StudentGradesService studentGradesService;
 
 
     //批量生成学生测试数据
@@ -84,8 +88,7 @@ public class StudentBiz {
     //查询所有学生
 
     public String allStudent(int page, int limit){
-        int count = studentService.selectAllStudent().size();
-
+        int count = studentService.countStudent();
         PageHelper.startPage(page,limit);
 
         List<Student> studentList1 = studentService.selectAllStudent();
@@ -108,7 +111,7 @@ public class StudentBiz {
         for (Student s:
              studentList) {
             String stuId = s.getStuId();
-            List<StudentGradesCard> cardList = gradesService.getGradesCard(stuId);
+            List<StudentGradesCard> cardList = studentGradesCardService.listStudentGradesCardByStuId(stuId);
 
         }
 
@@ -117,10 +120,10 @@ public class StudentBiz {
     //查询学生成绩
 
     public void findStudentGrades(@PathVariable("stuId") String stuId){
-        List<StudentGradesCard> cardList = gradesService.getGradesCard(stuId);
+        List<StudentGradesCard> cardList = studentGradesCardService.listStudentGradesCardByStuId(stuId);
         for (StudentGradesCard card:
              cardList) {
-            StudentGrades grades = gradesService.getGrades(card.getStugradesCardId());
+            StudentGrades grades = studentGradesService.getStudentGradesByCardId(card.getStugradesCardId());
 
         }
 

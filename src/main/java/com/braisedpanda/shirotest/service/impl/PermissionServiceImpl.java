@@ -39,7 +39,7 @@ public class PermissionServiceImpl implements PermissionService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public Permission selectPermissionById(Permission per) {
+    public Permission getPermissionById(String per) {
 //       Permission permission =  permissionMapper.getPermissionById(s1);
         Permission permission =  permissionMapper.selectByPrimaryKey(per);
        return permission;

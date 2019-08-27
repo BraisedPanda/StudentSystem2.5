@@ -49,17 +49,19 @@ public class UserBiz {
 
      */
     public  String testtable(int page,int limit){
-        int count = userService.selectAllUser().size();
+
+        int count = userService.countUser();
         PageHelper.startPage(page,limit);
-        List<User> userList1 = userService.selectAllUser();
+        List<User> userList1 = userService.listUsers();
 
         for (User user:
                 userList1) {
-            List<UserRole> userRoleList = userRoleService.selectUserRoleByUid(user.getUid());
+            List<UserRole> userRoleList = userRoleService.getUserRoleByUid(user.getUid());
             StringBuffer sb = new StringBuffer();
             //如果没有角色，追加【无角色】样式
             if(userRoleList ==null || userRoleList.size()==0){
-                user.setRoleList("无角色");
+//                user.setRoleList("无角色");
+
             }
             else {
                 for (UserRole userRole :
@@ -69,7 +71,7 @@ public class UserBiz {
                     sb.append("】");
 
                 }
-                user.setRoleList(sb.toString());
+//                user.setRoleList(sb.toString());
             }
 
 

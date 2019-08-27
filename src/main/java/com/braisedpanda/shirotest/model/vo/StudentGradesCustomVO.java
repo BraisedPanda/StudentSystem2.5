@@ -4,8 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 @Data
-public class StudentGradesCustom implements Serializable {
+public class StudentGradesCustomVO implements Serializable {
 
+    private static final long serialVersionUID = -4640062955101578253L;
     /**
      * 学生成绩信息表
      */

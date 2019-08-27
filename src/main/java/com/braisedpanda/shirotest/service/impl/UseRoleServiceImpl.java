@@ -24,7 +24,7 @@ public class UseRoleServiceImpl implements UserRoleService{
     * @Date: 2019/8/22 0022
     */
     @Override
-    public List<UserRole> selectUserRoleByUid(int uid) {
+    public List<UserRole> getUserRoleByUid(int uid) {
         Example example = new Example(UserRole.class);
         Example.Criteria  criteria = example.createCriteria();
         criteria.andEqualTo("uid",uid);

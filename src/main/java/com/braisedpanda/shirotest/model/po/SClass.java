@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @Table(name="class")
 public class SClass implements Serializable{
+    private static final long serialVersionUID = -1476631663410328285L;
     @Id
     @Column(name="classId")
     private String classId;                //班级id
@@ -44,8 +45,7 @@ public class SClass implements Serializable{
     private String artsTeacher;            //美术老师
     @Column(name="sportsTeacher")
     private String sportsTeacher;          //体育老师
-    @Transient
-    private List<Student> studentList;      //班级全部的学生
+
 
 
 }

@@ -107,11 +107,11 @@ public class StudentController {
     @RequestMapping("toaddstudent")
     public String tostudent2(Model model){
 
-        List<Nation> nationList = nationService.selectAllNation();
+        List<Nation> nationList = nationService.listNation();
 
         model.addAttribute("nationlist",nationList);
 
-        List<SClass> classList = classService.selectAllSClass();
+        List<SClass> classList = classService.listSClass();
 
         model.addAttribute("classlist",classList);
 

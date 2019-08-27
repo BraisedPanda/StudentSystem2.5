@@ -34,7 +34,7 @@ public class ClassServiceImpl implements ClassService {
    * @Date: 2019/8/22 0022 
    */ 
     @Override
-    public List<SClass> selectAllSClass() {
+    public List<SClass> listSClass() {
         List<SClass> classList = classMapper.selectAll();
         return classList;
     }
@@ -59,7 +59,7 @@ public class ClassServiceImpl implements ClassService {
     * @Date: 2019/8/22 0022 
     */ 
     @Override
-    public SClass selectSClassById(SClass sclass) {
+    public SClass getSClassById(SClass sclass) {
         SClass sClass = classMapper.selectByPrimaryKey(sclass);
         return sClass;
     }
@@ -88,6 +88,16 @@ public class ClassServiceImpl implements ClassService {
         return list;
 
     }
-
-
+    /**
+    * @Description: 统计出所有班级的数目
+    * @Param:
+    * @return:
+    * @Date: 2019/8/26 0026
+    */
+    @Override
+    public int countSClass() {
+        SClass c = new SClass();
+        int count = classMapper.selectCount(c);
+        return count;
+    }
 }

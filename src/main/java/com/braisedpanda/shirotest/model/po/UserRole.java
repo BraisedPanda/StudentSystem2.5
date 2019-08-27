@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Data
 @Table(name="userrole")
 public class UserRole implements Serializable {
+    private static final long serialVersionUID = -2877328973990973125L;
     @Id
     @Column(name="uRId")
     private String uRId;

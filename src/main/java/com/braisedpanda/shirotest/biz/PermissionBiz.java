@@ -56,7 +56,7 @@ public class PermissionBiz {
              s) {
             Permission per =new Permission();
             per.setPermissionId(s1);
-           Permission permission =  permissionService.selectPermissionById(per);
+           Permission permission =  permissionService.getPermissionById(s1);
             RolePermission rp = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
@@ -75,20 +75,19 @@ public class PermissionBiz {
     }
 
 
-
-
-
-
-
-    //查询表rolePermission表中所有内容
+    /**
+    * @Description: 查询表rolePermission表中所有内容
+    * @Param:
+    * @return:
+    * @Date: 2019/8/26 0026
+    */
     public String allpermission(int page,int limit){
 
 
-        List<RolePermission> rolePermissionList = rolePermissionService.selectAllRolePermission();
-        int count = rolePermissionList.size();
+        int count = rolePermissionService.countRolePermission();
 
         PageHelper.startPage(page,limit);
-        List<RolePermission> rolePermissionList1 = rolePermissionService.selectAllRolePermission();
+        List<RolePermission> rolePermissionList1 = rolePermissionService.listRolePermission();
 
         List resultList = PageHelperUtils.getResultList(rolePermissionList1);
 
@@ -123,7 +122,7 @@ public class PermissionBiz {
                 permissionList) {
             Permission per = new Permission();
             per.setPermissionId(s1);
-            Permission permission =  permissionService.selectPermissionById(per);
+            Permission permission =  permissionService.getPermissionById(s1);
             RolePermission rolePermission1 = new RolePermission();
             String rPId = UUID.randomUUID()+"";
             rPId = rPId.replace("-","");
@@ -154,8 +153,7 @@ public class PermissionBiz {
 
     public  String allrole(int page,int limit){
 
-        List<Role> roleList = roleService.selectAllRole();
-        int count = roleList.size();
+        int count = roleService.countRole();
         PageHelper.startPage(page,limit);
 
         List<Role> roleList1 = roleService.selectAllRole();

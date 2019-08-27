@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface PermissionService {
 
 
@@ -18,7 +18,7 @@ public interface PermissionService {
     List<Permission> selecAllPermission();
 
     //根据权限的id值，查询对应的权限
-    Permission selectPermissionById(Permission permission);
+    Permission getPermissionById(String permissionId);
 
 
 

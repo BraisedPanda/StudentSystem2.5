@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
     * @Date: 2019/8/22 0022 
     */ 
     @Override
-    public Role selectRoleById(Role rol) {
+    public Role getRoleById(Role rol) {
 //        Role role = permissionMapper.getRoleByroleId(roleId);
         Role role = roleMapper.selectByPrimaryKey(rol);
         return role;
@@ -80,5 +80,18 @@ public class RoleServiceImpl implements RoleService {
     public void deleteRoleByroleId(Role role) {
 //        permissionMapper.deleteRoleByroleId(roleId);
         roleMapper.deleteByPrimaryKey(role);
+    }
+    
+    /** 
+    * @Description: 统计role表中所有的数目
+    * @Param:  
+    * @return: 
+    * @Date: 2019/8/26 0026 
+    */
+    @Override
+    public int countRole() {
+        Role role = new Role();
+        int count = roleMapper.selectCount(role);
+        return count;
     }
 }

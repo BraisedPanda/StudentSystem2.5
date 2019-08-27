@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public List<User> selectAllUser() {
-//        List<User> userList = userMapper.listUsers();
+    public List<User> listUsers() {
+
         List<User> userList = userMapper.selectAll();
         return userList;
 
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void insertUser(User user) {
         userMapper.insert(user);
-//        userMapper.addUser(user);
+
     }
 
 
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("username",username);
         criteria.andEqualTo("password",password);
-//        User user = userMapper.getUser(username,password);
+
         User user =userMapper.selectOneByExample(example);
             return user;
     }
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(User user) {
         userMapper.delete(user);
-//        userMapper.delete(uid);
+
     }
 
     /** 
@@ -77,9 +77,9 @@ public class UserServiceImpl implements UserService {
     * @Date: 2019/8/22 0022 
     */ 
     @Override
-    public User selectUserById(User user) {
+    public User getUserById(User user) {
         User user1 = userMapper.selectByPrimaryKey(user);
-//     User user = userMapper.getUserByUid(uid);
+
      return user1;
     }
 
@@ -92,9 +92,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserById(User user) {
         userMapper.updateByPrimaryKey(user);
-//    userMapper.edit(user);
+
     }
 
+    /**
+    * @Description: 统计用户的人数
+    * @Param:
+    * @return:
+    * @Date: 2019/8/26 0026
+    */
+    @Override
+    public int countUser() {
+        User t = new User();
+        int count = userMapper.selectCount(t);
+        System.out.println("学生人数："+count);
+        return count;
 
 
+    }
 }

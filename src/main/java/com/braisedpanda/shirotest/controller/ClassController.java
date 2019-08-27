@@ -77,7 +77,7 @@ public class ClassController {
         ModelAndView modelAndView = new ModelAndView();
         SClass sClass = new SClass();
         sClass.setClassId(classId);
-        SClass sclass =  classService.selectSClassById(sClass);
+        SClass sclass =  classService.getSClassById(sClass);
 
         modelAndView.addObject("class",sclass);
 

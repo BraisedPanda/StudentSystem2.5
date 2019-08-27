@@ -99,7 +99,9 @@
                     $.ajax({
                         type:"post",
                         url:'permission/deleterole/'+roleId
-                    });
+                    }
+                        ,layer.msg("删除成功",{icon:'1',time:2000})
+                    );
 //                    window.location.reload();
 
 

@@ -144,7 +144,9 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
                                 type:"post",
                                 url:'student/delete/'+stuId
 
-                            });
+                            }
+                                ,layer.msg("删除成功",{icon:'1',time:2000})
+                            );
                             // window.location.reload();
                         }
                     });
@@ -172,7 +174,9 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'elemen
                     type:"post",
                     url:'student/delete/'+stuId
 
-                });
+                }
+                    ,layer.msg("删除成功",{icon:'1',time:2000})
+                );
 
                 // window.location.reload();
 

@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Data
 @Table(name="permission")
 public class Permission implements Serializable {
+    private static final long serialVersionUID = -4897498857041078361L;
     @Id
     @Column(name="permissionId")
     private String permissionId;

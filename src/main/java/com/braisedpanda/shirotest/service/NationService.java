@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface NationService {
 
 
     //根据nation_id查找nation
-    Nation selectNationByPrimaryKey(Nation nation);
+    Nation getNationByPrimaryKey(Nation nation);
 
     
     //查找所有的nation
-    List<Nation> selectAllNation();
+    List<Nation> listNation();
 }

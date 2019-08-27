@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Data
 @Table(name="student")
 public class Student implements Serializable {
+    private static final long serialVersionUID = 2688341042419000011L;
     @Id
     @Column(name="stuId")
 
@@ -44,8 +45,6 @@ public class Student implements Serializable {
     private String stuImage;           //相片
 
 
-    @Transient
-    private Nation nation;
 
 
 }

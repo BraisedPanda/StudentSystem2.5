@@ -71,10 +71,10 @@ public class PermissionController {
     @RequestMapping("findrolebyid/{uid}")
 
     public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
-        List<UserRole> userRoleList = userRoleService.selectUserRoleByUid(Integer.parseInt(uid));
+        List<UserRole> userRoleList = userRoleService.getUserRoleByUid(Integer.parseInt(uid));
         User user1 = new User();
         user1.setUid(Integer.parseInt(uid));
-        User user = userService.selectUserById(user1);
+        User user = userService.getUserById(user1);
         if(userRoleList !=null && userRoleList.size()>0){
             model.addAttribute("roleList", userRoleList);
         }else if(user!=null){ //用户存在，但是没有角色
@@ -109,7 +109,7 @@ public class PermissionController {
     public String addpermission2(int uid,HttpServletRequest request,Model model){
         User user1 = new User();
         user1.setUid(uid);
-        User user = userService.selectUserById(user1);
+        User user = userService.getUserById(user1);
 
         if(user == null){
             model.addAttribute("msg","**该用户不存在，请检查id是否输入正确");
@@ -126,14 +126,14 @@ public class PermissionController {
             List<Role> roleList = roleService.selectAllRole();
             model.addAttribute(roleList);
             return "permission/addpermission";
-        }else
+        }else{
             for (String roleId:
                     roles) {
                 Role ro = new Role();
                 ro.setRoleId(roleId);
-                Role role = roleService.selectRoleById(ro);
-                String uRId = UUID.randomUUID()+"";
-                uRId = uRId.replace("-","");
+                Role role = roleService.getRoleById(ro);
+                String uRId = UUID.randomUUID() + "";
+                uRId = uRId.replace("-", "");
                 UserRole userRole = new UserRole();
                 userRole.setURId(uRId);
                 userRole.setRoleDescribe(role.getRoleDescribe());
@@ -142,7 +142,7 @@ public class PermissionController {
                 userRole.setUsername(user.getUsername());
                 userRole.setRoleId(role.getRoleId());
                 userRoleService.insertUserRole(userRole);
-
+            }
             }
         model.addAttribute("msg","操作成功");
 
@@ -174,7 +174,7 @@ public class PermissionController {
     @RequestMapping("permission/toedit/{roleId}")
     public ModelAndView permission_toedit2(@PathVariable("roleId")String roleId){
         ModelAndView modelAndView = new ModelAndView();
-        List<RolePermission> rolePermissionlist =  rolePermissionService.selectRolePermissionByRoleId(roleId);
+        List<RolePermission> rolePermissionlist =  rolePermissionService.listRolePermissionByRoleId(roleId);
 
         List<Permission> permissionList= permissionService.selecAllPermission();
 

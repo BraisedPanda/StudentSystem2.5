@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface StudentService {
 
     //添加学生
@@ -30,8 +30,10 @@ public interface StudentService {
     List<String> selectAllClassId();
 
 
-    int getStudentConutByCid(String classid);
+    int countStudentByCid(String classid);
 
     //根据班级id值获取所有的学生
     List<Student> getStudentByClassId(String classId);
+    //查询所有的学生
+    int countStudent();
 }

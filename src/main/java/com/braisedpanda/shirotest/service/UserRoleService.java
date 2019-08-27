@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface UserRoleService {
     //根据uid查找所有的UserRole
-    List<UserRole> selectUserRoleByUid(int uid);
+    List<UserRole> getUserRoleByUid(int uid);
 
 
     //新增userRole信息

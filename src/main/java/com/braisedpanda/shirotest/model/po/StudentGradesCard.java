@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Data
 @Table(name="studentgradescard")
 public class StudentGradesCard implements Serializable {
+    private static final long serialVersionUID = -2490828136272806829L;
     @Id
     @Column(name="stugradesCardId")
 

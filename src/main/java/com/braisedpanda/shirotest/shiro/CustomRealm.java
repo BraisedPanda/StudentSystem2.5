@@ -35,7 +35,7 @@ public class CustomRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //查询登录用户所拥有的角色，并添加角色
         int uid = user.getUid();
-        List<UserRole> roleList = userRoleService.selectUserRoleByUid(uid);
+        List<UserRole> roleList = userRoleService.getUserRoleByUid(uid);
 
         for (UserRole role:
              roleList) {

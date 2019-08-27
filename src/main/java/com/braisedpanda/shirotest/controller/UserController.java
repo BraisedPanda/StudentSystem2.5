@@ -37,7 +37,7 @@ public class UserController {
     @RequestMapping("/alluser")
     public ModelAndView allUser2(){
         ModelAndView modelAndView = new ModelAndView();
-        List<User> userList = userService.selectAllUser();
+        List<User> userList = userService.listUsers();
 
         modelAndView.addObject("useList",userList);
         modelAndView.setViewName("index");
@@ -135,7 +135,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         User user1 = new User();
         user1.setUid(uid);
-        User user = userService.selectUserById(user1);
+        User user = userService.getUserById(user1);
 
         modelAndView.addObject("user",user);
         modelAndView.setViewName("user/edit");
@@ -222,7 +222,7 @@ public class UserController {
         User user1 = (User)session.getAttribute("user");
 //        int uid = user1.getUid();
         ModelAndView modelAndView = new ModelAndView();
-        User user = userService.selectUserById(user1);
+        User user = userService.getUserById(user1);
 
         modelAndView.addObject("user",user);
         modelAndView.setViewName("user/userlist2");

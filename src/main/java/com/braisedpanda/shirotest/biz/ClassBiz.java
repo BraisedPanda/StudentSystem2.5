@@ -4,11 +4,8 @@ import com.braisedpanda.shirotest.model.po.SClass;
 import com.braisedpanda.shirotest.model.po.Student;
 import com.braisedpanda.shirotest.model.po.StudentGrades;
 import com.braisedpanda.shirotest.model.po.StudentGradesCard;
-import com.braisedpanda.shirotest.model.vo.StudentGradesCustom;
-import com.braisedpanda.shirotest.service.ClassService;
-import com.braisedpanda.shirotest.service.GradesService;
-import com.braisedpanda.shirotest.service.NationService;
-import com.braisedpanda.shirotest.service.StudentService;
+import com.braisedpanda.shirotest.model.vo.StudentGradesCustomVO;
+import com.braisedpanda.shirotest.service.*;
 import com.braisedpanda.shirotest.utils.JsonUtils;
 import com.braisedpanda.shirotest.utils.PageHelperUtils;
 
@@ -35,6 +32,10 @@ public class ClassBiz {
     GradesService gradesService;
     @Autowired
     ClassService classService;
+    @Autowired
+    StudentGradesService studentGradesService;
+    @Autowired
+    StudentGradesCardService studentGradesCardService;
 
     /**
      * 查询所有班级，
@@ -46,11 +47,12 @@ public class ClassBiz {
 
         try{
             //如果操作成功，向前台返回数据
-//            int i = 2/0;
-            int count = classService.selectAllSClass().size();
+
+
+            int count = classService.countSClass();
             //使用分页助手进行分页
             PageHelper.startPage(page,limit);
-            List<SClass> classlist = classService.selectAllSClass();
+            List<SClass> classlist = classService.listSClass();
 
             List resultList = PageHelperUtils.getResultList(classlist);
             String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
@@ -81,7 +83,7 @@ public class ClassBiz {
     public String classDetail(@PathVariable("class_cid") String class_cid,int page,int limit){
 
         //创建学生成绩,来存放改班级所有学生的成绩
-        List<StudentGradesCustom> studentGradesCustomList
+        List<StudentGradesCustomVO> studentGradesCustomVOList
                 = new ArrayList<>();
 
 
@@ -90,52 +92,52 @@ public class ClassBiz {
         List<Student> studentList = studentService.getStudentByClassId(class_cid);
         for (Student student:
              studentList) {
-            StudentGradesCustom studentGradesCustom = new StudentGradesCustom();
+            StudentGradesCustomVO studentGradesCustomVO = new StudentGradesCustomVO();
             String stuId = student.getStuId();
             //根据每个学生的学生id查找所该学生的学习成绩卡（每次考试对应一张成绩卡）
             List<StudentGradesCard> studentGradesCardList
-                    = gradesService.getGradesCard(stuId);
+                    = studentGradesCardService.listStudentGradesCardByStuId(stuId);
             //根据每张成绩卡，查询对应考试的详细成绩
             for (StudentGradesCard card:
                  studentGradesCardList) {
                 String cardid = card.getStugradesCardId();
 
-                StudentGrades studentGrades =  gradesService.getGrades(cardid);
+                StudentGrades studentGrades =  studentGradesService.getStudentGradesByCardId(cardid);
 
                 //设置相关的信息
-                studentGradesCustom.setStuName(student.getStuName());
-                studentGradesCustom.setStuId(stuId);
-                studentGradesCustom.setTestTime(card.getTestTime());
-                studentGradesCustom.setTestDescribe(card.getTestDescribe());
-                studentGradesCustom.setTotal(studentGrades.getTotal());
-                studentGradesCustom.setAverage(studentGrades.getAverage());
-                studentGradesCustom.setMaxScore(studentGrades.getMaxScore());
-                studentGradesCustom.setMinScore(studentGrades.getMinScore());
-                studentGradesCustom.setChinese(studentGrades.getChinese());
-                studentGradesCustom.setMathematics(studentGrades.getMathematics());
-                studentGradesCustom.setEnglish(studentGrades.getEnglish());
-                studentGradesCustom.setPolitics(studentGrades.getPolitics());
-                studentGradesCustom.setHistory(studentGrades.getHistory());
-                studentGradesCustom.setGeography(studentGrades.getGeography());
-                studentGradesCustom.setBiology(studentGrades.getBiology());
-                studentGradesCustom.setChemistry(studentGrades.getChemistry());
-                studentGradesCustom.setMusic(studentGrades.getMusic());
-                studentGradesCustom.setArts(studentGrades.getArts());
-                studentGradesCustom.setSports(studentGrades.getSports());
+                studentGradesCustomVO.setStuName(student.getStuName());
+                studentGradesCustomVO.setStuId(stuId);
+                studentGradesCustomVO.setTestTime(card.getTestTime());
+                studentGradesCustomVO.setTestDescribe(card.getTestDescribe());
+                studentGradesCustomVO.setTotal(studentGrades.getTotal());
+                studentGradesCustomVO.setAverage(studentGrades.getAverage());
+                studentGradesCustomVO.setMaxScore(studentGrades.getMaxScore());
+                studentGradesCustomVO.setMinScore(studentGrades.getMinScore());
+                studentGradesCustomVO.setChinese(studentGrades.getChinese());
+                studentGradesCustomVO.setMathematics(studentGrades.getMathematics());
+                studentGradesCustomVO.setEnglish(studentGrades.getEnglish());
+                studentGradesCustomVO.setPolitics(studentGrades.getPolitics());
+                studentGradesCustomVO.setHistory(studentGrades.getHistory());
+                studentGradesCustomVO.setGeography(studentGrades.getGeography());
+                studentGradesCustomVO.setBiology(studentGrades.getBiology());
+                studentGradesCustomVO.setChemistry(studentGrades.getChemistry());
+                studentGradesCustomVO.setMusic(studentGrades.getMusic());
+                studentGradesCustomVO.setArts(studentGrades.getArts());
+                studentGradesCustomVO.setSports(studentGrades.getSports());
 
                 //存放在数组之中
-                studentGradesCustomList.add(studentGradesCustom);
+                studentGradesCustomVOList.add(studentGradesCustomVO);
 
             }
 
         }
-        int count = studentGradesCustomList.size();
+        int count = studentGradesCustomVOList.size();
 
 
         //用Pagehelper分页助手进行分页
         PageHelper.startPage(page,limit);
 
-        List resultList = PageHelperUtils.getResultList(studentGradesCustomList);
+        List resultList = PageHelperUtils.getResultList(studentGradesCustomVOList);
 
         String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
 
@@ -196,7 +198,7 @@ public class ClassBiz {
             sclass.setArtsTeacher(teacherlist[l]);
             sclass.setSportsTeacher(teacherlist[m]);
 
-            int count = studentService.getStudentConutByCid(classid);
+            int count = studentService.countStudentByCid(classid);
             sclass.setClassCount(count);
 
         }

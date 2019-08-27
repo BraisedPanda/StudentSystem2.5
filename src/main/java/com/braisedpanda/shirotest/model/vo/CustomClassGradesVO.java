@@ -2,10 +2,13 @@ package com.braisedpanda.shirotest.model.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class CustomClassGrades {
+public class CustomClassGradesVO implements Serializable{
 
 
+    private static final long serialVersionUID = 5210220905172379151L;
     private String classId;
     private String testTime;
     private String testDescribe;

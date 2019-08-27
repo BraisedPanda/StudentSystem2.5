@@ -33,8 +33,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public List<RolePermission> selectAllRolePermission() {
-//        List<RolePermission> rolePermissionList = permissionMapper.listRolePermission();
+    public List<RolePermission> listRolePermission() {
+
         List<RolePermission> rolePermissionList = rolePermissionMapper.selectAll();
         return rolePermissionList;
     }
@@ -59,7 +59,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public List<RolePermission>  selectRolePermissionByRoleId(String roleId) {
+    public List<RolePermission>  listRolePermissionByRoleId(String roleId) {
 //        List<RolePermission> rolePermissionlist  = permissionMapper.getRolePermissionById(rPId);
         Example example = new Example(RolePermission.class);
         Example.Criteria criteria = example.createCriteria();
@@ -95,5 +95,18 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     public List<String> getPermission(String uid) {
         List<String> permissionlist = rolePermissionMapper.getPermission(uid);
         return permissionlist;
+    }
+
+    /**
+    * @Description: 统计出RolePermission表中所有的记录数
+    * @Param:
+    * @return:
+    * @Date: 2019/8/26 0026
+    */
+    @Override
+    public int countRolePermission() {
+        RolePermission rp = new RolePermission();
+        int count = rolePermissionMapper.selectCount(rp);
+        return count;
     }
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Data
 @Table(name="studentgrades")
 public class StudentGrades implements Serializable{
+    private static final long serialVersionUID = 5845985959412302322L;
     @Id
     @Column(name="stugradesId")
 
@@ -16,37 +17,37 @@ public class StudentGrades implements Serializable{
     @Column(name="stugradesCardId")
     private String stugradesCardId;
     @Column(name="total")
-    private double total;
+    private Double total;
     @Column(name="average")
-    private double average;
+    private Double average;
     @Column(name="maxScore")
-    private double maxScore;
+    private Double maxScore;
     @Column(name="minScore")
-    private double minScore;
+    private Double minScore;
     @Column(name="chinese")
-    private double chinese;
+    private Double chinese;
     @Column(name="mathematics")
-    private double mathematics;
+    private Double mathematics;
     @Column(name="english")
-    private double english;
+    private Double english;
     @Column(name="politics")
-    private double politics;
+    private Double politics;
     @Column(name="history")
-    private double history;
+    private Double history;
     @Column(name="geography")
-    private double geography;
+    private Double geography;
     @Column(name="biology")
-    private double biology;
+    private Double biology;
     @Column(name="chemistry")
-    private double chemistry;
+    private Double chemistry;
     @Column(name="physics")
-    private double physics;
+    private Double physics;
     @Column(name="music")
-    private double music;
+    private Double music;
     @Column(name="arts")
-    private double arts;
+    private Double arts;
     @Column(name="sports")
-    private double sports;
+    private Double sports;
 
 
 }

@@ -97,7 +97,7 @@ public class StudentServiceImpl implements StudentService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public int getStudentConutByCid(String classid) {
+    public int countStudentByCid(String classid) {
 
         Example example = new Example(Student.class);
         Example.Criteria criteria = example.createCriteria();
@@ -125,4 +125,19 @@ public class StudentServiceImpl implements StudentService {
         List<Student> list = studentMapper.selectByExample(example);
         return list;
     }
+    /**
+    * @Description: 查询所有的学生
+    * @Param:
+    * @return:
+    * @Date: 2019/8/26 0026
+    */
+    @Override
+    public int countStudent() {
+        Student student = new Student();
+        int count = studentMapper.selectCount(student);
+        return count;
+    }
+
+
+
 }

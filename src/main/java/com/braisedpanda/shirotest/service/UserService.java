@@ -9,11 +9,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface UserService {
 
     //查找所有的用户
-    List<User> selectAllUser();
+    List<User> listUsers();
 
     //添加用户
     void insertUser(User user);
@@ -25,9 +25,10 @@ public interface UserService {
     void deleteUser(User user);
 
     //根据uid查找用户
-    User selectUserById(User user);
+    User getUserById(User user);
 
     //更新用户信息
     void updateUserById(User user);
-
+    //统计用户人数
+    int countUser();
 }

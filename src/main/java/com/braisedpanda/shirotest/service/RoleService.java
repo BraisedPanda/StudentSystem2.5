@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface RoleService {
     //添加角色
     void insertRole(Role role);
@@ -15,8 +15,7 @@ public interface RoleService {
     List<Role> selectAllRole();
 
     //根据roleId查询role表中对应的role
-    Role selectRoleById(Role role);
-
+    Role getRoleById(Role role);
 
     //在role表中更新role的相关权限、名称等信息
     void updateRole(Role role);
@@ -24,4 +23,6 @@ public interface RoleService {
     //根据roleId删除role表中的role
     void deleteRoleByroleId(Role role);
 
+    //统计出role表中所有的数目
+    int countRole();
 }

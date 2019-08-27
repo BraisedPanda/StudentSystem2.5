@@ -21,7 +21,7 @@ public class NationServiceImpl implements NationService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public Nation selectNationByPrimaryKey(Nation nation) {
+    public Nation getNationByPrimaryKey(Nation nation) {
         Nation nation2 = nationMapper.selectByPrimaryKey(nation);
 
         return nation2;
@@ -34,7 +34,7 @@ public class NationServiceImpl implements NationService {
     * @Date: 2019/8/22 0022
     */
     @Override
-    public List<Nation> selectAllNation() {
+    public List<Nation> listNation() {
         List<Nation> nationList = nationMapper.selectAll();
 
            return nationList;
