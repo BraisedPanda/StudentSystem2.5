@@ -11,7 +11,4 @@ import java.util.List;
 public interface UserMapper extends tk.mybatis.mapper.common.Mapper<User> {
 
 
-
-
-
 }

@@ -124,4 +124,12 @@ public class ClassController {
 
     }
 
+
+
+    //跳转到所有班级成绩
+    @RequestMapping("toclassgrades")
+    public String toclassgrades(){
+        return "class/classgrades";
+    }
+
 }

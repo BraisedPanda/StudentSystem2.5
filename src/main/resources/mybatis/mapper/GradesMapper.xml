@@ -18,7 +18,7 @@
     </select>
 
 
-
+    <!--获取学生成绩卡字段-->
     <select id="getGradesCardById_and_DesCribe" resultType="com.braisedpanda.shirotest.model.po.StudentGradesCard">
         select * from studentGradesCard where stuId=#{stuId} and testDescribe=#{testDescribe}
     </select>

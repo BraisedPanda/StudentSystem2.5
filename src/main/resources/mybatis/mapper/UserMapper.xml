@@ -5,11 +5,4 @@
 <mapper namespace="com.braisedpanda.shirotest.mapper.UserMapper">
 
 
-    <!--根据uid查找所有的role-->
-    <select id="getRole" resultType="com.braisedpanda.shirotest.model.po.UserRole">
-        select * from userRole where uid=#{uid}
-    </select>
-
-
-
 </mapper>

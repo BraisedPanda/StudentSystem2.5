@@ -232,4 +232,31 @@ public class PermissionController {
         roleService.deleteRoleByroleId(role);
     }
 
+
+    //无权限时，跳转界面
+    @RequestMapping("notRole")
+    public String testr(){
+        return "menu/nopermission";
+    }
+
+
+    //查询所有的权限
+    @RequestMapping("toallpermission")
+    public String toallpermission(){
+        return "permission/allrolePermission";
+    }
+
+    //跳转到所有角色
+    @RequestMapping("toallrole")
+    public String toallrole(){
+        return "permission/allrole";
+    }
+
+
+    //跳转到权限...
+    @RequestMapping("topermission")
+    public String topermission(){
+        return null;
+    }
+
 }

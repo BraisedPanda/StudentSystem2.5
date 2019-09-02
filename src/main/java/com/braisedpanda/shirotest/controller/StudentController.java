@@ -130,4 +130,18 @@ public class StudentController {
     }
 
 
+    //上传测试代码
+    @RequestMapping("uploadtest")
+    public String upload(){
+        return "user/upload";
+    }
+
+
+    //显示学生列表
+    @RequestMapping("tostudentlist")
+    public String tostudentlist(){
+        return "student/allstudent";
+    }
+
+
 }

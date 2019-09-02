@@ -6,7 +6,7 @@
 
 
 
-    <!--获取所有的班级id-->
+    <!--获取所有的班级id字段-->
     <select id="listClassId" resultType="String">
         select classId from class
     </select>

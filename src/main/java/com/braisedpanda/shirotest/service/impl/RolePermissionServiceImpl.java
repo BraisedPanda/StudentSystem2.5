@@ -47,7 +47,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     */
     @Override
     public void deleteRolePermissionById(RolePermission rolePermission) {
-//        permissionMapper.deleteRolePermissionById(rPId);
+
         rolePermissionMapper.deleteByPrimaryKey(rolePermission);
     }
 

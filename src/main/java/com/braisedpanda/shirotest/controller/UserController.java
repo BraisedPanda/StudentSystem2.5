@@ -220,7 +220,7 @@ public class UserController {
     @RequestMapping("userinfo")
     public ModelAndView userinfo2(HttpSession session){
         User user1 = (User)session.getAttribute("user");
-//        int uid = user1.getUid();
+
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getUserById(user1);
 
@@ -228,6 +228,40 @@ public class UserController {
         modelAndView.setViewName("user/userlist2");
         return modelAndView;
     }
+
+
+    //跳转到注册界面
+    @RequestMapping("toregist")
+    public String toregist(){
+        return "user/regist";
+    }
+
+    //跳转到登录界面
+    @RequestMapping("tologin")
+    public String tologin(){
+        return "index";
+    }
+
+    //主页内容
+    @RequestMapping("index")
+    public String index(){
+        return "menu/main";
+    }
+
+
+    //跳转到登录界面
+    @RequestMapping("login")
+    public String toologin(){
+        return "redirect:/";
+    }
+
+
+    //跳转到左侧菜单栏
+    @RequestMapping("toleft")
+    public String toleft(){
+        return "menu/left";
+    }
+
 
 
     /****************废弃的方法****************/
