@@ -134,8 +134,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int countStudent() {
         Student student = new Student();
+
         int count = studentMapper.selectCount(student);
+
+
         return count;
+
     }
 
 

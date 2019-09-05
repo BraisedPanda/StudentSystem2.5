@@ -88,7 +88,9 @@ public class StudentBiz {
     //查询所有学生
 
     public String allStudent(int page, int limit){
+
         int count = studentService.countStudent();
+
         PageHelper.startPage(page,limit);
 
         List<Student> studentList1 = studentService.selectAllStudent();
@@ -147,7 +149,7 @@ public class StudentBiz {
 
         User user = new User();
         user.setUsername(student.getStuName());
-        user.setPassword(student.getStuPassword());
+        user.setUserpassword(student.getStuPassword());
         user.setEmail(student.getStuEmail());
         user.setBirthday(student.getStuBirthday());
         user.setGender(student.getStuSex());
@@ -158,7 +160,7 @@ public class StudentBiz {
         //授予该学生权限
 
         UserRole userRole = new UserRole();
-        userRole.setUid(user.getUid());
+        userRole.setUserid(user.getUserid());
         userRole.setURId(stuId);
         userRole.setUsername(student.getStuName());
         userRole.setRoleId("cccdd017ff3b4f9dba8ff77c7836e1f6");

@@ -6,17 +6,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Table(name="user")
+@Table(name="users")
 public class User implements Serializable{
     private static final long serialVersionUID = -700577685605456958L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "JDBC")
-    @Column(name="uid")
-    private Integer uid;
+    @Column(name="userid")
+    private Integer userid;
     @Column(name="username")
     private String username;
-    @Column(name="password")
-    private String password;
+    @Column(name="userpassword")
+    private String userpassword;
     @Column(name="email")
     private String email;
     @Column(name="birthday")

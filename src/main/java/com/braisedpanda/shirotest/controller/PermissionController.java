@@ -73,7 +73,7 @@ public class PermissionController {
     public List<UserRole> findrolebyid(@PathVariable("uid") String uid, Model model){
         List<UserRole> userRoleList = userRoleService.getUserRoleByUid(Integer.parseInt(uid));
         User user1 = new User();
-        user1.setUid(Integer.parseInt(uid));
+        user1.setUserid(Integer.parseInt(uid));
         User user = userService.getUserById(user1);
         if(userRoleList !=null && userRoleList.size()>0){
             model.addAttribute("roleList", userRoleList);
@@ -108,7 +108,7 @@ public class PermissionController {
     @RequestMapping("addpermission")
     public String addpermission2(int uid,HttpServletRequest request,Model model){
         User user1 = new User();
-        user1.setUid(uid);
+        user1.setUserid(uid);
         User user = userService.getUserById(user1);
 
         if(user == null){
@@ -138,7 +138,7 @@ public class PermissionController {
                 userRole.setURId(uRId);
                 userRole.setRoleDescribe(role.getRoleDescribe());
                 userRole.setRole(role.getRole());
-                userRole.setUid(user.getUid());
+                userRole.setUserid(user.getUserid());
                 userRole.setUsername(user.getUsername());
                 userRole.setRoleId(role.getRoleId());
                 userRoleService.insertUserRole(userRole);

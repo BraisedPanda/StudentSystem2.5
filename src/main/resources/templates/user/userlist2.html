@@ -50,11 +50,11 @@
                         console.log(data);
                         var body = layui.layer.getChildFrame('body', index);
                         body.find(".username").val(data.username);
-                        body.find(".password").val(data.password);
+                        body.find(".userpassword").val(data.userpassword);
                         body.find(".email").val(data.email);
                         body.find(".birthday").val(data.birthday);
                         body.find(".activeCode").val(data.activeCode);
-                        body.find(".uid").val(data.uid);
+                        body.find(".userid").val(data.userid);
                         layui.form.render();
                     },
                     cancel:function () {
@@ -90,7 +90,7 @@
                         body.find(".email").val(data.email);
                         body.find(".birthday").val(data.birthday);
                         body.find(".activeCode").val(data.activeCode);
-                        body.find(".uid").val(data.uid);
+                        body.find(".userid").val(data.userid);
 
                         layui.form.render();
                     },
@@ -157,13 +157,13 @@
 
             ,cols: [ [ //表头
                 {type: 'checkbox', fixed: 'left'}
-                ,{field: 'uid', title: 'ID', width:'8%', sort: true}
+                ,{field: 'userid', title: 'ID', width:'8%', sort: true}
                 ,{field: 'username', title: '用户名', width:'10%'}
                 ,{field: 'images', title: '头像', sort: false,
                     templet:function (d) { return '<div><img style="height: 30px;width: 30px" src='+d.images+'></div>' }
 
                 }
-                ,{field: 'password', title: '密码', width: '10%', sort: true}
+                ,{field: 'userpassword', title: '密码', width: '10%', sort: true}
                 ,{field: 'email', title: '邮箱', width:'15%', sort: true}
                 ,{field: 'birthday', title: '生日', width: '10%', sort: true}
                 ,{field: 'gender', title: '性别', width:'8%'}
@@ -199,11 +199,11 @@
                     } else {
                         layer.confirm("是否确认删除？",function () {
                             for(var i=0;i<data.length;i++){
-                                var uid = data[i].uid;
-                                console.log(uid);
+                                var userid = data[i].userid;
+                                console.log(userid);
                                 $.ajax({
                                     type:"post",
-                                    url:'delete/'+uid
+                                    url:'delete/'+userid
                                 });
                                 window.location.reload();
                             }
@@ -225,11 +225,11 @@
                 layer.confirm('是否确认删除？', function(index){
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
-                    var uid = obj.data.uid;
+                    var userid = obj.data.userid;
 
                     $.ajax({
                         type:"post",
-                        url:'delete/'+uid
+                        url:'delete/'+userid
                     });
 
                     window.location.reload();

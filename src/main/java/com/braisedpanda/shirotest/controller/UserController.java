@@ -122,7 +122,7 @@ public class UserController {
     @RequestMapping("/delete/{uid}")
     public String delete(@PathVariable("uid") String uid){
         User user = new User();
-        user.setUid(Integer.parseInt(uid));
+        user.setUserid(Integer.parseInt(uid));
         userService.deleteUser(user);
 
         return "user/blank";
@@ -134,7 +134,7 @@ public class UserController {
     public ModelAndView getuser2(@PathVariable("uid") int uid){
         ModelAndView modelAndView = new ModelAndView();
         User user1 = new User();
-        user1.setUid(uid);
+        user1.setUserid(uid);
         User user = userService.getUserById(user1);
 
         modelAndView.addObject("user",user);

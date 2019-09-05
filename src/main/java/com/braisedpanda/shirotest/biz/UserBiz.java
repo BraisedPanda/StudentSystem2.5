@@ -56,7 +56,7 @@ public class UserBiz {
 
         for (User user:
                 userList1) {
-            List<UserRole> userRoleList = userRoleService.getUserRoleByUid(user.getUid());
+            List<UserRole> userRoleList = userRoleService.getUserRoleByUid(user.getUserid());
             StringBuffer sb = new StringBuffer();
             //如果没有角色，追加【无角色】样式
             if(userRoleList ==null || userRoleList.size()==0){

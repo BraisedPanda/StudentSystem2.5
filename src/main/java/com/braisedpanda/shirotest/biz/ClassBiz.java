@@ -48,14 +48,16 @@ public class ClassBiz {
         try{
             //如果操作成功，向前台返回数据
 
-
             int count = classService.countSClass();
             //使用分页助手进行分页
-            PageHelper.startPage(page,limit);
+             PageHelper.startPage(page,limit);
             List<SClass> classlist = classService.listSClass();
 
+
             List resultList = PageHelperUtils.getResultList(classlist);
+
             String result =  JsonUtils.createResultJson(ResultType.SimpleResultType.SUCCESS,count,resultList).toJSONString();
+            System.out.println(resultList);
             return result;
         }catch(Exception e){
             //操作异常，返回错误提示

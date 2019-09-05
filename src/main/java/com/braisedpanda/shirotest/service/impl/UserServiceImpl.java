@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("username",username);
-        criteria.andEqualTo("password",password);
+        criteria.andEqualTo("userpassword",password);
 
         User user =userMapper.selectOneByExample(example);
             return user;

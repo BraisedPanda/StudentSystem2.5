@@ -27,7 +27,7 @@ public class UseRoleServiceImpl implements UserRoleService{
     public List<UserRole> getUserRoleByUid(int uid) {
         Example example = new Example(UserRole.class);
         Example.Criteria  criteria = example.createCriteria();
-        criteria.andEqualTo("uid",uid);
+        criteria.andEqualTo("userid",uid);
         List<UserRole> roleList = userRoleMapper.selectByExample(example);
         return roleList;
     }

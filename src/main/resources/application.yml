@@ -1,9 +1,16 @@
 spring:
   datasource:
-    username: root
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://localhost:3306/studentsystem
+#    driver-class-name: com.mysql.jdbc.Driver
+
+
+    url: jdbc:oracle:thin:@47.98.135.254:1521:helowin
+    username: USER01
     password: 123456
-    url: jdbc:mysql://localhost:3306/studentsystem
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
 #   数据源其他配置
     initialSize: 5
     minIdle: 5

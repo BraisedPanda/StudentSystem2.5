@@ -13,8 +13,8 @@ public class UserRole implements Serializable {
     @Id
     @Column(name="uRId")
     private String uRId;
-    @Column(name="uid")
-    private Integer uid;
+    @Column(name="userid")
+    private Integer userid;
     @Column(name="username")
     private String username;
     @Column(name="roleId")

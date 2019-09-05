@@ -34,7 +34,7 @@ public class CustomRealm extends AuthorizingRealm {
         User user = (User)principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //查询登录用户所拥有的角色，并添加角色
-        int uid = user.getUid();
+        int uid = user.getUserid();
         List<UserRole> roleList = userRoleService.getUserRoleByUid(uid);
 
         for (UserRole role:
@@ -61,16 +61,16 @@ public class CustomRealm extends AuthorizingRealm {
         System.out.println("========开始身份验证========");
         String username = (String) authenticationToken.getPrincipal();
 
-        String password = new String((char[]) authenticationToken.getCredentials());
+        String userpassword = new String((char[]) authenticationToken.getCredentials());
 
 
-        User user = userService.selectUserByUsernameAndPasword(username,password);
+        User user = userService.selectUserByUsernameAndPasword(username,userpassword);
 
         if (user == null) {
             throw new AccountException("用户名或密码错误");
         }
 
-        return new SimpleAuthenticationInfo(user, password, getName());
+        return new SimpleAuthenticationInfo(user, userpassword, getName());
 
     }
 
