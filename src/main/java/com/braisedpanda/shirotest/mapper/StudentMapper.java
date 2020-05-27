@@ -10,4 +10,5 @@ public interface StudentMapper extends tk.mybatis.mapper.common.Mapper<Student>{
 
       List<String> selectAllClassId();
 
+      List<Student> selectAllStudent();
 }

@@ -10,6 +10,8 @@
         select distinct(classId) from student
     </select>
 
-
+    <select id="selectAllStudent" resultType="com.braisedpanda.shirotest.model.po.Student">
+        select * from student
+    </select>
 
 </mapper>

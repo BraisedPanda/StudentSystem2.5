@@ -7,7 +7,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 
-//@MapperScan("com.braisedpanda.shirotest.mapper")
+@MapperScan("mybatis.mapper")
 public class ShirotestApplication {
 
 	public static void main(String[] args) {
